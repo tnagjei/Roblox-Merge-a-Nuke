@@ -1,9 +1,10 @@
 export const siteConfig = {
-  siteName: "Example Game Guide",
-  gameName: "Example Roblox Game",
-  siteDomain: "https://example.com",
-  contactEmail: "example@example.com",
-  primaryKeyword: "Example Roblox Game guide",
+  siteName: "Merge a Nuke Guide",
+  gameName: "Merge a Nuke",
+  siteDomain: "https://mergeanuke.online",
+  canonicalDomain: "https://mergeanuke.online",
+  contactEmail: "tangjei414@gmail.com",
+  primaryKeyword: "Merge a Nuke guide",
   launchMode: "wiki-hub",
   defaultLocale: "en",
   availableLocales: ["en", "th", "fil", "id"],
@@ -13,10 +14,25 @@ export const siteConfig = {
   englishOnlySlugs: [],
   completedEnglishOnlySlugs: [],
   systemSlugs: ["about", "contact", "editorial-policy"],
-  blockedSlugs: ["scripts", "macros", "executor", "exploit"],
+  blockedSlugs: ["scripts", "macros", "executor", "exploit", "guide", "updates"],
   navigationSlugs: ["", "codes", "tier-list", "classes", "weapons", "value-list"],
+  routePolicy: {
+    publicPaths: ["/", "/codes/", "/tier-list/", "/classes/", "/weapons/", "/value-list/", "/about/", "/contact/", "/editorial-policy/"],
+    noindexPaths: ["/privacy/", "/terms/"],
+    blockedPaths: ["/scripts/", "/macros/", "/executor/", "/exploit/", "/guide/", "/updates/"]
+  },
+  wwwPolicy: {
+    source: "https://www.mergeanuke.online",
+    target: "https://mergeanuke.online",
+    statusCode: 301
+  },
+  indexNow: {
+    // HUMAN_DECISION_REQUIRED: Copy INDEXNOW_KEY into Cloudflare Pages environment variables before deployment. 人工确认：部署时需要把 INDEXNOW_KEY 填进 Cloudflare Pages 环境变量。
+    keyEnvVar: "INDEXNOW_KEY",
+    endpoint: "https://api.indexnow.org/indexnow"
+  },
   publisher: {
-    displayName: "Example Publisher",
+    displayName: "Merge a Nuke Guide",
     responseTime: "We usually review messages within 7 business days.",
     country: ""
   },
@@ -37,8 +53,8 @@ export const siteConfig = {
   assets: {
     icon: "/icon.svg",
     hero: "/hero-placeholder.svg",
-    iconTheme: "default",
-    brandColor: "#17241f",
+    iconTheme: "nuke",
+    brandColor: "#171717",
     accentColor: "#facc15"
   }
 };

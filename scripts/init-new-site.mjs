@@ -12,7 +12,7 @@ const WIKI_PAGE_FILES = [
   "src/pages/weapons.astro",
   "src/pages/value-list.astro"
 ];
-const ICON_THEMES = ["default", "magic", "farm", "anime", "combat", "racing", "simulator"];
+const ICON_THEMES = ["default", "magic", "farm", "anime", "combat", "racing", "simulator", "nuke"];
 
 function parseArgs(items) {
   const result = {};
@@ -32,7 +32,7 @@ function parseArgs(items) {
 }
 
 function usage() {
-  return `Usage:\n  npm run init:new-site -- --site-name "Example Guide" --game-name "Example Game" --domain "https://example.com" --contact-email "admin@example.com" --roblox-url "https://www.roblox.com/games/123/example" --icon-theme magic\n\nRequired:\n  --site-name\n  --game-name\n  --domain\n  --contact-email\n  --roblox-url\n\nDefault launch mode:\n  wiki-hub\n\nLaunch modes:\n  --launch-mode wiki-hub\n  --launch-mode minimal\n\nOptional Roblox metadata:\n  --primary-keyword\n  --creator-name\n  --universe-id\n  --root-place-id\n  --max-players\n  --official-title\n  --genre\n\nOptional themed icon settings:\n  --icon-theme default|magic|farm|anime|combat|racing|simulator\n  --brand-color "#17241f"\n  --accent-color "#facc15"\n`;
+  return `Usage:\n  npm run init:new-site -- --site-name "Merge a Nuke Guide" --game-name "Merge a Nuke" --domain "https://mergeanuke.online" --contact-email "tangjei414@gmail.com" --roblox-url "https://www.roblox.com/games/128784467030899/Merge-a-Nuke" --icon-theme combat\n\nRequired:\n  --site-name\n  --game-name\n  --domain\n  --contact-email\n  --roblox-url\n\nDefault launch mode:\n  wiki-hub\n\nLaunch modes:\n  --launch-mode wiki-hub\n  --launch-mode minimal\n\nOptional Roblox metadata:\n  --primary-keyword\n  --creator-name\n  --universe-id\n  --root-place-id\n  --max-players\n  --official-title\n  --genre\n\nOptional themed icon settings:\n  --icon-theme default|magic|farm|anime|combat|racing|simulator|nuke\n  --brand-color "#171717"\n  --accent-color "#facc15"\n`;
 }
 
 function assertRequired(options, key) {
@@ -129,6 +129,12 @@ try {
   assertEmail(contactEmail);
 
   const completedCoreSlugs = launchMode === "wiki-hub" ? WIKI_HUB_SLUGS : MINIMAL_SLUGS;
+  const publicPaths = [
+    ...completedCoreSlugs.map((slug) => (slug ? `/${slug}/` : "/")),
+    "/about/",
+    "/contact/",
+    "/editorial-policy/"
+  ];
 
   if (launchMode === "minimal") removeWikiPagesForMinimal();
 
@@ -138,6 +144,7 @@ try {
   siteName: ${q(siteName)},
   gameName: ${q(gameName)},
   siteDomain: ${q(siteDomain)},
+  canonicalDomain: ${q(siteDomain)},
   contactEmail: ${q(contactEmail)},
   primaryKeyword: ${q(primaryKeyword)},
   launchMode: ${q(launchMode)},
@@ -149,8 +156,23 @@ try {
   englishOnlySlugs: [],
   completedEnglishOnlySlugs: [],
   systemSlugs: ["about", "contact", "editorial-policy"],
-  blockedSlugs: ["scripts", "macros", "executor", "exploit"],
+  blockedSlugs: ["scripts", "macros", "executor", "exploit", "guide", "updates"],
   navigationSlugs: ["", "codes", "tier-list", "classes", "weapons", "value-list"],
+  routePolicy: {
+    publicPaths: ${JSON.stringify(publicPaths)},
+    noindexPaths: ["/privacy/", "/terms/"],
+    blockedPaths: ["/scripts/", "/macros/", "/executor/", "/exploit/", "/guide/", "/updates/"]
+  },
+  wwwPolicy: {
+    source: ${q(siteDomain.replace("https://", "https://www."))},
+    target: ${q(siteDomain)},
+    statusCode: 301
+  },
+  indexNow: {
+    // HUMAN_DECISION_REQUIRED: Copy INDEXNOW_KEY into Cloudflare Pages environment variables before deployment. 人工确认：部署时需要把 INDEXNOW_KEY 填进 Cloudflare Pages 环境变量。
+    keyEnvVar: "INDEXNOW_KEY",
+    endpoint: "https://api.indexnow.org/indexnow"
+  },
   publisher: {
     displayName: ${q(siteName)},
     responseTime: "We usually review messages within 7 business days.",

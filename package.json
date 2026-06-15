@@ -1,5 +1,5 @@
 {
-  "name": "roblox-guide-site-template-astro",
+  "name": "mergeanuke-online",
   "version": "0.1.0",
   "private": true,
   "type": "module",
@@ -11,6 +11,9 @@
     "audit:new-site": "node scripts/audit-new-site.mjs",
     "validate:template": "node scripts/validate-template.mjs",
     "validate:static-export": "node scripts/validate-static-export.mjs",
+    "indexnow:submit": "node scripts/indexnow-submit.mjs",
+    "indexnow:dry-run": "node scripts/indexnow-submit.mjs --dry-run",
+    "release:check": "node scripts/release-check.mjs",
     "test": "node --test tests/*.test.mjs",
     "check": "npm run audit:new-site && npm run validate:template && npm test && npm run build && npm run validate:static-export"
   },

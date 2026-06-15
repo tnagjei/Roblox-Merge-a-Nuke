@@ -63,13 +63,17 @@ const showReportedCodeWatch = siteConfig.completedCoreSlugs.includes("codes");
           <p>{evidenceNotice.communityReportedLabel}</p>
         </div>
         <div class="card-grid">
-          {reportedCodeRows.map((row) => (
-            <article class="card">
-              <h3>{row.code}</h3>
-              <p>{row.reward}</p>
-              <p class="source-label">{row.sourceLabel}</p>
-            </article>
-          ))}
+          {reportedCodeRows.length > 0 ? (
+            reportedCodeRows.map((row) => (
+              <article class="card">
+                <h3>{row.code}</h3>
+                <p>{row.reward}</p>
+                <p class="source-label">{row.sourceLabel}</p>
+              </article>
+            ))
+          ) : (
+            <p class="empty-state">No community-reported code rows are recorded yet.</p>
+          )}
         </div>
       </section>
     )}

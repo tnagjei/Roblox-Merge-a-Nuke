@@ -8,6 +8,7 @@ const violations = [];
 const warnings = [];
 const wikiHubSlugs = ["", "codes", "tier-list", "classes", "weapons", "value-list"];
 const systemSlugs = ["about", "contact", "editorial-policy"];
+const expectedBlockedSlugs = ["scripts", "macros", "executor", "exploit", "guide", "updates"];
 const expectedLocales = ["en", "th", "fil", "id"];
 const requiredSystemFiles = [
   "src/content/system-pages.ts",
@@ -86,6 +87,7 @@ if (!fs.existsSync(configPath)) {
   const siteName = extractString(config, "siteName");
   const gameName = extractString(config, "gameName");
   const siteDomain = extractString(config, "siteDomain");
+  const canonicalDomain = extractString(config, "canonicalDomain");
   const contactEmail = extractString(config, "contactEmail");
   const primaryKeyword = extractString(config, "primaryKeyword");
   const launchMode = extractString(config, "launchMode");
@@ -108,6 +110,8 @@ if (!fs.existsSync(configPath)) {
   if (publisherDisplayName === "Example Publisher") reportLaunchIssue("publisher.displayName must be replaced before launch");
   if (primaryKeyword === "Example Roblox Game guide") reportLaunchIssue("primaryKeyword must be replaced before launch");
   if (!siteDomain.startsWith("https://")) violations.push("siteDomain must start with https://");
+  if (canonicalDomain !== siteDomain) violations.push("canonicalDomain must match siteDomain");
+  if (siteDomain.includes("www.")) violations.push("siteDomain must use the bare domain");
   if (availableLocales.join(",") !== expectedLocales.join(",")) violations.push("availableLocales must be en, th, fil, id");
   if (completedLocales.join(",") !== "en") violations.push("completedLocales must default to en only");
   if (!["minimal", "wiki-hub"].includes(launchMode)) violations.push("launchMode must be minimal or wiki-hub");
@@ -124,8 +128,11 @@ if (!fs.existsSync(configPath)) {
   for (const flag of ["about: true", "contact: true", "privacy: true", "terms: true", "editorialPolicy: true"]) {
     if (!config.includes(flag)) violations.push(`systemPages must include ${flag}`);
   }
-  if (!["scripts", "macros", "executor", "exploit"].every((slug) => blockedSlugs.includes(slug))) {
-    violations.push("blockedSlugs must include scripts, macros, executor, and exploit");
+  if (!expectedBlockedSlugs.every((slug) => blockedSlugs.includes(slug))) {
+    violations.push("blockedSlugs must include scripts, macros, executor, exploit, guide, and updates");
+  }
+  for (const required of ["publicPaths", "noindexPaths", "blockedPaths", "wwwPolicy", "indexNow", "HUMAN_DECISION_REQUIRED"]) {
+    if (!config.includes(required)) violations.push(`config must include ${required}`);
   }
   if (launchMode === "minimal" && completedCoreSlugs.join(",") !== "") violations.push("minimal mode must complete homepage only");
   if (launchMode === "wiki-hub" && completedCoreSlugs.join(",") !== wikiHubSlugs.join(",")) {

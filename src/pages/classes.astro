@@ -15,14 +15,18 @@ import { evidenceNotice, reportedClasses } from "../data/reported-guides";
     <section class="section">
       <h2>Reported classes</h2>
       <div class="card-grid">
-        {reportedClasses.map((item) => (
-          <article class="card">
-            <h3>{item.name}</h3>
-            <p>Reported role: {item.role}</p>
-            <p>{item.note}</p>
-            <p class="source-label">{item.sourceLabel}</p>
-          </article>
-        ))}
+        {reportedClasses.length > 0 ? (
+          reportedClasses.map((item) => (
+            <article class="card">
+              <h3>{item.name}</h3>
+              <p>Reported role: {item.role}</p>
+              <p>{item.note}</p>
+              <p class="source-label">{item.sourceLabel}</p>
+            </article>
+          ))
+        ) : (
+          <p class="empty-state">No class rows are published yet because reviewed evidence has not been added.</p>
+        )}
       </div>
     </section>
     <RelatedGuides currentSlug="classes" />

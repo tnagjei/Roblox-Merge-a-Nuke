@@ -1,10 +1,10 @@
 export const gameData = {
-  robloxUrl: "https://www.roblox.com/",
-  creatorName: "Example Creator",
+  robloxUrl: "https://www.roblox.com/games/128784467030899/Merge-a-Nuke",
+  creatorName: "Unknown creator",
   universeId: null,
   rootPlaceId: null,
   maxPlayers: null,
-  officialTitle: "Example Roblox Game",
+  officialTitle: "Merge a Nuke",
   genre: "Roblox adventure",
   sourceConfidence: [
     { label: "Roblox game page", level: "pending" },

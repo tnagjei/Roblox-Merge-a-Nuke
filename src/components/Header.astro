@@ -4,11 +4,19 @@ import { getAvailableLocales, getMainNavItems } from "../lib/navigation";
 
 const navItems = getMainNavItems();
 const locales = getAvailableLocales();
+const brandInitials = siteConfig.gameName
+  .split(/\s+/)
+  .filter(Boolean)
+  .filter((word) => !["a", "an", "the"].includes(word.toLowerCase()))
+  .map((word) => word[0])
+  .join("")
+  .slice(0, 2)
+  .toUpperCase();
 ---
 
 <header class="site-header">
   <a class="brand" href="/">
-    <span class="brand-mark">GG</span>
+    <span class="brand-mark">{brandInitials}</span>
     <span>
       <strong>{siteConfig.siteName}</strong>
       <small>Astro Roblox wiki hub</small>

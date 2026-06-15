@@ -10,11 +10,11 @@ export const wikiLinks = [
 
 export const homeContent = {
   title: `${siteConfig.siteName} | Roblox Wiki Hub`,
-  description: `${siteConfig.siteName} is an evidence-first Roblox wiki hub template for codes, tier lists, classes, weapons, and value tracking.`,
+  description: `${siteConfig.siteName} is an evidence-first Roblox wiki hub for codes, tier lists, classes, weapons, and value tracking.`,
   hero: {
-    eyebrow: "Roblox wiki hub template",
+    eyebrow: "Roblox wiki hub",
     title: `${siteConfig.gameName} Wiki Hub`,
-    lede: "Launch a fast Roblox guide hub with clear evidence boundaries. Community-reported information is labeled as unverified until official, Roblox API, or in-game proof exists.",
+    lede: "Community-reported information is labeled as unverified until official, Roblox API, or in-game proof exists.",
     primaryAction: "Open Roblox page"
   },
   quickFacts: [

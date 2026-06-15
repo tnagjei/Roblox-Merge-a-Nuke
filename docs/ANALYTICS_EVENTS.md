@@ -88,7 +88,7 @@ trackEvent("related_guide_click", {
 import TrackedLink from "../components/TrackedLink.astro";
 ---
 
-<TrackedLink href="https://www.roblox.com/" external eventName="outbound_roblox_click" itemName="Roblox game page">
+<TrackedLink href="https://www.roblox.com/games/128784467030899/Merge-a-Nuke" external eventName="outbound_roblox_click" itemName="Roblox game page">
   Open Roblox
 </TrackedLink>
 ```
@@ -98,9 +98,11 @@ import TrackedLink from "../components/TrackedLink.astro";
 ```astro
 ---
 import CopyButton from "../components/CopyButton.astro";
+
+const reviewedCodeValue = "value added only after evidence review";
 ---
 
-<CopyButton value="PLACEHOLDER-CODE" eventName="copy_code" itemType="code" itemName="placeholder-code" />
+<CopyButton value={reviewedCodeValue} eventName="copy_code" itemType="code" itemName="reviewed-code-value" />
 ```
 
 ### Track tool input and result views

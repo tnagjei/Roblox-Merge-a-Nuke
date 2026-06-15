@@ -39,6 +39,10 @@ const requiredFiles = [
   "scripts/generate-seo-files.mjs",
   "scripts/validate-static-export.mjs",
   "scripts/init-new-site.mjs",
+  "scripts/indexnow-submit.mjs",
+  "scripts/release-check.mjs",
+  ".env.example",
+  "NEW_SITE_SETUP.md",
   "public/icon.svg",
   "public/hero-placeholder.svg",
   ...wikiFiles
@@ -55,6 +59,8 @@ test("package scripts include favicon generation, initialization, and validation
 
   assert.ok(packageJson.scripts.build.includes("generate-favicons.mjs"));
   assert.equal(packageJson.scripts["init:new-site"], "node scripts/init-new-site.mjs");
+  assert.equal(packageJson.scripts["indexnow:submit"], "node scripts/indexnow-submit.mjs");
+  assert.equal(packageJson.scripts["release:check"], "node scripts/release-check.mjs");
   assert.ok(packageJson.scripts.check.includes("audit:new-site"));
   assert.ok(packageJson.scripts.check.includes("validate:static-export"));
 });
@@ -67,11 +73,15 @@ test("template defaults to wiki-hub launch mode", () => {
   assert.ok(config.includes('availableLocales: ["en", "th", "fil", "id"]'));
   assert.ok(config.includes('completedCoreSlugs: ["", "codes", "tier-list", "classes", "weapons", "value-list"]'));
   assert.ok(config.includes('navigationSlugs: ["", "codes", "tier-list", "classes", "weapons", "value-list"]'));
-  assert.ok(config.includes('iconTheme: "default"'));
-  assert.ok(config.includes('brandColor: "#17241f"'));
+  assert.ok(config.includes('iconTheme: "nuke"'));
+  assert.ok(config.includes('brandColor: "#171717"'));
   assert.ok(config.includes('accentColor: "#facc15"'));
   assert.ok(config.includes("completedEnglishOnlySlugs: []"));
   assert.ok(config.includes('systemSlugs: ["about", "contact", "editorial-policy"]'));
+  assert.ok(config.includes('canonicalDomain: "https://mergeanuke.online"'));
+  assert.ok(config.includes("routePolicy:"));
+  assert.ok(config.includes("wwwPolicy:"));
+  assert.ok(config.includes("indexNow:"));
   assert.ok(config.includes("publisher:"));
   assert.ok(config.includes("systemPages:"));
 });
@@ -90,6 +100,7 @@ test("navigation exposes wiki hub links and language candidates", () => {
 
   assert.ok(header.includes("getMainNavItems"));
   assert.ok(header.includes("getAvailableLocales"));
+  assert.ok(header.includes("brandInitials"));
   assert.ok(header.includes("Language"));
 });
 
@@ -99,6 +110,7 @@ test("pillar page links directly to every cluster page", () => {
 
   assert.ok(index.includes("completedGuideLinks"));
   assert.ok(index.includes("Core guide entrances"));
+  assert.ok(read("src/components/HomeHero.astro").includes("publicPageCount"));
 
   for (const slug of wikiSlugs) {
     assert.ok(home.includes(`slug: "${slug}"`), `home wikiLinks must include ${slug}`);
@@ -134,6 +146,10 @@ test("init-new-site supports minimal, wiki-hub, and themed icon options", () => 
   assert.ok(script.includes('systemSlugs: ["about", "contact", "editorial-policy"]'));
   assert.ok(script.includes("publisher:"));
   assert.ok(script.includes("systemPages:"));
+  assert.ok(script.includes("routePolicy:"));
+  assert.ok(script.includes("wwwPolicy:"));
+  assert.ok(script.includes("indexNow:"));
+  assert.ok(script.includes("HUMAN_DECISION_REQUIRED"));
   assert.ok(script.includes('availableLocales: ["en", "th", "fil", "id"]'));
 });
 
@@ -144,7 +160,7 @@ test("themed favicon generator reads config and creates required assets", () => 
     assert.ok(script.includes(value), `generate-favicons must include ${value}`);
   }
 
-  for (const theme of ["default", "magic", "farm", "anime", "combat", "racing", "simulator"]) {
+  for (const theme of ["default", "magic", "farm", "anime", "combat", "racing", "simulator", "nuke"]) {
     assert.ok(script.includes(theme), `generate-favicons must support ${theme}`);
   }
 });
@@ -242,7 +258,7 @@ test("unsafe pages and removed legacy pages are not generated", () => {
   }
 
   const config = read("src/data/config.ts");
-  for (const slug of ["scripts", "macros", "executor", "exploit"]) {
+  for (const slug of ["scripts", "macros", "executor", "exploit", "guide", "updates"]) {
     assert.ok(config.includes(slug), `blockedSlugs must include ${slug}`);
   }
 });
@@ -267,6 +283,32 @@ test("active codes are not verified by default", () => {
   assert.ok(reported.includes("not independently verified"));
   assert.ok(codesPage.includes("Community-reported"));
   assert.equal(reported.includes("verifiedActiveCodes"), false);
+  assert.equal(reported.includes("PLACEHOLDER-CODE"), false);
+  assert.equal(reported.includes("Placeholder class"), false);
+});
+
+test("IndexNow and release setup are explicit and bounded to public paths", () => {
+  const config = read("src/data/config.ts");
+  const envExample = read(".env.example");
+  const setup = read("NEW_SITE_SETUP.md");
+  const submitter = read("scripts/indexnow-submit.mjs");
+  const releaseCheck = read("scripts/release-check.mjs");
+
+  for (const path of ["/", "/codes/", "/tier-list/", "/classes/", "/weapons/", "/value-list/", "/about/", "/contact/", "/editorial-policy/"]) {
+    assert.ok(config.includes(path), `public path must include ${path}`);
+  }
+
+  for (const path of ["/privacy/", "/terms/", "/scripts/", "/macros/", "/executor/", "/exploit/", "/guide/", "/updates/"]) {
+    assert.ok(config.includes(path), `blocked or noindex policy must include ${path}`);
+  }
+
+  assert.ok(envExample.includes("HUMAN_DECISION_REQUIRED"));
+  assert.match(envExample, /^INDEXNOW_KEY=[0-9a-fA-F-]{36}$/m);
+  assert.ok(setup.includes("Bulk Redirects"));
+  assert.ok(submitter.includes("publicPaths"));
+  assert.ok(submitter.includes("noindexPaths"));
+  assert.ok(submitter.includes("blockedPaths"));
+  assert.ok(releaseCheck.includes("expectedPublicPaths"));
 });
 
 test("init-new-site documents required arguments and optional Roblox metadata", () => {

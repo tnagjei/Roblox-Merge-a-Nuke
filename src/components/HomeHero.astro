@@ -2,6 +2,8 @@
 import { siteConfig } from "../data/config";
 import { gameData } from "../data/game";
 import { homeContent } from "../content/home";
+
+const publicPageCount = siteConfig.routePolicy.publicPaths.length;
 ---
 
 <section class="hero">
@@ -16,12 +18,12 @@ import { homeContent } from "../content/home";
       <a class="button secondary" href="/privacy/">Review privacy</a>
     </div>
   </div>
-  <div class="hero-card" aria-label="Template status">
-    <img src={siteConfig.assets.hero} alt="Template hero placeholder" loading="eager" />
+  <div class="hero-card" aria-label="Site status">
+    <img src={siteConfig.assets.hero} alt={`${siteConfig.siteName} hero art`} loading="eager" />
     <dl>
       <div><dt>Default output</dt><dd>Static dist/</dd></div>
-      <div><dt>Public pages</dt><dd>Home only</dd></div>
-      <div><dt>System pages</dt><dd>Privacy, Terms</dd></div>
+      <div><dt>Public pages</dt><dd>{publicPageCount} indexable</dd></div>
+      <div><dt>Noindex pages</dt><dd>Privacy, Terms</dd></div>
     </dl>
   </div>
 </section>

@@ -41,6 +41,7 @@ const completedEnglishOnlySlugs = extractArray(configText, "completedEnglishOnly
 const systemSlugs = extractArray(configText, "systemSlugs");
 const blockedSlugs = extractArray(configText, "blockedSlugs");
 const robloxUrl = extractString(gameText, "robloxUrl", "https://www.roblox.com/");
+const indexNowKey = (process.env.INDEXNOW_KEY || "").trim();
 const excludedSitemapSlugs = new Set([
   "privacy",
   "terms",
@@ -115,6 +116,16 @@ fs.writeFileSync(path.join(distDir, "sitemap.xml"), sitemap);
 fs.writeFileSync(path.join(distDir, "robots.txt"), robots);
 fs.writeFileSync(path.join(distDir, "llms.txt"), llms);
 fs.writeFileSync(path.join(distDir, "llms-full.txt"), llmsFull);
+
+if (indexNowKey) {
+  if (!/^[0-9a-fA-F-]{36}$/.test(indexNowKey)) {
+    throw new Error("INDEXNOW_KEY must be a UUID-style key before generating the IndexNow key file.");
+  }
+  fs.writeFileSync(path.join(distDir, `${indexNowKey}.txt`), indexNowKey);
+  console.log("Generated IndexNow key file in dist/.");
+} else {
+  console.warn("Skipped IndexNow key file because INDEXNOW_KEY is not set. HUMAN_DECISION_REQUIRED: copy INDEXNOW_KEY into Cloudflare Pages environment variables before deployment. 人工确认：部署时需要把 INDEXNOW_KEY 填进 Cloudflare Pages 环境变量。");
+}
 
 console.log(`Generated ${routes.length} sitemap route(s).`);
 console.log("Generated static SEO files in dist/.");

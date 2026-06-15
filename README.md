@@ -1,8 +1,8 @@
-# Roblox Guide Site Template Astro
+# Merge a Nuke Guide
 
-Astro + Cloudflare Pages Roblox wiki hub template.
+Astro + Cloudflare Pages Roblox wiki hub for Merge a Nuke.
 
-This repository is a lightweight static-site template for new Roblox guide sites. It uses static output and deploys to Cloudflare Pages with `dist/`.
+This repository uses Astro static output and deploys to Cloudflare Pages with `dist/`.
 
 ## Default navigation
 
@@ -89,6 +89,7 @@ npm test
 npm run build
 npm run validate:static-export
 npm run check
+npm run release:check
 ```
 
 ## Evidence policy
@@ -141,14 +142,14 @@ Example initialization:
 
 ```bash
 npm run init:new-site -- \
-  --site-name "Example Game Guide" \
-  --game-name "Example Game" \
-  --domain "https://example.com" \
-  --contact-email "admin@example.com" \
-  --roblox-url "https://www.roblox.com/games/123/example" \
+  --site-name "Merge a Nuke Guide" \
+  --game-name "Merge a Nuke" \
+  --domain "https://mergeanuke.online" \
+  --contact-email "tangjei414@gmail.com" \
+  --roblox-url "https://www.roblox.com/games/128784467030899/Merge-a-Nuke" \
   --launch-mode wiki-hub \
-  --icon-theme magic \
-  --brand-color "#17241f" \
+  --icon-theme combat \
+  --brand-color "#171717" \
   --accent-color "#facc15"
 ```
 
@@ -232,6 +233,28 @@ Default HTML output also includes:
 /terms/
 ```
 
+## IndexNow
+
+`INDEXNOW_KEY` is generated in `.env.example`.
+
+HUMAN_DECISION_REQUIRED: copy `INDEXNOW_KEY` into Cloudflare Pages environment variables before production deployment.
+
+The IndexNow submitter only sends:
+
+```text
+/
+/codes/
+/tier-list/
+/classes/
+/weapons/
+/value-list/
+/about/
+/contact/
+/editorial-policy/
+```
+
+It does not submit `/privacy/`, `/terms/`, or blocked unsafe paths.
+
 ## Create a new site
 
 ### Minimal launch
@@ -239,11 +262,11 @@ Default HTML output also includes:
 ```bash
 npm install
 npm run init:new-site -- \
-  --site-name "Example Game Guide" \
-  --game-name "Example Game" \
-  --domain "https://example.com" \
-  --contact-email "admin@example.com" \
-  --roblox-url "https://www.roblox.com/games/123/example" \
+  --site-name "Merge a Nuke Guide" \
+  --game-name "Merge a Nuke" \
+  --domain "https://mergeanuke.online" \
+  --contact-email "tangjei414@gmail.com" \
+  --roblox-url "https://www.roblox.com/games/128784467030899/Merge-a-Nuke" \
   --launch-mode minimal
 ```
 
@@ -252,27 +275,27 @@ npm run init:new-site -- \
 ```bash
 npm install
 npm run init:new-site -- \
-  --site-name "Example Game Guide" \
-  --game-name "Example Game" \
-  --domain "https://example.com" \
-  --contact-email "admin@example.com" \
-  --roblox-url "https://www.roblox.com/games/123/example" \
+  --site-name "Merge a Nuke Guide" \
+  --game-name "Merge a Nuke" \
+  --domain "https://mergeanuke.online" \
+  --contact-email "tangjei414@gmail.com" \
+  --roblox-url "https://www.roblox.com/games/128784467030899/Merge-a-Nuke" \
   --launch-mode wiki-hub \
-  --icon-theme magic
+  --icon-theme combat
 ```
 
 Optional arguments:
 
 ```text
---primary-keyword "Example Game guide"
---creator-name "Example Creator"
+--primary-keyword "Merge a Nuke guide"
+--creator-name "Unknown creator"
 --universe-id "123456"
 --root-place-id "123456"
 --max-players "12"
---official-title "Example Game"
---genre "Adventure"
---icon-theme "magic"
---brand-color "#17241f"
+--official-title "Merge a Nuke"
+--genre "Roblox adventure"
+--icon-theme "combat"
+--brand-color "#171717"
 --accent-color "#facc15"
 ```
 
@@ -296,6 +319,7 @@ npm test
 npm run build
 npm run validate:static-export
 npm run check
+npm run release:check
 ```
 
 ## Cloudflare Pages

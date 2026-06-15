@@ -5,7 +5,7 @@ const root = process.cwd();
 const violations = [];
 const wikiHubSlugs = ["", "codes", "tier-list", "classes", "weapons", "value-list"];
 const expectedLocales = ["en", "th", "fil", "id"];
-const allowedIconThemes = ["default", "magic", "farm", "anime", "combat", "racing", "simulator"];
+const allowedIconThemes = ["default", "magic", "farm", "anime", "combat", "racing", "simulator", "nuke"];
 
 const requiredFiles = [
   "astro.config.mjs",
@@ -39,6 +39,10 @@ const requiredFiles = [
   "scripts/init-new-site.mjs",
   "scripts/audit-new-site.mjs",
   "scripts/validate-static-export.mjs",
+  "scripts/indexnow-submit.mjs",
+  "scripts/release-check.mjs",
+  ".env.example",
+  "NEW_SITE_SETUP.md",
   "public/icon.svg",
   "public/hero-placeholder.svg"
 ];
@@ -98,6 +102,8 @@ if (exists("package.json")) {
   }
   if (!packageJson.scripts?.check?.includes("validate:static-export")) violations.push("check script must include validate:static-export");
   if (packageJson.scripts?.["init:new-site"] !== "node scripts/init-new-site.mjs") violations.push("package.json must expose init:new-site");
+  if (packageJson.scripts?.["release:check"] !== "node scripts/release-check.mjs") violations.push("package.json must expose release:check");
+  if (packageJson.scripts?.["indexnow:submit"] !== "node scripts/indexnow-submit.mjs") violations.push("package.json must expose indexnow:submit");
 }
 
 if (exists("astro.config.mjs")) {
@@ -116,6 +122,9 @@ if (exists("src/data/config.ts")) {
   const completedLocales = extractArray(config, "completedLocales");
   const blockedSlugs = extractArray(config, "blockedSlugs");
   const systemSlugs = extractArray(config, "systemSlugs");
+  const publicPaths = extractArray(config, "publicPaths");
+  const noindexPaths = extractArray(config, "noindexPaths");
+  const blockedPaths = extractArray(config, "blockedPaths");
   const iconTheme = extractString(config, "iconTheme");
   const brandColor = extractString(config, "brandColor");
   const accentColor = extractString(config, "accentColor");
@@ -136,8 +145,18 @@ if (exists("src/data/config.ts")) {
   for (const flag of ["about: true", "contact: true", "privacy: true", "terms: true", "editorialPolicy: true"]) {
     if (!config.includes(flag)) violations.push(`systemPages must include ${flag}`);
   }
-  if (!["scripts", "macros", "executor", "exploit"].every((slug) => blockedSlugs.includes(slug))) {
-    violations.push("blockedSlugs must include scripts, macros, executor, exploit");
+  if (!["scripts", "macros", "executor", "exploit", "guide", "updates"].every((slug) => blockedSlugs.includes(slug))) {
+    violations.push("blockedSlugs must include scripts, macros, executor, exploit, guide, updates");
+  }
+  if (publicPaths.join(",") !== "/,/codes/,/tier-list/,/classes/,/weapons/,/value-list/,/about/,/contact/,/editorial-policy/") {
+    violations.push("routePolicy.publicPaths must list indexable public paths only");
+  }
+  if (noindexPaths.join(",") !== "/privacy/,/terms/") violations.push("routePolicy.noindexPaths must be privacy and terms");
+  if (blockedPaths.join(",") !== "/scripts/,/macros/,/executor/,/exploit/,/guide/,/updates/") {
+    violations.push("routePolicy.blockedPaths must include unsafe and legacy blocked paths");
+  }
+  for (const required of ["canonicalDomain", "wwwPolicy", "indexNow", "HUMAN_DECISION_REQUIRED"]) {
+    if (!config.includes(required)) violations.push(`config must include ${required}`);
   }
   if (!allowedIconThemes.includes(iconTheme)) violations.push("assets.iconTheme must be a supported theme");
   if (!/^#[0-9a-fA-F]{6}$/.test(brandColor)) violations.push("assets.brandColor must be a hex color");
@@ -211,6 +230,9 @@ if (exists("src/data/reported-guides.ts")) {
   if (reported.includes("verifiedActiveCodes")) violations.push("reported guide data must not define verified active codes");
   if (!reported.includes("community-reported")) violations.push("reported guide data must label community-reported content");
   if (!reported.includes("not independently verified")) violations.push("reported guide data must state not independently verified");
+  for (const forbidden of ["PLACEHOLDER-CODE", "Placeholder class", "Placeholder weapon", "Placeholder item"]) {
+    if (reported.includes(forbidden)) violations.push(`reported guide data must not include ${forbidden}`);
+  }
 }
 
 if (exists("src/lib/analytics.ts")) {
@@ -233,6 +255,19 @@ if (exists("scripts/validate-static-export.mjs")) {
   if (!validator.includes("systemSlugs")) violations.push("validate-static-export must check allowed systemSlugs");
   for (const forbidden of ["/privacy/", "/terms/", "/guide/", "/updates/", "/scripts/", "/macros/", "/executor/", "/exploit/", "/th/", "/fil/", "/id/"]) {
     if (!validator.includes(forbidden)) violations.push(`validate-static-export must reject ${forbidden} in sitemap`);
+  }
+}
+
+if (exists(".env.example")) {
+  const envExample = read(".env.example");
+  if (!envExample.includes("HUMAN_DECISION_REQUIRED")) violations.push(".env.example must mark human confirmation");
+  if (!/^INDEXNOW_KEY=[0-9a-fA-F-]{36}$/m.test(envExample)) violations.push(".env.example must include a UUID-style INDEXNOW_KEY");
+}
+
+if (exists("NEW_SITE_SETUP.md")) {
+  const setup = read("NEW_SITE_SETUP.md");
+  for (const required of ["HUMAN_DECISION_REQUIRED", "INDEXNOW_KEY", "Bulk Redirects", "https://mergeanuke.online"]) {
+    if (!setup.includes(required)) violations.push(`NEW_SITE_SETUP.md must include ${required}`);
   }
 }
 

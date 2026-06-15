@@ -1,10 +1,10 @@
 {
-  "name": "Example Game Guide",
-  "short_name": "Game Guide",
+  "name": "Merge a Nuke Guide",
+  "short_name": "Merge a Nuke",
   "start_url": "/",
   "display": "standalone",
-  "background_color": "#f8f7ef",
-  "theme_color": "#17241f",
+  "background_color": "#171717",
+  "theme_color": "#171717",
   "icons": [
     {
       "src": "/icon-192.png",
