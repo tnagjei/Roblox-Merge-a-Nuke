@@ -38,7 +38,20 @@ function themeShape(theme, accentColor, brandColor) {
     combat: `<path d="M150 386 350 126l38 38-200 260-38-38Z" fill="${accentColor}" /><path d="M124 166l38-38 226 226-38 38L124 166Z" fill="#ffffff" opacity="0.82" />`,
     racing: `<path d="M100 282c44-84 268-84 312 0v88H100v-88Z" fill="${accentColor}" /><circle cx="172" cy="372" r="36" fill="#ffffff" /><circle cx="340" cy="372" r="36" fill="#ffffff" />`,
     simulator: `<rect x="128" y="132" width="256" height="256" rx="46" fill="${accentColor}" /><circle cx="256" cy="260" r="82" fill="#ffffff" opacity="0.84" /><path d="M256 190v70l54 36" stroke="#17241f" stroke-width="34" stroke-linecap="round" fill="none" />`,
-    nuke: `<circle cx="256" cy="220" r="120" fill="${accentColor}" /><path d="M 256,130 C 246,130 236,150 236,180 L 236,280 L 216,305 L 241,295 L 246,290 L 256,290 L 266,290 L 271,295 L 296,305 L 276,280 L 276,180 C 276,150 266,130 256,130 Z" fill="${brandColor}" /><g transform="translate(256, 230) scale(0.12) rotate(90)" fill="${accentColor}"><circle cx="0" cy="0" r="30" /><path id="radiation-petal-small" d="M39,-22.5 L95.3,-55 A110,110 0 0 1 95.3,55 L39,22.5 A45,45 0 0 0 39,-22.5 Z" /><use href="#radiation-petal-small" transform="rotate(120)" /><use href="#radiation-petal-small" transform="rotate(240)" /></g>`,
+    nuke: `<defs>
+      <g id="official-bomb">
+        <path d="M -40,-20 A 40,40 0 0 1 40,-20 C 40,15 20,55 18,55 L 18,70 C 22,70 25,72 25,78 L 25,85 C 25,87 18,89 0,89 C -18,89 -25,87 -25,85 L -25,78 C -25,72 -22,70 -18,70 L -18,55 C -20,55 -40,15 -40,-20 Z" fill="#00d8ff" stroke="${brandColor}" stroke-width="8" stroke-linejoin="round" />
+        <path d="M -38,-5 C -20,5 20,5 38,-5" fill="none" stroke="${brandColor}" stroke-width="7" />
+        <path d="M -32,15 C -15,25 15,25 32,15" fill="none" stroke="${brandColor}" stroke-width="7" />
+        <path d="M -8,55 L -8,70 M 0,55 L 0,70 M 8,55 L 8,70" fill="none" stroke="${brandColor}" stroke-width="5" />
+      </g>
+    </defs>
+    <use href="#official-bomb" x="175" y="205" />
+    <use href="#official-bomb" x="337" y="205" />
+    <path d="M 244,195 L 268,195 M 256,183 L 256,207" fill="none" stroke="${brandColor}" stroke-width="10" stroke-linecap="round" />
+    <path d="M 244,195 L 268,195 M 256,183 L 256,207" fill="none" stroke="#ffffff" stroke-width="4" stroke-linecap="round" />
+    <text x="175" y="135" text-anchor="middle" font-family="Arial, sans-serif" font-size="44" font-weight="900" fill="#ffffff" stroke="${brandColor}" stroke-width="8" paint-order="stroke fill">1</text>
+    <text x="337" y="135" text-anchor="middle" font-family="Arial, sans-serif" font-size="44" font-weight="900" fill="#ffffff" stroke="${brandColor}" stroke-width="8" paint-order="stroke fill">1</text>`,
     default: `<path d="M160 284 256 120l96 164h-58l-38-70-38 70h-58Z" fill="${accentColor}" /><path d="M170 342h172v42H170z" fill="#ffffff" opacity="0.92" />`
   };
 
@@ -86,101 +99,155 @@ function pngChunk(type, data) {
 
 function createPng(size, brandColor, accentColor) {
   const [br, bg, bb] = hexToRgb(brandColor);
-  const [ar, ag, ab] = hexToRgb(accentColor);
   const raw = Buffer.alloc((size * 4 + 1) * size);
 
-  const cx = size / 2;
-  const cy = size / 2;
-  const r_circle = size * 0.38;
+  const cx1 = size * 0.34;
+  const cx2 = size * 0.66;
+  const cy = size * 0.46;
+  
+  // Plus sign center
+  const cx_plus = size * 0.5;
+  const cy_plus = size * 0.44;
 
-  const y_start = cy - size * 0.22;
-  const y_nose = cy - size * 0.10;
-  const y_base = cy + size * 0.16;
-  const y_fin_start = cy + size * 0.08;
-  const y_end = cy + size * 0.22;
-  const half_width_body = size * 0.08;
+  function checkBomb(x, y, cx, cy) {
+    const dx = x - cx;
+    const dy = y - cy;
+    const wx = Math.abs(dx);
+    const y_start = cy - size * 0.14;
+    const y_end = cy + size * 0.14;
 
-  // Radiation symbol engraved on missile body
-  const cy_body = cy + size * 0.02;
-  const r_rad_center = size * 0.024;
-  const r_rad_inner = size * 0.036;
-  const r_rad_outer = size * 0.088;
+    if (y < y_start || y > y_end) return 0; // outside
+
+    const cap_cy = cy - size * 0.04;
+    const R_cap = size * 0.08;
+
+    if (y < cap_cy) {
+      const dist = Math.sqrt(dx * dx + (y - cap_cy) * (y - cap_cy));
+      if (dist <= R_cap) {
+        if (dist > R_cap - size * 0.015) return 1; // outline
+        return 2; // fill
+      }
+    } else if (y <= cy + size * 0.08) {
+      const t = (y - cap_cy) / (size * 0.12);
+      const hw = R_cap * (1 - 0.55 * t);
+      if (wx <= hw) {
+        if (wx > hw - size * 0.015) return 1; // outline
+        
+        // Add stripes
+        const offset_y = y - cy;
+        if (offset_y >= -size * 0.01 && offset_y <= size * 0.01) return 1;
+        if (offset_y >= size * 0.035 && offset_y <= size * 0.055) return 1;
+        
+        return 2; // fill
+      }
+    } else {
+      const hw = size * 0.05;
+      if (wx <= hw) {
+        if (wx > hw - size * 0.015 || y > y_end - size * 0.015) return 1; // outline
+        
+        // vertical tail fins inside the stabilizer ring
+        const ox = dx / size;
+        if (Math.abs(ox - 0.016) < 0.005 || Math.abs(ox) < 0.005 || Math.abs(ox + 0.016) < 0.005) {
+          return 1;
+        }
+
+        return 2; // fill
+      }
+    }
+    return 0;
+  }
+
+  function checkNumberOne(x, y, cx, cy) {
+    const dx = x - cx;
+    const dy = y - cy;
+    const adx = Math.abs(dx);
+    const y_len = size * 0.05;
+    const x_thick = size * 0.008;
+
+    // Outer outline (black)
+    const stemOutline = (adx <= x_thick + size * 0.012 && dy >= -y_len/2 - size * 0.01 && dy <= y_len/2 + size * 0.01);
+    const baseOutline = (adx <= size * 0.025 && dy >= y_len/2 - size * 0.008 && dy <= y_len/2 + size * 0.016);
+    const flagOutline = (dx >= -size * 0.02 && dx <= 0 && dy >= -y_len/2 - size * 0.01 && dy <= -y_len/2 + size * 0.015);
+
+    // Inner fill (white)
+    const stemFill = (adx <= x_thick && dy >= -y_len/2 && dy <= y_len/2);
+    const baseFill = (adx <= size * 0.016 && dy >= y_len/2 - size * 0.002 && dy <= y_len/2 + size * 0.008);
+    const flagFill = (dx >= -size * 0.012 && dx <= 0 && dy >= -y_len/2 && dy <= -y_len/2 + size * 0.008);
+
+    if (stemFill || baseFill || flagFill) return 2; // fill
+    if (stemOutline || baseOutline || flagOutline) return 1; // outline
+    return 0;
+  }
 
   for (let y = 0; y < size; y += 1) {
     const rowStart = y * (size * 4 + 1);
     raw[rowStart] = 0;
     for (let x = 0; x < size; x += 1) {
-      const dx = x - cx;
-      const dy = y - cy;
-      const dist_from_center = Math.sqrt(dx * dx + dy * dy);
-
-      let isYellow = false;
-      let isMissile = false;
-
-      // 1. Background Circle
-      if (dist_from_center < r_circle) {
-        isYellow = true;
-      }
-
-      // 2. Missile Body
-      if (y >= y_start && y <= y_end) {
-        const wx = Math.abs(dx);
-        let hw = 0;
-        if (y < y_nose) {
-          const t = (y - y_start) / (y_nose - y_start);
-          hw = half_width_body * t;
-        } else if (y <= y_base) {
-          hw = half_width_body;
-        } else {
-          const t = (y_end - y) / (y_end - y_base);
-          hw = half_width_body * t;
-        }
-
-        if (wx <= hw) {
-          isMissile = true;
-        }
-
-        // Left/Right Fins
-        if (y >= y_fin_start && y <= y_fin_start + size * 0.12) {
-          const fin_flare = (y - y_fin_start) / (size * 0.12);
-          const fin_hw = half_width_body + size * 0.08 * fin_flare;
-          if (wx <= fin_hw) {
-            isMissile = true;
-          }
-        }
-      }
-
-      // 3. Radiation Symbol Cutout on Missile
-      if (isMissile) {
-        const dy_rad = y - cy_body;
-        const r_rad = Math.sqrt(dx * dx + dy_rad * dy_rad);
-        if (r_rad < r_rad_center) {
-          isMissile = false; // color yellow
-        } else if (r_rad >= r_rad_inner && r_rad <= r_rad_outer) {
-          const angle_rad = Math.atan2(dy_rad, dx);
-          const angleDeg_rad = (angle_rad * 180 / Math.PI + 360) % 360;
-          if ((angleDeg_rad >= 60 && angleDeg_rad <= 120) || 
-              (angleDeg_rad >= 180 && angleDeg_rad <= 240) || 
-              (angleDeg_rad >= 300 && angleDeg_rad <= 360)) {
-            isMissile = false; // color yellow
-          }
-        }
-      }
-
       const offset = rowStart + 1 + x * 4;
-      if (isMissile) {
-        raw[offset] = br;
-        raw[offset + 1] = bg;
-        raw[offset + 2] = bb;
-      } else if (isYellow) {
-        raw[offset] = ar;
-        raw[offset + 1] = ag;
-        raw[offset + 2] = ab;
-      } else {
-        raw[offset] = br;
-        raw[offset + 1] = bg;
-        raw[offset + 2] = bb;
+
+      let r_val = br, g_val = bg, b_val = bb;
+      let drawn = false;
+
+      // 1. Plus Sign (+)
+      const dx_p = x - cx_plus;
+      const dy_p = y - cy_plus;
+      const adx_p = Math.abs(dx_p);
+      const ady_p = Math.abs(dy_p);
+
+      const insideWhitePlus = (adx_p <= size * 0.008 && ady_p <= size * 0.04) || (ady_p <= size * 0.008 && adx_p <= size * 0.04);
+      const insideBlackPlus = (adx_p <= size * 0.018 && ady_p <= size * 0.05) || (ady_p <= size * 0.018 && adx_p <= size * 0.05);
+
+      if (insideWhitePlus) {
+        r_val = 255;
+        g_val = 255;
+        b_val = 255;
+        drawn = true;
+      } else if (insideBlackPlus) {
+        r_val = br;
+        g_val = bg;
+        b_val = bb;
+        drawn = true;
       }
+
+      // 2. Numbers "1"
+      if (!drawn) {
+        const leftNum = checkNumberOne(x, y, cx1, cy - size * 0.20);
+        const rightNum = checkNumberOne(x, y, cx2, cy - size * 0.20);
+        const numState = Math.max(leftNum, rightNum);
+
+        if (numState === 2) {
+          r_val = 255;
+          g_val = 255;
+          b_val = 255;
+          drawn = true;
+        } else if (numState === 1) {
+          r_val = br;
+          g_val = bg;
+          b_val = bb;
+          drawn = true;
+        }
+      }
+
+      // 3. Left and Right Bombs
+      if (!drawn) {
+        const leftBomb = checkBomb(x, y, cx1, cy);
+        const rightBomb = checkBomb(x, y, cx2, cy);
+        const bombState = Math.max(leftBomb, rightBomb);
+
+        if (bombState === 1) {
+          r_val = br;
+          g_val = bg;
+          b_val = bb;
+        } else if (bombState === 2) {
+          r_val = 0;
+          g_val = 216;
+          b_val = 255;
+        }
+      }
+
+      raw[offset] = r_val;
+      raw[offset + 1] = g_val;
+      raw[offset + 2] = b_val;
       raw[offset + 3] = 255;
     }
   }
