@@ -33,6 +33,9 @@ const ogImage = siteConfig.assets.ogImage || siteConfig.assets.hero;
         `} />
       </>
     )}
+    {siteConfig.analytics.adsenseClient && (
+      <script async src={`https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=${siteConfig.analytics.adsenseClient}`} crossorigin="anonymous" is:inline></script>
+    )}
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="yandex-verification" content="cb99003272ef017e" />

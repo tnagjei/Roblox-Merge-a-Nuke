@@ -50,7 +50,7 @@ export const siteConfig = {
   },
   analytics: {
     googleAnalyticsId: "G-MPNFPXHHBF",
-    adsenseClient: "",
+    adsenseClient: "ca-pub-3083296102953963",
     clarityId: "x7ub91pldc",
     thirdPartyAdScripts: []
   },
