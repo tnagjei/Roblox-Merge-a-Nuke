@@ -58,6 +58,120 @@ import { siteConfig } from "../data/config";
     </div>
   </div>
 
+  <!-- Featured Partners Scrolling Marquee -->
+  <div class="footer-marquee-section">
+    <div class="marquee-label">Featured & Partners</div>
+    <div class="marquee-container">
+      <div class="marquee-track">
+        <div class="marquee-group">
+          <a href="https://aijustbetter.com/item/mergeanuke.online" target="_blank" rel="noopener" title="Merge a Nuke Guide: Detailed review, analysis and comparison on AI Just Better">
+            <img src="https://cdn.aijustbetter.com/badges/badge-dark.svg" alt="Featured on AIJustBetter.com" width="212" height="55" />
+          </a>
+          <a href="https://aijustbetter.com/item/mergeanuke.online" target="_blank" rel="noopener" title="Merge a Nuke Guide: Detailed review, analysis and comparison on AI Just Better">
+            <img src="https://cdn.aijustbetter.com/badges/badge-dark.svg" alt="Featured on AIJustBetter.com" width="212" height="55" />
+          </a>
+          <a href="https://aijustbetter.com/item/mergeanuke.online" target="_blank" rel="noopener" title="Merge a Nuke Guide: Detailed review, analysis and comparison on AI Just Better">
+            <img src="https://cdn.aijustbetter.com/badges/badge-dark.svg" alt="Featured on AIJustBetter.com" width="212" height="55" />
+          </a>
+        </div>
+        <div class="marquee-group" aria-hidden="true">
+          <a href="https://aijustbetter.com/item/mergeanuke.online" target="_blank" rel="noopener" title="Merge a Nuke Guide: Detailed review, analysis and comparison on AI Just Better">
+            <img src="https://cdn.aijustbetter.com/badges/badge-dark.svg" alt="Featured on AIJustBetter.com" width="212" height="55" />
+          </a>
+          <a href="https://aijustbetter.com/item/mergeanuke.online" target="_blank" rel="noopener" title="Merge a Nuke Guide: Detailed review, analysis and comparison on AI Just Better">
+            <img src="https://cdn.aijustbetter.com/badges/badge-dark.svg" alt="Featured on AIJustBetter.com" width="212" height="55" />
+          </a>
+          <a href="https://aijustbetter.com/item/mergeanuke.online" target="_blank" rel="noopener" title="Merge a Nuke Guide: Detailed review, analysis and comparison on AI Just Better">
+            <img src="https://cdn.aijustbetter.com/badges/badge-dark.svg" alt="Featured on AIJustBetter.com" width="212" height="55" />
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <style>
+    .footer-marquee-section {
+      border-top: 1px solid var(--line);
+      padding: 24px 0 12px;
+      margin-top: 40px;
+      overflow: hidden;
+      width: 100%;
+    }
+
+    .marquee-label {
+      font-family: var(--font-display);
+      font-size: 0.8rem;
+      font-weight: 800;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin-bottom: 16px;
+      text-align: center;
+      opacity: 0.8;
+    }
+
+    .marquee-container {
+      display: flex;
+      overflow: hidden;
+      user-select: none;
+      gap: 40px;
+      mask-image: linear-gradient(
+        to right,
+        rgba(0, 0, 0, 0) 0%,
+        rgba(0, 0, 0, 1) 15%,
+        rgba(0, 0, 0, 1) 85%,
+        rgba(0, 0, 0, 0) 100%
+      );
+      -webkit-mask-image: linear-gradient(
+        to right,
+        rgba(0, 0, 0, 0) 0%,
+        rgba(0, 0, 0, 1) 15%,
+        rgba(0, 0, 0, 1) 85%,
+        rgba(0, 0, 0, 0) 100%
+      );
+    }
+
+    .marquee-track {
+      display: flex;
+      flex-shrink: 0;
+      align-items: center;
+      justify-content: space-around;
+      min-width: 100%;
+      gap: 40px;
+      animation: marquee-scroll 25s linear infinite;
+    }
+
+    .marquee-track:hover {
+      animation-play-state: paused;
+    }
+
+    .marquee-group {
+      display: flex;
+      align-items: center;
+      justify-content: space-around;
+      flex-shrink: 0;
+      gap: 40px;
+    }
+
+    .marquee-group a {
+      display: inline-block;
+      transition: transform 0.2s ease;
+    }
+
+    .marquee-group a:hover {
+      transform: scale(1.03);
+    }
+
+    @keyframes marquee-scroll {
+      0% {
+        transform: translateX(0%);
+      }
+      100% {
+        transform: translateX(-50%);
+      }
+    }
+  </style>
+
   <div class="footer-bottom">
     <p class="footer-copyright">
       &copy; 2026 {siteConfig.siteName}. All rights reserved. Not affiliated with Roblox Corporation or Nuke The Game developers.
