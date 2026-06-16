@@ -3,8 +3,8 @@ import { gameData } from "../data/game";
 
 export const systemPageContent = {
   about: {
-    title: `About ${siteConfig.siteName}`,
-    description: `Learn what ${siteConfig.siteName} is, how it handles Roblox guide information, and how evidence boundaries work.`,
+    title: "About Merge a Nuke Guide | Roblox Wiki & Strategy Hub",
+    description: "Learn about Merge a Nuke Guide, our editorial policy, how we verify active codes, list nuke progression priority, and define evidence-backed Wiki boundaries.",
     sections: [
       {
         heading: "What this site is",
@@ -29,8 +29,8 @@ export const systemPageContent = {
     ]
   },
   contact: {
-    title: "Contact",
-    description: `Contact ${siteConfig.siteName} for corrections, evidence submissions, copyright issues, or general feedback.`,
+    title: "Contact Merge a Nuke Guide | Submit Feedback & Codes",
+    description: "Contact the Merge a Nuke Guide editorial team to report active codes, submit strategy suggestions, report bugs, or send inquiries about Roblox progression.",
     sections: [
       {
         heading: "General contact",
@@ -51,8 +51,8 @@ export const systemPageContent = {
     ]
   },
   editorialPolicy: {
-    title: "Editorial Policy",
-    description: `Editorial policy for ${siteConfig.siteName}, including evidence labels, corrections, and Roblox guide boundaries.`,
+    title: "Editorial Policy | Merge a Nuke Guide Trust System",
+    description: "Read the editorial policy for Merge a Nuke Guide. Learn how we verify simulation codes, rate upgrade priority, and label community-reported statistics.",
     sections: [
       {
         heading: "Evidence labels",
@@ -77,8 +77,8 @@ export const systemPageContent = {
     ]
   },
   privacy: {
-    title: "Privacy Policy",
-    description: `Privacy policy for ${siteConfig.siteName}.`,
+    title: "Privacy Policy | Merge a Nuke Guide Site Information",
+    description: "Read the privacy policy for Merge a Nuke Guide. Find out how our Roblox strategy helper, calculators, and offline cash tools protect player privacy online.",
     sections: [
       {
         heading: "Information boundaries",
@@ -107,8 +107,8 @@ export const systemPageContent = {
     ]
   },
   terms: {
-    title: "Terms of Use",
-    description: `Terms of use for ${siteConfig.siteName}.`,
+    title: "Terms of Use | Merge a Nuke Guide Roblox Resources",
+    description: "Review the terms of use for Merge a Nuke Guide. Understand the rules for using our Roblox calculators, codes lists, and independent strategy resources.",
     sections: [
       {
         heading: "Independent fan guide",

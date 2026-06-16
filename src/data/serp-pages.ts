@@ -174,7 +174,7 @@ export const serpPages = {
   raid: {
     currentSlug: "raid",
     title: "Merge a Nuke Raid Guide | Attack, Lock, Cash Defense",
-    description: "Use this Merge a Nuke raid guide to plan attacks, pick safer targets, protect cash, avoid scripts, and read evidence labels before raiding.",
+    description: "Use this Merge a Nuke raid guide to plan attacks, pick safer targets, protect cash, avoid scripts, and read evidence labels before launching raids.",
     eyebrow: "Raid guide",
     h1: "Merge a Nuke Raid Guide",
     intro: [
@@ -461,7 +461,7 @@ export const serpPages = {
   },
   calculator: {
     currentSlug: "calculator",
-    title: "Merge a Nuke Calculator | Offline Cash Planner",
+    title: "Merge a Nuke Calculator | Roblox Offline Cash Planner",
     description: "Use the Merge a Nuke calculator as a Roblox offline cash planner with player-input estimates, privacy-safe local math, and no hidden official formula claims.",
     eyebrow: "Calculator",
     h1: "Merge a Nuke Calculator",
@@ -548,7 +548,7 @@ export const serpPages = {
   progression: {
     currentSlug: "progression",
     title: "Merge a Nuke Progression Guide | Cash, Upgrades, Raids",
-    description: "Follow a Merge a Nuke progression guide built around codes, clean merges, cash upgrades, lock habits, selective raids, and rebirth timing.",
+    description: "Follow a Merge a Nuke progression guide built around active codes, clean merges, cash upgrades, lock habits, selective raids, and rebirth timing.",
     eyebrow: "Progression",
     h1: "Merge a Nuke Progression Guide",
     intro: [
@@ -892,7 +892,7 @@ export const serpPages = {
   },
   tierList: {
     currentSlug: "tier-list",
-    title: "Merge a Nuke Tier List | Progression Priorities",
+    title: "Merge a Nuke Tier List | Roblox Progression Priorities",
     description: "Read a Merge a Nuke tier list focused on progression priorities, ranking criteria, source notes, pending exact stats, and update-sensitive labels.",
     eyebrow: "Tier list",
     h1: "Merge a Nuke Tier List",
