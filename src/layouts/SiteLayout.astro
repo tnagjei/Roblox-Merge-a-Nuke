@@ -6,6 +6,7 @@
 import { siteConfig } from "../data/config";
 import Header from "../components/Header.astro";
 import Footer from "../components/Footer.astro";
+import BackToTop from "../components/BackToTop.astro";
 import "../styles/global.css";
 
 interface Props {
@@ -70,5 +71,6 @@ const ogImage = siteConfig.assets.ogImage || siteConfig.assets.hero;
     <Header />
     <slot />
     <Footer />
+    <BackToTop />
   </body>
 </html>

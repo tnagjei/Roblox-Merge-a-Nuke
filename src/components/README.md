@@ -7,6 +7,7 @@
 ## Files
 - Header.astro：顶栏导航条，含品牌标记和多语言列表
 - Footer.astro：底栏，显示动态版权和可配置邮箱
+- BackToTop.astro：回到顶部悬浮按钮，支持平滑滚动与动态可见性
 - HomeHero.astro：首页巨幕，突出网站特色与 Roblox 入口链接
 - CopyButton.astro：点击一键复制礼包兑换码组件
 - VideoEmbed.astro：隐私增强 YouTube 嵌入组件，统一 nocookie、懒加载和备用链接
