@@ -1,0 +1,319 @@
+---
+// input: SERP-driven guide page data and optional feature slot
+// output: SEO guide page with evidence labels, tables, video, FAQ, and related links
+// pos: src/components/SerpGuidePage.astro (更新规则：文件变更需同步本注释与所属目录 README)
+
+import SiteLayout from "../layouts/SiteLayout.astro";
+import RelatedGuides from "./RelatedGuides.astro";
+import VideoEmbed from "./VideoEmbed.astro";
+import type { SerpGuidePageData } from "../data/serp-pages";
+
+interface Props {
+  page: SerpGuidePageData;
+}
+
+const { page } = Astro.props;
+
+function badgeClass(label: string) {
+  if (label === "unsafe" || label === "disputed") return "danger";
+  if (label === "pending" || label === "estimated") return "pending";
+  return "reported";
+}
+---
+
+<SiteLayout title={page.title} description={page.description}>
+  <main class="content-page">
+    <section class="prose-block serp-hero">
+      <p class="eyebrow">{page.eyebrow}</p>
+      <h1>{page.h1}</h1>
+      {page.intro.map((paragraph) => <p>{paragraph}</p>)}
+      <p class="source-label">{page.status}</p>
+
+      <div class={`serp-callout ${page.callout.tone ?? "neutral"}`}>
+        <h3>{page.callout.title}</h3>
+        <p>{page.callout.body}</p>
+      </div>
+    </section>
+
+    {Astro.slots.has("feature") ? <slot name="feature" /> : null}
+
+    {page.checklist ? (
+      <section class="section serp-section" aria-labelledby={`${page.currentSlug}-checklist`}>
+        <p class="eyebrow">{page.checklist.eyebrow}</p>
+        <h2 id={`${page.currentSlug}-checklist`}>{page.checklist.heading}</h2>
+        <ol class="guide-list">
+          {page.checklist.items.map((item) => (
+            <li>
+              <strong>{item.title}</strong>
+              <span>{item.body}</span>
+            </li>
+          ))}
+        </ol>
+      </section>
+    ) : null}
+
+    {page.tables.map((table) => (
+      <section class="section serp-section" aria-labelledby={table.heading.toLowerCase().replace(/[^a-z0-9]+/g, "-")}>
+        <p class="eyebrow">{table.eyebrow}</p>
+        <h2 id={table.heading.toLowerCase().replace(/[^a-z0-9]+/g, "-")}>{table.heading}</h2>
+        <p>{table.intro}</p>
+        <div class="table-wrap">
+          <table class="guide-table">
+            <thead>
+              <tr>
+                {table.columns.map((column) => <th>{column}</th>)}
+              </tr>
+            </thead>
+            <tbody>
+              {table.rows.map((row) => (
+                <tr>
+                  {row.map((cell) => <td>{cell}</td>)}
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+      </section>
+    ))}
+
+    {page.cardSections.map((section) => (
+      <section class="section serp-section" aria-labelledby={section.heading.toLowerCase().replace(/[^a-z0-9]+/g, "-")}>
+        <p class="eyebrow">{section.eyebrow}</p>
+        <h2 id={section.heading.toLowerCase().replace(/[^a-z0-9]+/g, "-")}>{section.heading}</h2>
+        <div class="card-grid">
+          {section.cards.map((card) => (
+            <article class="card evidence-card">
+              <span class={`evidence-badge ${badgeClass(card.label)}`}>{card.label}</span>
+              <h3>{card.title}</h3>
+              {card.body.map((paragraph) => <p>{paragraph}</p>)}
+            </article>
+          ))}
+        </div>
+      </section>
+    ))}
+
+    <VideoEmbed {...page.video} />
+
+    <section class="section serp-section" aria-labelledby={`${page.currentSlug}-evidence`}>
+      <p class="eyebrow">Evidence boundary</p>
+      <h2 id={`${page.currentSlug}-evidence`}>{page.evidence.heading}</h2>
+      <div class="evidence-grid">
+        {page.evidence.items.map((item) => (
+          <article class="card evidence-card">
+            <span class={`evidence-badge ${badgeClass(item.label)}`}>{item.label}</span>
+            <h3>{item.claim}</h3>
+            <p>{item.detail}</p>
+          </article>
+        ))}
+      </div>
+    </section>
+
+    <section class="section faq-block serp-section">
+      <p class="eyebrow">FAQ</p>
+      <h2>{page.faqHeading}</h2>
+      <div class="faq-grid">
+        {page.faqs.map((faq) => (
+          <article class="card faq-card">
+            <span class={`evidence-badge ${badgeClass(faq.label)}`}>{faq.label}</span>
+            <h3>{faq.question}</h3>
+            <p>{faq.answer}</p>
+          </article>
+        ))}
+      </div>
+    </section>
+
+    <RelatedGuides currentSlug={page.currentSlug} />
+  </main>
+</SiteLayout>
+
+<style>
+  .serp-hero {
+    margin-bottom: 40px;
+  }
+
+  .serp-callout {
+    margin-top: 24px;
+    padding: 20px;
+    border: 1.5px solid rgba(255, 165, 2, 0.18);
+    border-radius: var(--radius-interactive);
+    background: rgba(255, 165, 2, 0.05);
+    line-height: 1.6;
+  }
+
+  .serp-callout h3 {
+    margin: 0 0 8px;
+    color: var(--color-yellow);
+    font-family: var(--font-display);
+  }
+
+  .serp-callout p {
+    margin: 0;
+  }
+
+  .serp-callout.green {
+    border-color: rgba(46, 213, 115, 0.18);
+    background: rgba(46, 213, 115, 0.05);
+  }
+
+  .serp-callout.green h3 {
+    color: var(--color-green);
+  }
+
+  .serp-callout.blue {
+    border-color: rgba(30, 144, 255, 0.18);
+    background: rgba(30, 144, 255, 0.05);
+  }
+
+  .serp-callout.blue h3 {
+    color: var(--color-blue);
+  }
+
+  .serp-callout.red {
+    border-color: rgba(255, 71, 87, 0.18);
+    background: rgba(255, 71, 87, 0.05);
+  }
+
+  .serp-callout.red h3 {
+    color: var(--color-red);
+  }
+
+  .serp-section {
+    margin-bottom: 48px;
+  }
+
+  .serp-section h2 {
+    margin-bottom: 18px;
+  }
+
+  .serp-section > p:not(.eyebrow) {
+    max-width: 860px;
+    line-height: 1.65;
+  }
+
+  .guide-list {
+    display: grid;
+    gap: 14px;
+    padding-left: 24px;
+    max-width: 920px;
+  }
+
+  .guide-list li {
+    padding: 16px 18px;
+    border: 1px solid var(--line);
+    border-radius: var(--radius-interactive);
+    background: rgba(18, 22, 32, 0.62);
+  }
+
+  .guide-list strong {
+    display: block;
+    color: var(--color-yellow);
+    font-family: var(--font-display);
+    margin-bottom: 4px;
+  }
+
+  .guide-list span {
+    display: block;
+    color: var(--text);
+    line-height: 1.55;
+  }
+
+  .table-wrap {
+    width: 100%;
+    overflow-x: auto;
+    border: 1px solid var(--line);
+    border-radius: var(--radius-card);
+    background: rgba(18, 22, 32, 0.68);
+  }
+
+  .guide-table {
+    width: 100%;
+    min-width: 680px;
+    border-collapse: collapse;
+  }
+
+  .guide-table th,
+  .guide-table td {
+    padding: 14px 16px;
+    border-bottom: 1px solid var(--line);
+    text-align: left;
+    vertical-align: top;
+    font-size: 0.9rem;
+  }
+
+  .guide-table th {
+    color: var(--color-yellow);
+    font-family: var(--font-display);
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    font-size: 0.78rem;
+    background: rgba(255, 165, 2, 0.06);
+  }
+
+  .guide-table tr:last-child td {
+    border-bottom: 0;
+  }
+
+  .evidence-card {
+    border-radius: var(--radius-card);
+    border-color: var(--line);
+  }
+
+  .evidence-card h3,
+  .faq-card h3 {
+    margin: 10px 0 10px;
+    color: var(--text);
+    font-family: var(--font-display);
+    font-size: 1.08rem;
+  }
+
+  .evidence-card p,
+  .faq-card p {
+    margin: 0;
+    font-size: 0.92rem;
+    line-height: 1.6;
+  }
+
+  .evidence-grid,
+  .faq-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 18px;
+  }
+
+  .evidence-badge {
+    display: inline-flex;
+    width: fit-content;
+    padding: 4px 9px;
+    border-radius: 999px;
+    font-family: var(--font-mono);
+    font-size: 0.72rem;
+    font-weight: 800;
+    letter-spacing: 0.02em;
+    border: 1px solid rgba(46, 213, 115, 0.28);
+    color: var(--color-green);
+    background: rgba(46, 213, 115, 0.08);
+  }
+
+  .evidence-badge.pending {
+    border-color: rgba(255, 165, 2, 0.28);
+    color: var(--color-yellow);
+    background: rgba(255, 165, 2, 0.08);
+  }
+
+  .evidence-badge.danger {
+    border-color: rgba(255, 71, 87, 0.3);
+    color: var(--color-red);
+    background: rgba(255, 71, 87, 0.08);
+  }
+
+  @media (max-width: 720px) {
+    .evidence-grid,
+    .faq-grid {
+      grid-template-columns: 1fr;
+    }
+
+    .guide-table {
+      min-width: 620px;
+    }
+  }
+</style>

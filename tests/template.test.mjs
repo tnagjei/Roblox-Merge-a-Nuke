@@ -12,14 +12,20 @@ const wikiFiles = [
   "src/pages/tier-list.astro",
   "src/pages/beginner-guide.astro",
   "src/pages/updates.astro",
-  "src/pages/wiki.astro"
+  "src/pages/wiki.astro",
+  "src/pages/progression.astro",
+  "src/pages/raid.astro",
+  "src/pages/upgrades.astro",
+  "src/pages/offline-cash.astro",
+  "src/pages/rebirth.astro"
 ];
 
-const wikiSlugs = ["calculator", "codes", "tier-list", "beginner-guide", "updates", "wiki"];
+const wikiSlugs = ["calculator", "codes", "tier-list", "beginner-guide", "updates", "wiki", "progression", "raid", "upgrades", "offline-cash", "rebirth"];
 
 const requiredFiles = [
   "astro.config.mjs",
   "src/data/reported-guides.ts",
+  "src/data/serp-pages.ts",
   "src/content/system-pages.ts",
   "src/lib/navigation.ts",
   "src/lib/analytics.ts",
@@ -27,6 +33,8 @@ const requiredFiles = [
   "src/components/CopyButton.astro",
   "src/components/ToolEventTracker.astro",
   "src/components/RelatedGuides.astro",
+  "src/components/SerpGuidePage.astro",
+  "src/components/VideoEmbed.astro",
   "docs/ANALYTICS_EVENTS.md",
   "src/pages/index.astro",
   "src/pages/about.astro",
@@ -73,8 +81,8 @@ test("template defaults to wiki-hub launch mode", () => {
   assert.ok(config.includes('launchMode: "wiki-hub"'));
   assert.ok(config.includes('completedLocales: ["en"]'));
   assert.ok(config.includes('availableLocales: ["en", "th", "fil", "id"]'));
-  assert.ok(config.includes('completedCoreSlugs: ["", "calculator", "codes", "tier-list", "beginner-guide", "updates", "wiki"]'));
-  assert.ok(config.includes('navigationSlugs: ["", "calculator", "codes", "tier-list", "beginner-guide", "updates", "wiki"]'));
+  assert.ok(config.includes('completedCoreSlugs: ["", "calculator", "codes", "tier-list", "beginner-guide", "updates", "wiki", "progression", "raid", "upgrades", "offline-cash", "rebirth"]'));
+  assert.ok(config.includes('navigationSlugs: ["", "calculator", "codes", "tier-list", "beginner-guide", "updates", "wiki", "progression", "raid", "upgrades", "offline-cash", "rebirth"]'));
   assert.ok(config.includes('iconTheme: "nuke"'));
   assert.ok(config.includes('brandColor: "#171717"'));
   assert.ok(config.includes('accentColor: "#facc15"'));
@@ -92,7 +100,7 @@ test("navigation exposes wiki hub links and language candidates", () => {
   const navigation = read("src/lib/navigation.ts");
   const header = read("src/components/Header.astro");
 
-  for (const label of ["Calculator", "Codes", "Tier List", "Beginner Guide", "Updates", "Wiki", "English", "Thai", "Filipino", "Indonesian"]) {
+  for (const label of ["Calculator", "Codes", "Tier List", "Beginner Guide", "Updates", "Wiki", "Progression", "Raid Guide", "Upgrades", "Offline Cash", "Rebirth", "English", "Thai", "Filipino", "Indonesian"]) {
     assert.ok(navigation.includes(label), `navigation must include ${label}`);
   }
 
@@ -128,8 +136,7 @@ test("cluster pages link back to hub and related cluster pages", () => {
 
   for (const slug of wikiSlugs) {
     const page = read(`src/pages/${slug}.astro`);
-    assert.ok(page.includes("RelatedGuides"), `${slug} must include RelatedGuides`);
-    assert.ok(page.includes(`currentSlug="${slug}"`), `${slug} must pass currentSlug`);
+    assert.ok(page.includes("SerpGuidePage"), `${slug} must use shared SERP guide renderer`);
   }
 });
 
@@ -286,7 +293,7 @@ test("active codes are not verified by default", () => {
   assert.ok(game.includes('pendingCodes: ["BOOM"]'));
   assert.ok(reported.includes("community-reported"));
   assert.ok(reported.includes("not independently verified"));
-  assert.ok(codesPage.includes("Official-page reports"));
+  assert.ok(codesPage.includes("0 verified active codes"));
   assert.equal(reported.includes("verifiedActiveCodes"), false);
   assert.equal(reported.includes("PLACEHOLDER-CODE"), false);
   assert.equal(reported.includes("Placeholder class"), false);
@@ -299,7 +306,7 @@ test("IndexNow and release setup are explicit and bounded to public paths", () =
   const submitter = read("scripts/indexnow-submit.mjs");
   const releaseCheck = read("scripts/release-check.mjs");
 
-  for (const path of ["/", "/calculator/", "/codes/", "/tier-list/", "/beginner-guide/", "/updates/", "/wiki/", "/about/", "/contact/", "/editorial-policy/"]) {
+  for (const path of ["/", "/calculator/", "/codes/", "/tier-list/", "/beginner-guide/", "/updates/", "/wiki/", "/progression/", "/raid/", "/upgrades/", "/offline-cash/", "/rebirth/", "/about/", "/contact/", "/editorial-policy/"]) {
     assert.ok(config.includes(path), `public path must include ${path}`);
   }
 

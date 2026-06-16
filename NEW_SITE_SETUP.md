@@ -35,6 +35,11 @@
 - /beginner-guide/
 - /updates/
 - /wiki/
+- /progression/
+- /raid/
+- /upgrades/
+- /offline-cash/
+- /rebirth/
 - /about/
 - /contact/
 - /editorial-policy/

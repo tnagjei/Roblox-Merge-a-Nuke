@@ -14,7 +14,7 @@ export const localeLabels = {
 export const defaultNavItems = [
   { slug: "", label: "Home", href: "/" },
   { slug: "codes", label: "Codes", href: "/codes/" },
-  { slug: "guide", label: "Beginner Guide", href: "/guide/" },
+  { slug: "beginner-guide", label: "Beginner Guide", href: "/beginner-guide/" },
   { slug: "progression", label: "Progression", href: "/progression/" },
   { slug: "raid", label: "Raid Guide", href: "/raid/" },
   { slug: "tier-list", label: "Tier List", href: "/tier-list/" },

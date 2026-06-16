@@ -1,18 +1,12 @@
 ---
-// input: none
-// output: HTML redirect to the new shorter /guide/ path
+// input: SERP beginner guide page data and shared guide renderer
+// output: Beginner guide page with starter loop, evidence labels, nocookie video, and FAQ
 // pos: src/pages/beginner-guide.astro (更新规则：文件变更需同步本注释与所属目录 README)
+
+import SerpGuidePage from "../components/SerpGuidePage.astro";
+import { serpPages } from "../data/serp-pages";
+
+const page = serpPages.beginnerGuide;
 ---
 
-<!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="utf-8" />
-    <title>Redirecting...</title>
-    <meta http-equiv="refresh" content="0;url=/guide/" />
-    <link rel="canonical" href="https://mergeanuke.online/guide/" />
-  </head>
-  <body>
-    <p>Redirecting to <a href="/guide/">/guide/</a>...</p>
-  </body>
-</html>
+<SerpGuidePage page={page} />

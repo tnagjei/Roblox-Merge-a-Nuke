@@ -49,7 +49,7 @@ const indexNowKey = (process.env.INDEXNOW_KEY || "").trim();
 const excludedSitemapSlugs = new Set([
   "privacy",
   "terms",
-  "beginner-guide",
+  "guide",
   "scripts",
   "macros",
   "executor",

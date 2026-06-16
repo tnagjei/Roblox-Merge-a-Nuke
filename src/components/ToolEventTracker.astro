@@ -25,18 +25,30 @@ const {
 ---
 
 <script define:vars={{ toolName, eventSource, inputSelector, resultSelector, inputEventName, resultEventName, debounceMs }}>
-  import { debounce, trackToolInputChange, trackToolResultView } from "../lib/analytics";
+  function debounce(callback, wait) {
+    let timeoutId;
+    return (...args) => {
+      window.clearTimeout(timeoutId);
+      timeoutId = window.setTimeout(() => callback(...args), wait);
+    };
+  }
+
+  function trackEvent(name, params) {
+    if (typeof window.gtag === "function") {
+      window.gtag("event", name, params);
+      return;
+    }
+    if (!window.location.hostname.includes("localhost") && window.location.hostname !== "127.0.0.1") return;
+    console.debug("[analytics]", name, params);
+  }
 
   const trackInput = debounce((fieldName) => {
-    trackToolInputChange(
-      {
-        page_path: window.location.pathname,
-        event_source: eventSource,
-        tool_name: toolName,
-        field_name: fieldName
-      },
-      inputEventName
-    );
+    trackEvent(inputEventName, {
+      page_path: window.location.pathname,
+      event_source: eventSource,
+      tool_name: toolName,
+      field_name: fieldName
+    });
   }, debounceMs);
 
   document.querySelectorAll(inputSelector).forEach((input) => {
@@ -51,13 +63,10 @@ const {
   const result = document.querySelector(resultSelector);
   if (result && result.dataset.analyticsResultViewed !== "true") {
     result.dataset.analyticsResultViewed = "true";
-    trackToolResultView(
-      {
-        page_path: window.location.pathname,
-        event_source: eventSource,
-        tool_name: toolName
-      },
-      resultEventName
-    );
+    trackEvent(resultEventName, {
+      page_path: window.location.pathname,
+      event_source: eventSource,
+      tool_name: toolName
+    });
   }
 </script>

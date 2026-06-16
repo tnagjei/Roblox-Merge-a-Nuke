@@ -8,7 +8,7 @@ export const wikiLinks = [
   { title: "Calculator", slug: "calculator", description: "Estimate offline cash or upgrade targets with your own numbers, avoiding fake official formulas." },
   { title: "Codes", slug: "codes", description: "Track official-page and community-reported code status without inventing rewards." },
   { title: "Tier List", slug: "tier-list", description: "Hold ranking research until enough evidence exists for reviewed community tiers." },
-  { title: "Beginner Guide", slug: "guide", description: "Start with codes, clean merges, income upgrades, base lock habits, and safer first raids before chasing higher tiers." },
+  { title: "Beginner Guide", slug: "beginner-guide", description: "Start with codes, clean merges, income upgrades, base lock habits, and safer first raids before chasing higher tiers." },
   { title: "Progression Guide", slug: "progression", description: "Build a stronger cash engine, improve upgrade order, protect offline value, and work toward the strongest nuke route." },
   { title: "Raid Guide", slug: "raid", description: "Learn when to attack, how to choose targets, how to protect stolen cash, and why base lock matters after raids." },
   { title: "Upgrades Guide", slug: "upgrades", description: "Choose spawn flow, stronger nuke spawns, lock upgrades, raid cooldowns, and health upgrades in a safer order." },

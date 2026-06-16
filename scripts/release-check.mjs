@@ -5,7 +5,7 @@ const root = process.cwd();
 const distDir = path.join(root, "dist");
 const violations = [];
 
-const expectedPublicPaths = ["/", "/calculator/", "/codes/", "/tier-list/", "/beginner-guide/", "/updates/", "/wiki/", "/about/", "/contact/", "/editorial-policy/"];
+const expectedPublicPaths = ["/", "/calculator/", "/codes/", "/tier-list/", "/beginner-guide/", "/updates/", "/wiki/", "/progression/", "/raid/", "/upgrades/", "/offline-cash/", "/rebirth/", "/about/", "/contact/", "/editorial-policy/"];
 const expectedNoindexPaths = ["/privacy/", "/terms/"];
 const expectedBlockedPaths = ["/scripts/", "/macros/", "/executor/", "/exploit/", "/guide/"];
 

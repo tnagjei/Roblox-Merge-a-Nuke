@@ -3,7 +3,7 @@ import path from "node:path";
 
 const root = process.cwd();
 const violations = [];
-const wikiHubSlugs = ["", "calculator", "codes", "tier-list", "beginner-guide", "updates", "wiki"];
+const wikiHubSlugs = ["", "calculator", "codes", "tier-list", "beginner-guide", "updates", "wiki", "progression", "raid", "upgrades", "offline-cash", "rebirth"];
 const expectedLocales = ["en", "th", "fil", "id"];
 const allowedIconThemes = ["default", "magic", "farm", "anime", "combat", "racing", "simulator", "nuke"];
 
@@ -29,6 +29,11 @@ const requiredFiles = [
   "src/pages/beginner-guide.astro",
   "src/pages/updates.astro",
   "src/pages/wiki.astro",
+  "src/pages/progression.astro",
+  "src/pages/raid.astro",
+  "src/pages/upgrades.astro",
+  "src/pages/offline-cash.astro",
+  "src/pages/rebirth.astro",
   "src/layouts/SiteLayout.astro",
   "src/components/Header.astro",
   "src/components/TrackedLink.astro",
@@ -152,7 +157,7 @@ if (exists("src/data/config.ts")) {
   if (!["scripts", "macros", "executor", "exploit", "guide"].every((slug) => blockedSlugs.includes(slug))) {
     violations.push("blockedSlugs must include scripts, macros, executor, exploit, guide");
   }
-  if (publicPaths.join(",") !== "/,/calculator/,/codes/,/tier-list/,/beginner-guide/,/updates/,/wiki/,/about/,/contact/,/editorial-policy/") {
+  if (publicPaths.join(",") !== "/,/calculator/,/codes/,/tier-list/,/beginner-guide/,/updates/,/wiki/,/progression/,/raid/,/upgrades/,/offline-cash/,/rebirth/,/about/,/contact/,/editorial-policy/") {
     violations.push("routePolicy.publicPaths must list indexable public paths only");
   }
   if (noindexPaths.join(",") !== "/privacy/,/terms/") violations.push("routePolicy.noindexPaths must be privacy and terms");
@@ -206,7 +211,7 @@ if (exists("src/components/Footer.astro")) {
 
 if (exists("src/lib/navigation.ts")) {
   const nav = read("src/lib/navigation.ts");
-  for (const label of ["Calculator", "Codes", "Tier List", "Beginner Guide", "Updates", "Wiki", "English", "Thai", "Filipino", "Indonesian"]) {
+  for (const label of ["Calculator", "Codes", "Tier List", "Beginner Guide", "Updates", "Wiki", "Progression", "Raid Guide", "Upgrades", "Offline Cash", "Rebirth", "English", "Thai", "Filipino", "Indonesian"]) {
     if (!nav.includes(label)) violations.push(`navigation must include ${label}`);
   }
   for (const label of ["Classes", "Weapons", "Value List"]) {

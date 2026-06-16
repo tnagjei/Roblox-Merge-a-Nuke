@@ -3,7 +3,7 @@ import path from "node:path";
 
 const root = process.cwd();
 const args = process.argv.slice(2);
-const WIKI_HUB_SLUGS = ["", "calculator", "codes", "tier-list", "beginner-guide", "updates", "wiki"];
+const WIKI_HUB_SLUGS = ["", "calculator", "codes", "tier-list", "beginner-guide", "updates", "wiki", "progression", "raid", "upgrades", "offline-cash", "rebirth"];
 const MINIMAL_SLUGS = [""];
 const WIKI_PAGE_FILES = [
   "src/pages/calculator.astro",
@@ -11,7 +11,12 @@ const WIKI_PAGE_FILES = [
   "src/pages/tier-list.astro",
   "src/pages/beginner-guide.astro",
   "src/pages/updates.astro",
-  "src/pages/wiki.astro"
+  "src/pages/wiki.astro",
+  "src/pages/progression.astro",
+  "src/pages/raid.astro",
+  "src/pages/upgrades.astro",
+  "src/pages/offline-cash.astro",
+  "src/pages/rebirth.astro"
 ];
 const ICON_THEMES = ["default", "magic", "farm", "anime", "combat", "racing", "simulator", "nuke"];
 
@@ -152,13 +157,13 @@ try {
   defaultLocale: "en",
   availableLocales: ["en", "th", "fil", "id"],
   completedLocales: ["en"],
-  coreSlugs: ["", "calculator", "codes", "tier-list", "beginner-guide", "updates", "wiki"],
+  coreSlugs: ["", "calculator", "codes", "tier-list", "beginner-guide", "updates", "wiki", "progression", "raid", "upgrades", "offline-cash", "rebirth"],
   completedCoreSlugs: ${JSON.stringify(completedCoreSlugs)},
   englishOnlySlugs: [],
   completedEnglishOnlySlugs: [],
   systemSlugs: ["about", "contact", "editorial-policy"],
   blockedSlugs: ["scripts", "macros", "executor", "exploit", "guide"],
-  navigationSlugs: ["", "calculator", "codes", "tier-list", "beginner-guide", "updates", "wiki"],
+  navigationSlugs: ["", "calculator", "codes", "tier-list", "beginner-guide", "updates", "wiki", "progression", "raid", "upgrades", "offline-cash", "rebirth"],
   routePolicy: {
     publicPaths: ${JSON.stringify(publicPaths)},
     noindexPaths: ["/privacy/", "/terms/"],
@@ -240,7 +245,12 @@ export const wikiLinks = [
   { title: "Tier List", slug: "tier-list", description: "Hold ranking research until enough evidence exists for reviewed community tiers." },
   { title: "Beginner Guide", slug: "beginner-guide", description: "Explain the verified loop: merge bombs, collect cash, raid bases, and lock your base." },
   { title: "Updates", slug: "updates", description: "Track the reported Friday update cadence and avoid fake patch notes." },
-  { title: "Wiki", slug: "wiki", description: "Centralize source-backed mechanics and open research gaps." }
+  { title: "Wiki", slug: "wiki", description: "Centralize source-backed mechanics and open research gaps." },
+  { title: "Progression Guide", slug: "progression", description: "Build the cash engine, protect value, and prepare rebirth timing." },
+  { title: "Raid Guide", slug: "raid", description: "Choose raid timing, targets, and post-raid cash protection with conservative labels." },
+  { title: "Upgrades Guide", slug: "upgrades", description: "Pick upgrades by bottleneck instead of unsafe auto-upgrade scripts." },
+  { title: "Offline Cash", slug: "offline-cash", description: "Prepare away windows with measured rates, lock habits, and calculator estimates." },
+  { title: "Rebirth Guide", slug: "rebirth", description: "Plan reset timing, pre-rebirth checks, and post-reset recovery." }
 ];
 
 export const homeContent = {

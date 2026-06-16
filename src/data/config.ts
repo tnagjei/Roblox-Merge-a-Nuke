@@ -13,17 +13,17 @@ export const siteConfig = {
   defaultLocale: "en",
   availableLocales: ["en", "th", "fil", "id"],
   completedLocales: ["en"],
-  coreSlugs: ["", "calculator", "codes", "tier-list", "guide", "updates", "wiki", "progression", "raid", "upgrades", "offline-cash", "rebirth"],
-  completedCoreSlugs: ["", "calculator", "codes", "tier-list", "guide", "updates", "wiki", "progression", "raid", "upgrades", "offline-cash", "rebirth"],
+  coreSlugs: ["", "calculator", "codes", "tier-list", "beginner-guide", "updates", "wiki", "progression", "raid", "upgrades", "offline-cash", "rebirth"],
+  completedCoreSlugs: ["", "calculator", "codes", "tier-list", "beginner-guide", "updates", "wiki", "progression", "raid", "upgrades", "offline-cash", "rebirth"],
   englishOnlySlugs: [],
   completedEnglishOnlySlugs: [],
   systemSlugs: ["about", "contact", "editorial-policy"],
-  blockedSlugs: ["scripts", "macros", "executor", "exploit"],
-  navigationSlugs: ["", "calculator", "codes", "tier-list", "guide", "updates", "wiki", "progression", "raid", "upgrades", "offline-cash", "rebirth"],
+  blockedSlugs: ["scripts", "macros", "executor", "exploit", "guide"],
+  navigationSlugs: ["", "calculator", "codes", "tier-list", "beginner-guide", "updates", "wiki", "progression", "raid", "upgrades", "offline-cash", "rebirth"],
   routePolicy: {
-    publicPaths: ["/", "/calculator/", "/codes/", "/tier-list/", "/guide/", "/updates/", "/wiki/", "/about/", "/contact/", "/editorial-policy/", "/progression/", "/raid/", "/upgrades/", "/offline-cash/", "/rebirth/"],
+    publicPaths: ["/", "/calculator/", "/codes/", "/tier-list/", "/beginner-guide/", "/updates/", "/wiki/", "/progression/", "/raid/", "/upgrades/", "/offline-cash/", "/rebirth/", "/about/", "/contact/", "/editorial-policy/"],
     noindexPaths: ["/privacy/", "/terms/"],
-    blockedPaths: ["/scripts/", "/macros/", "/executor/", "/exploit/"]
+    blockedPaths: ["/scripts/", "/macros/", "/executor/", "/exploit/", "/guide/"]
   },
   wwwPolicy: {
     source: "https://www.mergeanuke.online",

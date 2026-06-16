@@ -6,7 +6,7 @@ const configPath = path.join(root, "src/data/config.ts");
 const gamePath = path.join(root, "src/data/game.ts");
 const violations = [];
 const warnings = [];
-const wikiHubSlugs = ["", "calculator", "codes", "tier-list", "beginner-guide", "updates", "wiki"];
+const publicCoreSlugs = ["", "calculator", "codes", "tier-list", "beginner-guide", "updates", "wiki", "progression", "raid", "upgrades", "offline-cash", "rebirth"];
 const systemSlugs = ["about", "contact", "editorial-policy"];
 const expectedBlockedSlugs = ["scripts", "macros", "executor", "exploit", "guide"];
 const expectedLocales = ["en", "th", "fil", "id"];
@@ -120,7 +120,7 @@ if (!fs.existsSync(configPath)) {
   if (!completedCoreSlugs.every((slug) => coreSlugs.includes(slug))) violations.push("completedCoreSlugs must be a subset of coreSlugs");
   if (completedEnglishOnlySlugs.length !== 0) violations.push("completedEnglishOnlySlugs must be empty by default");
   if (!navigationSlugs.every((slug) => coreSlugs.includes(slug))) violations.push("navigationSlugs must be a subset of coreSlugs");
-  if (!navigationSlugs.every((slug) => wikiHubSlugs.includes(slug))) violations.push("navigationSlugs must use the RSA hub slugs only");
+  if (!navigationSlugs.every((slug) => publicCoreSlugs.includes(slug))) violations.push("navigationSlugs must use the approved public core slugs only");
   if (configuredSystemSlugs.join(",") !== systemSlugs.join(",")) {
     violations.push("systemSlugs must be about, contact, and editorial-policy");
   }
@@ -137,8 +137,8 @@ if (!fs.existsSync(configPath)) {
     if (!config.includes(required)) violations.push(`config must include ${required}`);
   }
   if (launchMode === "minimal" && completedCoreSlugs.join(",") !== "") violations.push("minimal mode must complete homepage only");
-  if (launchMode === "wiki-hub" && completedCoreSlugs.join(",") !== wikiHubSlugs.join(",")) {
-    violations.push("wiki-hub mode must complete homepage, calculator, codes, tier-list, beginner-guide, updates, and wiki");
+  if (launchMode === "wiki-hub" && completedCoreSlugs.join(",") !== publicCoreSlugs.join(",")) {
+    violations.push("wiki-hub mode must complete the approved public core route set");
   }
   validateAsset("assets.icon", icon);
   validateAsset("assets.hero", hero);

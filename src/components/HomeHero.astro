@@ -5,6 +5,9 @@
 
 import { gameData } from "../data/game";
 import { homeContent } from "../content/home";
+import { siteConfig } from "../data/config";
+
+const publicPageCount = siteConfig.routePolicy.publicPaths.length;
 ---
 
 <section class="hero home-hero">
@@ -15,7 +18,7 @@ import { homeContent } from "../content/home";
       <p class="hero-lead">{homeContent.hero.lede}</p>
       <div class="cta-row hero-cta">
         <a class="button primary" href="/codes/">Merge a Nuke Codes</a>
-        <a class="button accent" href="/guide/">Beginner Guide</a>
+        <a class="button accent" href="/beginner-guide/">Beginner Guide</a>
         <a class="button secondary" href={gameData.robloxUrl} target="_blank" rel="noopener noreferrer">Play on Roblox</a>
       </div>
     </div>
@@ -54,9 +57,9 @@ import { homeContent } from "../content/home";
           <span class="snapshot-stat-label">Friday update window</span>
         </div>
         <div class="snapshot-stat">
-          <span class="snapshot-stat-title">Status</span>
-          <strong>Online</strong>
-          <span class="snapshot-stat-label">Public build live</span>
+          <span class="snapshot-stat-title">Public Pages</span>
+          <strong>{publicPageCount}</strong>
+          <span class="snapshot-stat-label">Indexable route policy</span>
         </div>
       </div>
     </aside>

@@ -1,69 +1,49 @@
 ---
-// input: siteConfig data, related guides list component, event trackers
-// output: Interactive browser-side Tycoon offline cash calculator with tactical cyber HUD progress bar visual
+// input: SERP calculator page data, shared guide renderer, event tracker
+// output: Offline cash calculator page with player-input estimates and evidence-safe guide content
 // pos: src/pages/calculator.astro (更新规则：文件变更需同步本注释与所属目录 README)
 
-import SiteLayout from "../layouts/SiteLayout.astro";
-import RelatedGuides from "../components/RelatedGuides.astro";
+import SerpGuidePage from "../components/SerpGuidePage.astro";
 import ToolEventTracker from "../components/ToolEventTracker.astro";
-import { siteConfig } from "../data/config";
+import { serpPages } from "../data/serp-pages";
+
+const page = serpPages.calculator;
 ---
 
-<SiteLayout title="Merge a Nuke Guide Calculator | Offline Cash Progress Planner" description="Estimate your in-game upgrades with the Merge a Nuke guide calculator. Plan your offline cash income, target upgrade gaps, and server stats without hassle.">
-  <main class="content-page">
-    <section class="prose-block" style="margin-bottom: 40px;">
-      <p class="eyebrow">Calculator</p>
-      <h1>{siteConfig.gameName} Calculator</h1>
-      <p>The Merge a Nuke guide calculator helps players plan upgrade paths based on input numbers. It does not claim official in-game formulas.</p>
-      <p class="source-label">Status: player-input estimate, not official formula data.</p>
-      
-      <div style="margin-top: 24px; padding: 20px; background: rgba(30, 144, 255, 0.05); border: 1.5px solid rgba(30, 144, 255, 0.15); border-radius: var(--radius-interactive); line-height: 1.6;">
-        <h3 style="color: var(--color-blue); margin-bottom: 8px;">Calculation Logic and Formula</h3>
-        <p style="margin-bottom: 12px; font-size: 0.9rem;">
-          The calculator evaluates your idle accumulation efficiency using a simple but critical progression formula. By measuring your cash output over a designated offline duration, you can predict exactly how much of your next weapon target cost will be covered:
-        </p>
-        <div style="font-family: var(--font-mono); font-size: 0.95rem; background: rgba(0, 0, 0, 0.35); padding: 12px; border-radius: 8px; margin: 12px 0; text-align: center; color: var(--color-green);">
-          Estimated Cash = Cash Per Minute * Offline Minutes
-        </div>
-        <div style="font-family: var(--font-mono); font-size: 0.95rem; background: rgba(0, 0, 0, 0.35); padding: 12px; border-radius: 8px; margin: 12px 0; text-align: center; color: var(--color-red);">
-          Upgrade Deficit Gap = Target Cost - Estimated Cash
-        </div>
-        <p style="margin-bottom: 0; font-size: 0.9rem;">
-          To make the most of this <strong>Merge a Nuke guide</strong> calculator, we recommend recording your cash-per-minute rate directly from your island dashboard when you are actively merging. Note that your rate fluctuates as you merge lower-tier bombs into higher-level warheads.
-        </p>
-      </div>
-    </section>
-
+<SerpGuidePage page={page}>
+  <Fragment slot="feature">
     <section class="section tool-panel" aria-labelledby="offline-cash" style="margin-bottom: 48px;">
       <div>
         <p class="eyebrow">Offline cash planner</p>
-        <h2 id="offline-cash">Estimate your next upgrade window</h2>
-        <p style="margin-bottom: 24px;">Enter your current cash rate from the game screen, the time you expect to be away, and your target cost.</p>
+        <h2 id="offline-cash">Estimate Your Next Upgrade Window</h2>
+        <p style="margin-bottom: 24px;">
+          Enter your current cash rate from the game screen, the time you expect to be away, and your target upgrade cost. Every result is labeled estimated because the game does not publish a hidden official formula here.
+        </p>
       </div>
-      
+
       <div class="card" style="background: rgba(18, 22, 32, 0.65); border-color: var(--line); border-radius: var(--radius-card);">
         <form class="calculator-form" data-tool-form>
           <label>
             Cash per minute
-            <input id="cash-rate" name="cash_rate" type="number" min="0" step="1" value="0" inputmode="decimal" placeholder="e.g. 500" style="border-radius: var(--radius-interactive);" />
+            <input id="cash-rate" data-tool-input name="cash_rate" type="number" min="0" step="1" value="0" inputmode="decimal" placeholder="e.g. 500" style="border-radius: var(--radius-interactive);" />
           </label>
           <label>
             Offline minutes
-            <input id="offline-minutes" name="offline_minutes" type="number" min="0" step="1" value="60" inputmode="decimal" placeholder="e.g. 60" style="border-radius: var(--radius-interactive);" />
+            <input id="offline-minutes" data-tool-input name="offline_minutes" type="number" min="0" step="1" value="60" inputmode="decimal" placeholder="e.g. 60" style="border-radius: var(--radius-interactive);" />
           </label>
           <label>
             Target upgrade cost
-            <input id="target-cost" name="target_cost" type="number" min="0" step="1" value="0" inputmode="decimal" placeholder="e.g. 25000" style="border-radius: var(--radius-interactive);" />
+            <input id="target-cost" data-tool-input name="target_cost" type="number" min="0" step="1" value="0" inputmode="decimal" placeholder="e.g. 25000" style="border-radius: var(--radius-interactive);" />
           </label>
-          
+
           <div class="hud-panel" style="border-radius: var(--radius-interactive); padding: 20px; border: 1px solid rgba(30, 144, 255, 0.25);">
             <div class="hud-header" style="margin-bottom: 12px; border-bottom: 1px solid var(--line); padding-bottom: 8px;">
               <span class="hud-dot red"></span>
               <span class="hud-dot yellow"></span>
               <span class="hud-dot green"></span>
-              <span style="font-size: 0.72rem; color: var(--color-blue); margin-left: auto; font-family: var(--font-display); font-weight: 800; letter-spacing: 0.05em;">PROGRESS REPORT</span>
+              <span style="font-size: 0.72rem; color: var(--color-blue); margin-left: auto; font-family: var(--font-display); font-weight: 800; letter-spacing: 0.05em;">ESTIMATED REPORT</span>
             </div>
-            <output class="result-card" id="calculator-result" aria-live="polite" style="display: block; width: 100%; border: none; background: transparent; padding: 0; box-shadow: none; font-family: var(--font-body); font-size: 0.95rem; color: var(--text);">
+            <output class="result-card" id="calculator-result" data-tool-result aria-live="polite" style="display: block; width: 100%; border: none; background: transparent; padding: 0; box-shadow: none; font-family: var(--font-body); font-size: 0.95rem; color: var(--text);">
               Enter your in-game numbers to estimate progress.
             </output>
           </div>
@@ -71,37 +51,8 @@ import { siteConfig } from "../data/config";
       </div>
       <ToolEventTracker toolName="offline_cash_calculator" />
     </section>
-
-    <section class="section grid-section" aria-labelledby="calculator-boundary" style="margin-bottom: 48px;">
-      <div>
-        <p class="eyebrow">Evidence boundary</p>
-        <h2 id="calculator-boundary">How the Merge a Nuke Guide Calculator operates</h2>
-      </div>
-      <div class="card-grid">
-        <article class="card" style="border-radius: var(--radius-card); border-color: var(--line);">
-          <h3 style="color: var(--color-yellow);">No hidden rate table</h3>
-          <p style="margin-bottom: 12px; font-size: 0.9rem; line-height: 1.5;">This simulator does not crawl or reference proprietary backend game code. The reviewed community sources do not publish official tables mapping bomb tiers to exact cash-per-minute coefficients. Since multipliers might scale non-linearly with rebirths or store upgrades, user-input validation is the safest way to maintain calculations. Players should use this <strong>Merge a Nuke guide</strong> utility to perform manual checks before logging off.</p>
-          <p style="margin-bottom: 12px; font-size: 0.9rem; line-height: 1.5;">Additionally, cash outputs can scale dramatically based on active server multipliers, Roblox gamepasses, or promotional weekend events. Because these external factors are highly variable and not logged in public APIs, relying on static database values would only result in incorrect offline estimations. Manual input ensures 100% accuracy relative to your current live game stats.</p>
-          <p style="margin-bottom: 0; font-size: 0.85rem; color: var(--muted);">We advise players to record their active in-game income values manually from their base stats display before scheduling long away windows.</p>
-        </article>
-        <article class="card" style="border-radius: var(--radius-card); border-color: var(--line);">
-          <h3 style="color: var(--color-yellow);">No raid guarantee</h3>
-          <p style="margin-bottom: 12px; font-size: 0.9rem; line-height: 1.5;">While the idle progression runs in your base, player-versus-player raids remain highly dynamic. Opposing players can target your base with high-tier nukes, resetting a portion of your progress or stealing raw cash before you log back in. The calculator computes linear, uninterrupted time intervals only, assuming your base remains undisturbed.</p>
-          <p style="margin-bottom: 12px; font-size: 0.9rem; line-height: 1.5;">In active server lobbies, raids occur randomly. If an opponent with an advanced nuke penetrates your layout defenses, your offline yield will drop below the calculator's estimate. This is why this <strong>Merge a Nuke guide</strong> strongly emphasizes setting up a secure defense perimeter. Never leave your island unattended without locking your protective shield first.</p>
-          <p style="margin-bottom: 0; font-size: 0.85rem; color: var(--muted);">To safeguard offline earnings estimated by this tool, always activate the base shield lock before closing your Roblox client.</p>
-        </article>
-        <article class="card" style="border-radius: var(--radius-card); border-color: var(--line);">
-          <h3 style="color: var(--color-yellow);">Static deployment</h3>
-          <p style="margin-bottom: 12px; font-size: 0.9rem; line-height: 1.5;">All computing logic is bundled into client-side JavaScript that executes strictly within the player's web browser. The tool does not store cookies, upload metrics to third-party databases, or create server waterfalls. This ensures the offline cash planner loads instantly and operates securely on any mobile device without tracking user data.</p>
-          <p style="margin-bottom: 12px; font-size: 0.9rem; line-height: 1.5;">By keeping the calculator completely client-side, we avoid heavy server-side processing delays. This static architecture allows search engines to index our <strong>Merge a Nuke guide</strong> instantly, providing excellent loading times and smooth UI transitions even on slow mobile networks. Your privacy and local performance are our primary priorities.</p>
-          <p style="margin-bottom: 0; font-size: 0.85rem; color: var(--muted);">Static bundling allows Cloudflare Pages to serve the assets under SSL with optimal TTFB response metrics for SEO crawlability.</p>
-        </article>
-      </div>
-    </section>
-
-    <RelatedGuides currentSlug="calculator" />
-  </main>
-</SiteLayout>
+  </Fragment>
+</SerpGuidePage>
 
 <script>
   const rate = document.querySelector("#cash-rate");
@@ -123,7 +74,7 @@ import { siteConfig } from "../data/config";
     if (!result) return;
 
     if (numericValue(rate) <= 0 && numericValue(target) <= 0) {
-      result.innerHTML = `<span style="color: var(--muted); font-size: 0.9rem;">Waiting for simulator inputs...</span>`;
+      result.innerHTML = `<span style="color: var(--muted); font-size: 0.9rem;">Waiting for player-input estimate values...</span>`;
       return;
     }
 
@@ -132,21 +83,20 @@ import { siteConfig } from "../data/config";
 
     if (remaining <= 0) {
       result.innerHTML = `
-        <div style="color: var(--color-green); margin-bottom: 10px; font-family: var(--font-display); font-weight: 900; font-size: 0.85rem; letter-spacing: 0.05em;">[ TARGET MET ]</div>
+        <div style="color: var(--color-green); margin-bottom: 10px; font-family: var(--font-display); font-weight: 900; font-size: 0.85rem; letter-spacing: 0.05em;">[ ESTIMATED TARGET MET ]</div>
         <div style="font-size: 0.92rem; color: var(--muted);">ESTIMATED CASH INCOME</div>
-        <div style="font-size: 1.8rem; font-family: var(--font-mono); font-weight: 800; color: var(--color-green); text-shadow: 0 0 10px rgba(46, 213, 115, 0.25); line-height: 1.2; margin-top: 4px;">$${formattedEstimated}</div>
-        <div style="margin-top: 12px; font-size: 0.85rem; color: var(--color-green); display: flex; align-items: center; gap: 4px;">
-          <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>
-          Simulator estimate fully covers target.
+        <div style="font-size: 1.8rem; font-family: var(--font-mono); font-weight: 800; color: var(--color-green); line-height: 1.2; margin-top: 4px;">$${formattedEstimated}</div>
+        <div style="margin-top: 12px; font-size: 0.85rem; color: var(--color-green);">
+          This player-input estimate covers the target. Recheck in game before spending.
         </div>
       `;
     } else {
       result.innerHTML = `
-        <div style="color: var(--color-red); margin-bottom: 10px; font-family: var(--font-display); font-weight: 900; font-size: 0.85rem; letter-spacing: 0.05em;">[ DEFICIT WARNING ]</div>
+        <div style="color: var(--color-red); margin-bottom: 10px; font-family: var(--font-display); font-weight: 900; font-size: 0.85rem; letter-spacing: 0.05em;">[ ESTIMATED GAP ]</div>
         <div style="font-size: 0.92rem; color: var(--muted);">ESTIMATED CASH INCOME</div>
         <div style="font-size: 1.5rem; font-family: var(--font-mono); font-weight: 800; color: var(--text); line-height: 1.2; margin-top: 4px;">$${formattedEstimated}</div>
         <div style="margin-top: 10px; border-top: 1px dashed var(--line); padding-top: 10px; font-size: 0.85rem;">
-          GAP TO COVER: <span style="color: var(--color-red); font-family: var(--font-mono); font-weight: 700;">$${formattedRemaining}</span>
+          ESTIMATED GAP: <span style="color: var(--color-red); font-family: var(--font-mono); font-weight: 700;">$${formattedRemaining}</span>
         </div>
       `;
     }

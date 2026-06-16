@@ -57,6 +57,11 @@ Publishes:
 /beginner-guide/
 /updates/
 /wiki/
+/progression/
+/raid/
+/upgrades/
+/offline-cash/
+/rebirth/
 /about/
 /contact/
 /editorial-policy/
@@ -77,7 +82,7 @@ Before review, verify:
 /privacy/ exists, outputs HTML, and remains noindex
 /terms/ exists, outputs HTML, and remains noindex
 Footer links to About, Contact, Privacy, Terms, and Editorial Policy
-sitemap.xml includes /, /calculator/, /codes/, /tier-list/, /beginner-guide/, /updates/, /wiki/, /about/, /contact/, and /editorial-policy/
+sitemap.xml includes /, /calculator/, /codes/, /tier-list/, /beginner-guide/, /updates/, /wiki/, /progression/, /raid/, /upgrades/, /offline-cash/, /rebirth/, /about/, /contact/, and /editorial-policy/
 sitemap.xml excludes /privacy/, /terms/, /guide/, /scripts/, /macros/, /executor/, /exploit/, /th/, /fil/, and /id/
 No fake active codes, rewards, value rows, or official claims are published
 No unsafe exploit, executor, macro, or script pages are generated

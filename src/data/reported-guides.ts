@@ -20,7 +20,7 @@ type CompetitorSource = {
 type ReportedCodeRow = {
   code: string;
   reward: string;
-  status: "official-page-reported" | "community-reported";
+  status: "official-page-reported" | "community-reported" | "disputed";
   sourceLabel: string;
   lastChecked: string;
 };
@@ -73,50 +73,50 @@ export const competitorSources: CompetitorSource[] = [
 export const reportedCodeRows: ReportedCodeRow[] = [
   {
     code: "ATOMIC",
-    reward: "$10k cash and 20 nukes",
-    status: "community-reported",
-    sourceLabel: "PocketTactics, checked 2026-06-16",
+    reward: "Reported reward conflicts across sources",
+    status: "disputed",
+    sourceLabel: "PocketTactics and other trackers disagree, checked 2026-06-16",
     lastChecked: "2026-06-16"
   },
   {
     code: "UPDATE2",
-    reward: "$10k cash and 10 nukes",
+    reward: "$10k cash and 10 nukes reported by trackers",
     status: "community-reported",
-    sourceLabel: "PocketTactics, checked 2026-06-16",
+    sourceLabel: "Multiple third-party trackers, checked 2026-06-16",
     lastChecked: "2026-06-16"
   },
   {
     code: "BOOM",
-    reward: "$5k cash",
+    reward: "Reward not verified by this site",
     status: "official-page-reported",
-    sourceLabel: "Roblox game page, checked 2026-06-16",
+    sourceLabel: "Roblox game page reports the code text, checked 2026-06-16",
     lastChecked: "2026-06-16"
   }
 ];
 export const reportedClassTiers: ReportedClassTier[] = [
   {
     tier: "S",
-    items: ["Level 30+ Hydrogen & Tsar Nukes", "Rebirth Prestige Multipliers", "S-Tier Fusion Warheads"],
+    items: ["Cash engine upgrades", "Base lock habit", "Directly verified or official-page-reported free value"],
     status: "community-reported",
-    sourceLabel: "Community guide check 2026-06-16"
+    sourceLabel: "Progression-priority tier, not official damage data, checked 2026-06-16"
   },
   {
     tier: "A",
-    items: ["Level 16-29 Fusion Nukes", "Board Expansion Upgrades", "Advanced Base Shield Locks"],
+    items: ["Clean merge chain", "Board capacity", "Measured offline routine"],
     status: "community-reported",
-    sourceLabel: "Community guide check 2026-06-16"
+    sourceLabel: "Progression-priority tier, not official damage data, checked 2026-06-16"
   },
   {
     tier: "B",
-    items: ["Level 8-15 Atomic Missiles", "Spawn Speed Upgrades", "Leaderboard Raid Warheads"],
+    items: ["Selective raids after recovery is stable", "Late-session PvP pressure"],
     status: "community-reported",
-    sourceLabel: "Community guide check 2026-06-16"
+    sourceLabel: "Progression-priority tier, not official damage data, checked 2026-06-16"
   },
   {
     tier: "C",
-    items: ["Level 1-7 Basic TNT & Dynamite", "Base Spawn Tier level 1-2", "Unprotected Cash Storages"],
+    items: ["Unverified bomb-name claims", "Unsourced exact stats", "Unsafe shortcut claims"],
     status: "community-reported",
-    sourceLabel: "Community guide check 2026-06-16"
+    sourceLabel: "Progression-priority tier, not official damage data, checked 2026-06-16"
   }
 ];
 export const reportedClasses: ReportedClass[] = [];
