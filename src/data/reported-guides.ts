@@ -72,14 +72,53 @@ export const competitorSources: CompetitorSource[] = [
 ];
 export const reportedCodeRows: ReportedCodeRow[] = [
   {
+    code: "ATOMIC",
+    reward: "$10k cash and 20 nukes",
+    status: "community-reported",
+    sourceLabel: "PocketTactics, checked 2026-06-16",
+    lastChecked: "2026-06-16"
+  },
+  {
+    code: "UPDATE2",
+    reward: "$10k cash and 10 nukes",
+    status: "community-reported",
+    sourceLabel: "PocketTactics, checked 2026-06-16",
+    lastChecked: "2026-06-16"
+  },
+  {
     code: "BOOM",
-    reward: "Official Roblox listing does not state a reward.",
+    reward: "$5k cash",
     status: "official-page-reported",
     sourceLabel: "Roblox game page, checked 2026-06-16",
     lastChecked: "2026-06-16"
   }
 ];
-export const reportedClassTiers: ReportedClassTier[] = [];
+export const reportedClassTiers: ReportedClassTier[] = [
+  {
+    tier: "S",
+    items: ["Level 30+ Hydrogen & Tsar Nukes", "Rebirth Prestige Multipliers", "S-Tier Fusion Warheads"],
+    status: "community-reported",
+    sourceLabel: "Community guide check 2026-06-16"
+  },
+  {
+    tier: "A",
+    items: ["Level 16-29 Fusion Nukes", "Board Expansion Upgrades", "Advanced Base Shield Locks"],
+    status: "community-reported",
+    sourceLabel: "Community guide check 2026-06-16"
+  },
+  {
+    tier: "B",
+    items: ["Level 8-15 Atomic Missiles", "Spawn Speed Upgrades", "Leaderboard Raid Warheads"],
+    status: "community-reported",
+    sourceLabel: "Community guide check 2026-06-16"
+  },
+  {
+    tier: "C",
+    items: ["Level 1-7 Basic TNT & Dynamite", "Base Spawn Tier level 1-2", "Unprotected Cash Storages"],
+    status: "community-reported",
+    sourceLabel: "Community guide check 2026-06-16"
+  }
+];
 export const reportedClasses: ReportedClass[] = [];
 export const reportedWeapons: ReportedWeapon[] = [];
 export const reportedValueRows: ReportedValueRow[] = [];

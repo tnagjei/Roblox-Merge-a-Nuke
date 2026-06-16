@@ -7,19 +7,60 @@ import { siteConfig } from "../data/config";
 ---
 
 <footer class="site-footer">
-  <div style="display: flex; flex-direction: column; gap: 8px;">
-    <strong>{siteConfig.siteName}</strong>
-    <p>Independent fan guide. Not affiliated with Roblox Corporation or game developers.</p>
-    <p style="font-size: 0.8rem; color: var(--muted); margin: 0;">
-      &copy; 2026 {siteConfig.siteName}. All rights reserved. 
-      Contact: <a href={`mailto:${siteConfig.contactEmail}`} style="color: var(--color-blue); text-decoration: underline; background: transparent; padding: 0; border: none; font-size: inherit;">{siteConfig.contactEmail}</a>
+  <div class="footer-grid">
+    <!-- Col 1: Brand & Contact -->
+    <div class="footer-col">
+      <strong style="color: var(--color-yellow); font-family: var(--font-display); font-size: 1.25rem; font-weight: 900; letter-spacing: 0.05em; text-shadow: 0 0 10px rgba(255,165,2,0.3);">{siteConfig.siteName}</strong>
+      <p style="font-size: 0.9rem; line-height: 1.5; color: var(--muted); margin: 0;">
+        Your independent third-party resource hub for Roblox Merge a Nuke strategy guides, active code watch updates, and multiplier walkthrough checklists.
+      </p>
+      <p style="font-size: 0.85rem; color: var(--muted); margin: 0;">
+        Contact support: <a href={`mailto:${siteConfig.contactEmail}`} style="color: var(--accent); text-decoration: none; border-bottom: 1px dashed var(--accent); padding: 0 0 1px;">{siteConfig.contactEmail}</a>
+      </p>
+    </div>
+
+    <!-- Col 2: Core Tools -->
+    <div class="footer-col">
+      <h4>Core Tools</h4>
+      <ul>
+        <li><a href="/">Home Dashboard</a></li>
+        <li><a href="/calculator/">Offline Calculator</a></li>
+        <li><a href="/codes/">Codes & Payouts</a></li>
+        <li><a href="/tier-list/">Weapon Tier List</a></li>
+      </ul>
+    </div>
+
+    <!-- Col 3: Wiki Sections -->
+    <div class="footer-col">
+      <h4>Wiki Database</h4>
+      <ul>
+        <li><a href="/wiki/">Wiki Hub Page</a></li>
+        <li><a href="/guide/">Beginner Loop Guide</a></li>
+        <li><a href="/progression/">Progression Speedrun</a></li>
+        <li><a href="/raid/">Raid & Shield PvP</a></li>
+        <li><a href="/upgrades/">Upgrades Priority</a></li>
+        <li><a href="/offline-cash/">Offline Income Setup</a></li>
+        <li><a href="/rebirth/">Rebirth Mechanics</a></li>
+        <li><a href="/updates/">Updates Changelog</a></li>
+      </ul>
+    </div>
+
+    <!-- Col 4: Site Policy -->
+    <div class="footer-col">
+      <h4>Information</h4>
+      <ul>
+        <li><a href="/about/">About Ownership</a></li>
+        <li><a href="/contact/">Get In Touch</a></li>
+        <li><a href="/editorial-policy/">Editorial Policy</a></li>
+        <li><a href="/privacy/">Privacy Policy</a></li>
+        <li><a href="/terms/">Terms of Use</a></li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="footer-bottom">
+    <p class="footer-copyright">
+      &copy; 2026 {siteConfig.siteName}. All rights reserved. Not affiliated with Roblox Corporation or Nuke The Game developers.
     </p>
   </div>
-  <nav aria-label="Footer navigation">
-    <a href="/about/">About</a>
-    <a href="/contact/">Contact</a>
-    <a href="/privacy/">Privacy</a>
-    <a href="/terms/">Terms</a>
-    <a href="/editorial-policy/">Editorial Policy</a>
-  </nav>
 </footer>
