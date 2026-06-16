@@ -1,0 +1,68 @@
+---
+// input: siteConfig data, related guides list layout component
+// output: Raid guide page detailing pvp combat strategies and base locking defense bypass
+// pos: src/pages/raid.astro (更新规则：文件变更需同步本注释与所属目录 README)
+
+import SiteLayout from "../layouts/SiteLayout.astro";
+import RelatedGuides from "../components/RelatedGuides.astro";
+import { siteConfig } from "../data/config";
+---
+
+<SiteLayout title="Merge a Nuke Guide Raid | Roblox PvP Combat Strategy" description="Master base raiding with the Merge a Nuke guide raid tips. Learn how to target rival islands, bypass locking shields, and protect stolen cash.">
+  <main class="content-page">
+    <section class="prose-block" style="margin-bottom: 40px;">
+      <p class="eyebrow">Raid guide</p>
+      <h1>{siteConfig.gameName} Raid Guide</h1>
+      <p>Raid combat in Roblox Merge a Nuke offers a high-risk, high-reward method to boost your progression cash pools. Launching nuclear warheads at rival player islands allows you to siphon their passive earnings, but it also paints a target on your own base. This page explains how to conduct safe, profitable raids.</p>
+      
+      <div style="margin-top: 24px; padding: 20px; background: rgba(255, 71, 87, 0.05); border: 1.5px solid rgba(255, 71, 87, 0.15); border-radius: var(--radius-interactive); line-height: 1.6;">
+        <h3 style="color: var(--color-red); margin-bottom: 8px;">Raiding Strategy Rationale</h3>
+        <p style="margin-bottom: 0; font-size: 0.9rem;">
+          PVP combat is highly dynamic. Engaging in senseless retaliation wars can drain your resources and distract you from the merging loop. This <strong>Merge a Nuke guide</strong> is built to teach you target selection, timing, and defensive locking habits to ensure you retain every dollar stolen from rival hangars.
+        </p>
+      </div>
+    </section>
+
+    <section class="section" aria-labelledby="assault-guide" style="margin-bottom: 48px;">
+      <p class="eyebrow">Assault tips</p>
+      <h2 id="assault-guide" style="margin-bottom: 24px;">Tactical island assault guide</h2>
+      <p style="margin-bottom: 24px; line-height: 1.6;">Before launching any warheads, you must evaluate the target's layout. Throwing high-tier weapons at small, empty bases yields minimal cash rewards and triggers unnecessary alerts. Successful players only attack bases with active cash setups and weak defenses.</p>
+
+      <div class="card-grid">
+        <article class="card" style="border-radius: var(--radius-card); border-color: var(--line);">
+          <h3 style="color: var(--color-yellow); margin-bottom: 12px; font-size: 1.1rem; font-family: var(--font-display);">Selecting high-yield targets</h3>
+          <p style="margin-bottom: 12px; font-size: 0.9rem; line-height: 1.5;">To run a profitable combat run, look for islands with advanced warheads sitting active in their hangars. These setups represent players who have active cash-per-minute loops. This <strong>Merge a Nuke guide</strong> advises scouting the lobby leaderboard for players with high net worth who do not have lock shields active.</p>
+          <p style="margin-bottom: 0; font-size: 0.9rem; line-height: 1.5;">Avoid targets who have reached late-game rebirth milestones unless you have S-Tier weapons available. High-level players often have passive armor stats that reduce incoming raid damage, making them inefficient targets for beginner merges. Focus on mid-tier players to maximize your economic returns.</p>
+        </article>
+        <article class="card" style="border-radius: var(--radius-card); border-color: var(--line);">
+          <h3 style="color: var(--color-yellow); margin-bottom: 12px; font-size: 1.1rem; font-family: var(--font-display);">Understanding shield mechanics</h3>
+          <p style="margin-bottom: 12px; font-size: 0.9rem; line-height: 1.5;">Every base is equipped with a locking shield that blocks raids. If a target's shield is active, your nuclear strike will deal zero damage and fail to steal cash. Launching attacks at active shields wastes your weapon cooldowns and alerts the target to your presence.</p>
+          <p style="margin-bottom: 0; font-size: 0.9rem; line-height: 1.5;">According to this <strong>Merge a Nuke guide</strong> evaluation, players should wait for the target's shield indicator to turn off before firing. Targets often drop their guard immediately after executing a rebirth, as they rush to merge low-tier duplicates. This creates a perfect window for a surprise strike.</p>
+        </article>
+      </div>
+    </section>
+
+    <section class="section grid-section" aria-labelledby="risk-management" style="margin-bottom: 48px;">
+      <div>
+        <p class="eyebrow">Risk control</p>
+        <h2 id="risk-management">Combat risk management</h2>
+      </div>
+      <div class="card-grid">
+        <article class="card" style="border-radius: var(--radius-card); border-color: var(--line);">
+          <h3 style="color: var(--accent);">Mitigating active retaliation</h3>
+          <p style="margin-bottom: 12px; font-size: 0.9rem; line-height: 1.5;">Once you launch a nuke, the victim receives a warning displaying your base's coordinates. They can respond immediately with high-tier counter-strikes. To survive, you must prepare your base layout for retaliation before launching your strike.</p>
+          <p style="margin-bottom: 12px; font-size: 0.9rem; line-height: 1.5;">This <strong>Merge a Nuke guide</strong> advises players to lock their base shield immediately after the weapon leaves the silo. This locking shield will absorb any incoming counter-strikes, protecting your grid layout and preventing the victim from siphoning your currency in return.</p>
+          <p style="margin-bottom: 0; font-size: 0.85rem; color: var(--muted);">Locking your shield immediately after launching prevents opponents from executing successful counter-strikes.</p>
+        </article>
+        <article class="card" style="border-radius: var(--radius-card); border-color: var(--line);">
+          <h3 style="color: var(--accent);">Securing stolen cash pools</h3>
+          <p style="margin-bottom: 12px; font-size: 0.9rem; line-height: 1.5;">Raid rewards are added directly to your pocket cash. However, pocket cash is highly vulnerable: if your base is raided, a percentage of this liquid currency can be stolen. To prevent losses, you must reinvest stolen cash immediately.</p>
+          <p style="margin-bottom: 12px; font-size: 0.9rem; line-height: 1.5;">Spend your raid profits on permanent upgrades, such as spawn speed and board slot expansions. This <strong>Merge a Nuke guide</strong> strategy converts vulnerable liquid cash into permanent tycoon growth, ensuring that no opponent can steal your progress in subsequent server sessions.</p>
+          <p style="margin-bottom: 0; font-size: 0.85rem; color: var(--muted);">Spend liquid cash immediately on permanent upgrades to protect it from counter-raids.</p>
+        </article>
+      </div>
+    </section>
+
+    <RelatedGuides currentSlug="raid" />
+  </main>
+</SiteLayout>

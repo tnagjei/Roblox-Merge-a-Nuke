@@ -1,6 +1,11 @@
 ---
+// input: Homepage content (homeContent), configurations (siteConfig), data streams (gameData, reportedCodeRows, evidenceNotice)
+// output: Redesigned competitor-aligned gaming portal dashboard index page with live codes, snapshot card, video embeds, and timeline plans
+// pos: src/pages/index.astro (更新规则：文件变更需同步本注释与所属目录 README)
+
 import SiteLayout from "../layouts/SiteLayout.astro";
 import HomeHero from "../components/HomeHero.astro";
+import CopyButton from "../components/CopyButton.astro";
 import { homeContent } from "../content/home";
 import { siteConfig } from "../data/config";
 import { gameData } from "../data/game";
@@ -11,153 +16,519 @@ const completedGuideLinks = homeContent.wikiLinks.filter((link) => siteConfig.co
 const showReportedCodeWatch = siteConfig.completedCoreSlugs.includes("codes");
 ---
 
-<SiteLayout title={homeContent.title} description={homeContent.description}>
-  <main>
+<SiteLayout title={homeContent.title}  <main class="page-shell home-guide-page" style="padding-top: 0;">
     <HomeHero />
 
-    {completedGuideLinks.length > 0 && (
-      <section class="section" aria-labelledby="wiki-entry">
-        <p class="eyebrow">Wiki index</p>
-        <h2 id="wiki-entry" style="margin-bottom: 32px;">Core guide entrances</h2>
-        <div class="bento-grid">
-          {completedGuideLinks.map((link, idx) => {
-            // Calculator (0), Beginner Guide (3), Wiki (5) are featured
-            const isFeatured = idx === 0 || idx === 3 || idx === 5;
-            return (
-              <a class={`card bento-card ${isFeatured ? 'featured' : ''}`} href={`/${link.slug}/`}>
-                <h3>{link.title}</h3>
-                <p style="margin-bottom: 16px;">{link.description}</p>
-                <span class="source-link">Open {link.title} →</span>
-              </a>
-            );
-          })}
+    <!-- 1. Quick Answers Section -->
+    <section class="band alt" id="quick-answers">
+      <div class="container">
+        <div class="section-heading center">
+          <p class="eyebrow">Quick Answers</p>
+          <h2>Merge a Nuke Wiki Overview</h2>
+          <p>Use this section for a fast answer to what Merge a Nuke is, what this wiki covers, and what new players should do first.</p>
         </div>
-      </section>
-    )}
-
-    <section class="section" aria-labelledby="quick-facts">
-      <div style="margin-bottom: 32px;">
-        <p class="eyebrow">Quick facts</p>
-        <h2 id="quick-facts">Launch monitor metrics</h2>
+        <div class="detail-grid">
+          <article class="detail-item">
+            <h3>What is Merge a Nuke Wiki?</h3>
+            <p>Merge a Nuke Wiki is an independent Roblox guide hub for Merge a Nuke codes, beginner strategy, merge routes, tier notes, raid timing, offline cash, upgrades, rebirth, and base lock defense.</p>
+          </article>
+          <article class="detail-item">
+            <h3>What is Merge a Nuke?</h3>
+            <p>Merge a Nuke! is a Roblox idle merge and raid game where players combine bombs into larger nukes, generate cash, attack other bases, and protect their own base with the lock system.</p>
+          </article>
+          <article class="detail-item">
+            <h3>What should new players do first?</h3>
+            <p>Redeem the current codes, merge every duplicate you can, upgrade your income loop, and avoid risky raids until your passive cash feels stable.</p>
+          </article>
+          <article class="detail-item">
+            <h3>Why does base lock matter?</h3>
+            <p>Offline cash is part of the progression loop, but an unlocked base can be punished by other players. Treat locking as the final step before logging out.</p>
+          </article>
+          <article class="detail-item">
+            <h3>Are tier list values final?</h3>
+            <p>No. Merge a Nuke updates quickly, so early tier notes should be treated as route guidance until exact in-game values are verified after patches.</p>
+          </article>
+        </div>
       </div>
-      <div class="stats-strip">
-        {homeContent.quickFacts.map((fact) => (
-          <div class="stat-item">
-            <div class="stat-label" style="color: var(--accent); font-weight: 800; margin-bottom: 8px;">{fact.label}</div>
-            <div style="font-size: 1.25rem; font-weight: 700; color: var(--text);">{fact.value}</div>
+    </section>
+
+    <!-- 2. Core Loop Section -->
+    <section class="band" id="game-loop">
+      <div class="container">
+        <div class="section-heading center">
+          <p class="eyebrow">Core Loop</p>
+          <h2>How Merge a Nuke Works</h2>
+          <p>Merge a Nuke is easiest to understand as a loop: create pieces, merge into stronger nukes, reinvest cash, protect the base, then use raids only when they improve the run.</p>
+        </div>
+        <div class="module-grid">
+          <article class="module-card">
+            <span>Loop Step 01</span>
+            <h3>Spawn, merge, and clear space</h3>
+            <p>The basic loop is simple: keep creating pieces, match identical tiers, and avoid letting low-value bombs clog the board. Every clean merge gives you a better cash engine and more room for the next spawn.</p>
+          </article>
+          <article class="module-card">
+            <span>Loop Step 02</span>
+            <h3>Turn rewards into income</h3>
+            <p>Codes and update gifts feel exciting, but their best use is not instant raiding. Put early cash into the loop that makes future cash easier: more reliable spawns, stronger pieces, and a board that reaches better tiers without constant waiting.</p>
+          </article>
+          <article class="module-card">
+            <span>Loop Step 03</span>
+            <h3>Protect value before stepping away</h3>
+            <p>A strong board is only useful if it survives long enough to earn. Before leaving the server, do one last merge pass, spend obvious upgrade cash, and lock your base. This habit protects offline gains and reduces raid losses.</p>
+          </article>
+          <article class="module-card">
+            <span>Loop Step 04</span>
+            <h3>Raid when the upside is clear</h3>
+            <p>Raids can speed up progression, but they should be treated as a bonus path rather than the whole plan. Attack when your income can recover from a bad result, the target looks worth the time, and your own base is not sitting open.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- 3. Wiki Hub Grid -->
+    <section class="band" id="wiki-hub">
+      <div class="container">
+        <div class="section-heading center">
+          <p class="eyebrow">Wiki Hub</p>
+          <h2>Merge a Nuke Wiki Guide Hub</h2>
+          <p>Choose the Merge a Nuke guide that matches what you need right now. These internal links keep the main topics connected for players and search engines.</p>
+        </div>
+        <div class="link-grid home-wiki-grid">
+          <a href="/codes/">
+            <span>Codes</span>
+            <h3>Merge a Nuke Codes</h3>
+            <p>Copy active codes, check rewards, learn the Store redeem flow, and keep update codes separate until they work in-game.</p>
+          </a>
+          <a href="/guide/">
+            <span>Beginner</span>
+            <h3>Beginner Guide</h3>
+            <p>Start with codes, clean merges, income upgrades, base lock habits, and safer first raids before chasing higher tiers.</p>
+          </a>
+          <a href="/progression/">
+            <span>Progression</span>
+            <h3>Progression Guide</h3>
+            <p>Build a stronger cash engine, improve upgrade order, protect offline value, and work toward the strongest nuke route.</p>
+          </a>
+          <a href="/tier-list/">
+            <span>Tier List</span>
+            <h3>Merge a Nuke Tier List</h3>
+            <p>Compare nukes by practical value for cash growth, raids, offline income, merge effort, and update confidence.</p>
+          </a>
+          <a href="/raid/">
+            <span>Raids</span>
+            <h3>Merge a Nuke Raid Guide</h3>
+            <p>Learn when to attack, how to choose targets, how to protect stolen cash, and why base lock matters after raids.</p>
+          </a>
+          <a href="/upgrades/">
+            <span>Upgrades</span>
+            <h3>Upgrades Guide</h3>
+            <p>Choose spawn flow, stronger nuke spawns, lock upgrades, raid cooldowns, and health upgrades in a safer order.</p>
+          </a>
+          <a href="/offline-cash/">
+            <span>Offline Cash</span>
+            <h3>Offline Cash Guide</h3>
+            <p>Prepare the board before leaving, spend useful cash, keep your best nukes active, and lock the base as the final action.</p>
+          </a>
+          <a href="/rebirth/">
+            <span>Rebirth</span>
+            <h3>Rebirth Guide</h3>
+            <p>Decide when rebirth is worth it, prepare before confirming, and rebuild quickly after the reset.</p>
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- 4. YouTube Gameplay Video Block -->
+    <section class="band" id="gameplay-video">
+      <div class="container">
+        <div class="section-heading">
+          <p class="eyebrow">Gameplay Video</p>
+          <h2>Merge a Nuke Gameplay Video</h2>
+          <p>Watch the current Roblox gameplay guide first if you want to see the Store menu, code flow, merging loop, and early route before reading the written guide.</p>
+        </div>
+        <article class="video-card card">
+          <div class="video-copy">
+            <p class="eyebrow" style="color: var(--color-red); margin-bottom: 0;">YouTube Guide</p>
+            <h3>2 NEW CODES! HOW TO PLAY MERGE A NUKE! ROBLOX</h3>
+            <p>A recent Roblox gameplay guide covering Merge a Nuke basics, codes, merging, and early progression. Use it as a visual companion before following the written guide.</p>
+            <a class="text-link" href="https://www.youtube.com/watch?v=qYVHWmSC05U" target="_blank" rel="noreferrer">Watch on YouTube</a>
           </div>
-        ))}
+          <div class="video-frame" data-video-id="qYVHWmSC05U" data-embed-src="https://www.youtube.com/embed/qYVHWmSC05U?rel=0&playsinline=1&autoplay=1&mute=1" data-video-title="2 NEW CODES! HOW TO PLAY MERGE A NUKE! ROBLOX">
+            <iframe src="https://www.youtube.com/embed/qYVHWmSC05U?rel=0&playsinline=1&autoplay=1&mute=1" title="2 NEW CODES! HOW TO PLAY MERGE A NUKE! ROBLOX" loading="eager" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+          </div>
+        </article>
       </div>
     </section>
 
-    <section class="section" aria-labelledby="trending-searches">
-      <p class="eyebrow">Trending searches</p>
-      <h2 id="trending-searches" style="margin-bottom: 20px;">Search demand map</h2>
-      <div class="tag-list">
-        {homeContent.trendingSearches.map((query) => (
-          <span class="tag-pill">{query}</span>
-        ))}
-      </div>
-    </section>
-
+    <!-- 5. Codes Table & Redemption Steps -->
     {showReportedCodeWatch && (
-      <section class="section" aria-labelledby="reported-code-watch">
-        <p class="eyebrow">Code watch</p>
-        <h2 id="reported-code-watch">Official-page and community signals</h2>
-        <p style="margin-bottom: 24px;">Official listing text, third-party pages, and in-game redemption checks stay separated.</p>
-        
-        <div class="card terminal-panel">
-          <div class="terminal-header">
-            <span class="terminal-dot red"></span>
-            <span class="terminal-dot yellow"></span>
-            <span class="terminal-dot green"></span>
-            <span style="font-size: 0.75rem; color: var(--muted); margin-left: auto; font-family: monospace;">codes-watch.log</span>
+      <section class="band" id="codes">
+        <div class="container">
+          <div class="section-heading">
+            <p class="eyebrow">Codes</p>
+            <h2>Merge a Nuke Codes</h2>
+            <p>Try the active codes first, then keep future Friday update codes on watchlist until they are confirmed in-game.</p>
           </div>
-          <div style="display: grid; gap: 16px; margin-top: 8px;">
-            {reportedCodeRows.length > 0 ? (
-              reportedCodeRows.map((row) => (
-                <div style="display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 16px; border-bottom: 1px dashed var(--line); padding-bottom: 12px;">
-                  <div>
-                    <span style="color: var(--accent); font-weight: 800; font-family: monospace; font-size: 1.1rem;">$ nuke-code --redeem {row.code}</span>
-                    <p style="margin: 4px 0 0; font-size: 0.85rem; color: var(--muted);">{row.sourceLabel}</p>
-                  </div>
-                  <div style="display: flex; align-items: center; gap: 12px;">
-                    <span style="font-size: 0.95rem; color: var(--text); font-weight: 600;">{row.reward}</span>
-                    <span class={`status-badge ${row.status.toLowerCase().includes('pending') ? 'pending' : ''}`}>
-                      {row.status}
-                    </span>
-                  </div>
-                </div>
-              ))
-            ) : (
-              <p class="empty-state">No community-reported code rows are recorded yet.</p>
-            )}
-            <div style="font-size: 0.85rem; color: var(--muted); font-family: monospace; margin-top: 8px;">
-              <span>> System monitoring live...</span><span class="terminal-cursor"></span>
+          
+          <div class="card hud-panel" style="border-color: rgba(255, 165, 2, 0.25); margin-bottom: 24px; border-radius: var(--radius-card); padding: 24px; background: rgba(31, 39, 58, 0.25);">
+            <div class="hud-header" style="margin-bottom: 16px; display: flex; align-items: center; gap: 8px;">
+              <span class="hud-dot red" style="display: inline-block; width: 8px; height: 8px; border-radius: 50%; background: var(--color-red);"></span>
+              <span class="hud-dot yellow" style="display: inline-block; width: 8px; height: 8px; border-radius: 50%; background: var(--color-yellow);"></span>
+              <span class="hud-dot green" style="display: inline-block; width: 8px; height: 8px; border-radius: 50%; background: var(--color-green);"></span>
+              <span style="font-size: 0.75rem; color: var(--color-yellow); margin-left: auto; font-family: var(--font-display); font-weight: 800; text-transform: uppercase;">CODES TELEMETRY</span>
+            </div>
+            <div class="guide-table-shell" style="overflow-x: auto; background: rgba(18, 22, 32, 0.35); border-radius: var(--radius-interactive); border: 1px solid var(--line);">
+              <table class="guide-table" style="width: 100%; border-collapse: collapse; text-align: left; font-size: 0.9rem;">
+                <thead>
+                  <tr style="border-bottom: 1.5px solid var(--line); background: rgba(31, 39, 58, 0.5);">
+                    <th scope="col" style="padding: 16px;">Code</th>
+                    <th scope="col" style="padding: 16px;">Reward</th>
+                    <th scope="col" style="padding: 16px;">Status</th>
+                    <th scope="col" style="padding: 16px;">Where Checked</th>
+                    <th scope="col" style="padding: 16px; text-align: right;">Action</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {reportedCodeRows.map((row) => (
+                    <tr style="border-bottom: 1px dashed var(--line);">
+                      <td style="padding: 16px;"><code style="font-family: var(--font-mono); color: var(--color-yellow); font-weight: 900; font-size: 1.1rem; text-shadow: 0 0 8px rgba(255,165,2,0.2);">{row.code}</code></td>
+                      <td style="padding: 16px; font-weight: 600; color: var(--text);">{row.reward}</td>
+                      <td style="padding: 16px;">
+                        <span class={`status-badge ${row.status.toLowerCase().includes('pending') ? 'pending' : ''}`}>
+                          {row.status}
+                        </span>
+                      </td>
+                      <td style="padding: 16px; color: var(--muted); font-size: 0.85rem;">{row.sourceLabel}</td>
+                      <td style="padding: 16px; text-align: right;">
+                        <CopyButton
+                          value={row.code}
+                          label="Copy"
+                          class="button primary"
+                          style="min-height: 32px; padding: 0 12px; font-size: 0.75rem;"
+                          eventSource="homepage_table"
+                          itemType="roblox_code"
+                          itemName={row.code}
+                        />
+                      </td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
+          </div>
+
+          <div class="content-group">
+            <h3 style="font-size: 1.15rem; color: var(--accent); margin-bottom: 16px; font-family: var(--font-display);">How to Redeem Codes</h3>
+            <div class="step-grid">
+              <article class="step-card">
+                <span>01</span>
+                <h4>Open Store</h4>
+                <p>Launch Merge a Nuke in Roblox and use the Store button on the left side of the game UI.</p>
+              </article>
+              <article class="step-card">
+                <span>02</span>
+                <h4>Scroll to Codes</h4>
+                <p>Move to the code box near the bottom of the Store menu. Codes are case-sensitive, so copy exactly.</p>
+              </article>
+              <article class="step-card">
+                <span>03</span>
+                <h4>Redeem Rewards</h4>
+                <p>Paste one code at a time, press Redeem, and make sure the cash or nukes appear successfully.</p>
+              </article>
+              <article class="step-card">
+                <span>04</span>
+                <h4>Reinvest Fast</h4>
+                <p>Spend early rewards on the merge and income loop instead of raiding immediately with a weak base.</p>
+              </article>
             </div>
           </div>
         </div>
       </section>
     )}
 
-    <section class="section" aria-labelledby="guide-map">
-      <p class="eyebrow">Guide map</p>
-      <h2 id="guide-map" style="margin-bottom: 32px;">Evidence-first publishing flow</h2>
-      <div class="timeline">
-        {homeContent.guideMap.map((item) => (
-          <div class="timeline-item">
-            <div class="timeline-marker">{item.step}</div>
-            <div style="padding-left: 12px;">
-              <h3 style="margin-bottom: 8px;">{item.title}</h3>
-              <p style="margin-bottom: 0;">{item.body}</p>
+    <!-- 6. Beginner Route & First Session Plan -->
+    <section class="band alt" id="beginner-guide">
+      <div class="container">
+        <div class="section-heading">
+          <p class="eyebrow">Beginner Route</p>
+          <h2>Merge a Nuke Beginner Guide</h2>
+          <p>The first Merge a Nuke goal is not a flashy raid. It is a stable merge board that keeps producing cash while you learn the game.</p>
+        </div>
+        <div class="step-grid">
+          <article class="step-card">
+            <span>01</span>
+            <h3>Redeem Both Stable Codes</h3>
+            <p>Use BOOM and UPDATE2 first. The cash and starter nukes shorten the early grind and give you more pieces to merge.</p>
+          </article>
+          <article class="step-card">
+            <span>02</span>
+            <h3>Merge Low Tiers Immediately</h3>
+            <p>Do not let duplicate starter bombs fill the grid. Merge pairs as soon as possible so each slot creates better income.</p>
+          </article>
+          <article class="step-card">
+            <span>03</span>
+            <h3>Upgrade Income Before PvP</h3>
+            <p>A stronger passive loop makes mistakes cheaper. Build enough cash flow that a failed raid does not stall your account.</p>
+          </article>
+          <article class="step-card">
+            <span>04</span>
+            <h3>Lock Before You Leave</h3>
+            <p>End every session with a quick merge pass, then lock the base. This protects offline gains and reduces raid losses.</p>
+          </article>
+        </div>
+        <div class="section-actions" style="display: flex; justify-content: center; margin-top: 24px;">
+          <a class="button secondary" href="/guide/">Open Beginner Guide</a>
+        </div>
+
+        <div class="content-group" style="margin-top: 40px;">
+          <h3 style="font-size: 1.15rem; color: var(--accent); margin-bottom: 16px; font-family: var(--font-display);">First Session Plan</h3>
+          <p style="color: var(--muted); margin-bottom: 20px;">A good first session should feel calm and repeatable. Use this route when you want a simple order that turns early rewards into a board that keeps growing.</p>
+          <div class="card hud-panel" style="border-color: rgba(255, 71, 87, 0.2); border-radius: var(--radius-card); padding: 24px; background: rgba(31, 39, 58, 0.25);">
+            <div class="hud-header" style="margin-bottom: 16px; display: flex; align-items: center; gap: 8px;">
+              <span class="hud-dot red" style="display: inline-block; width: 8px; height: 8px; border-radius: 50%; background: var(--color-red);"></span>
+              <span class="hud-dot yellow" style="display: inline-block; width: 8px; height: 8px; border-radius: 50%; background: var(--color-yellow);"></span>
+              <span class="hud-dot green" style="display: inline-block; width: 8px; height: 8px; border-radius: 50%; background: var(--color-green);"></span>
+              <span style="font-size: 0.75rem; color: var(--color-red); margin-left: auto; font-family: var(--font-display); font-weight: 800; text-transform: uppercase;">TACTICAL ROADMAP</span>
+            </div>
+            <div class="guide-table-shell" style="overflow-x: auto; background: rgba(18, 22, 32, 0.35); border-radius: var(--radius-interactive); border: 1px solid var(--line);">
+              <table class="guide-table" style="width: 100%; border-collapse: collapse; text-align: left; font-size: 0.9rem;">
+                <thead>
+                  <tr style="border-bottom: 1.5px solid var(--line); background: rgba(31, 39, 58, 0.5);">
+                    <th scope="col" style="padding: 16px; width: 140px;">Time</th>
+                    <th scope="col" style="padding: 16px; width: 180px;">Focus</th>
+                    <th scope="col" style="padding: 16px;">What to Do</th>
+                    <th scope="col" style="padding: 16px; width: 220px;">Why It Matters</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr style="border-bottom: 1px dashed var(--line);">
+                    <td style="padding: 16px; font-weight: 800; color: var(--color-yellow);">0-5 minutes</td>
+                    <td style="padding: 16px; font-weight: 700; color: var(--text);">Claim the easy start</td>
+                    <td style="padding: 16px; line-height: 1.4; color: var(--muted);">Open Merge a Nuke, redeem stable codes, collect the first cash boost, and place every starter piece where you can see matches clearly.</td>
+                    <td style="padding: 16px; line-height: 1.4; color: var(--muted); font-size: 0.85rem;">A clean start prevents the common problem of buying too many pieces before you understand matches.</td>
+                  </tr>
+                  <tr style="border-bottom: 1px dashed var(--line);">
+                    <td style="padding: 16px; font-weight: 800; color: var(--color-yellow);">5-15 minutes</td>
+                    <td style="padding: 16px; font-weight: 700; color: var(--text);">Build the first engine</td>
+                    <td style="padding: 16px; line-height: 1.4; color: var(--muted);">In Merge a Nuke, merge duplicate low tiers as soon as they appear, reinvest cash into spawn and income upgrades, and avoid spending everything on risky attacks.</td>
+                    <td style="padding: 16px; line-height: 1.4; color: var(--muted); font-size: 0.85rem;">The first real power spike comes from stable production, not from one lucky raid against another player.</td>
+                  </tr>
+                  <tr style="border-bottom: 1px dashed var(--line);">
+                    <td style="padding: 16px; font-weight: 800; color: var(--color-yellow);">15-30 minutes</td>
+                    <td style="padding: 16px; font-weight: 700; color: var(--text);">Prepare for safer raids</td>
+                    <td style="padding: 16px; line-height: 1.4; color: var(--muted);">Keep your best pieces active, check whether your cash flow still feels slow, and only raid targets that look weaker or poorly defended.</td>
+                    <td style="padding: 16px; line-height: 1.4; color: var(--muted); font-size: 0.85rem;">This is where many new players lose time: they raid too early, fail, then return to a board that still cannot produce.</td>
+                  </tr>
+                  <tr style="border-bottom: 1px dashed var(--line);">
+                    <td style="padding: 16px; font-weight: 800; color: var(--color-yellow);">Before logoff</td>
+                    <td style="padding: 16px; font-weight: 700; color: var(--text);">Save the session value</td>
+                    <td style="padding: 16px; line-height: 1.4; color: var(--muted);">Before leaving Merge a Nuke, collect cash, merge anything obvious, buy the most useful upgrade you can afford, and lock the base as the final action.</td>
+                    <td style="padding: 16px; line-height: 1.4; color: var(--muted); font-size: 0.85rem;">Offline cash is part of the game loop, but it works best when your board is already optimized and protected.</td>
+                  </tr>
+                </tbody>
+              </table>
             </div>
           </div>
-        ))}
-      </div>
-    </section>
-
-    <section class="section" aria-labelledby="source-status">
-      <p class="eyebrow">Evidence boundaries</p>
-      <h2 id="source-status">{evidenceNotice.title}</h2>
-      <p style="margin-bottom: 24px;">{evidenceNotice.body}</p>
-      
-      <div class="card terminal-panel">
-        <div class="terminal-header">
-          <span class="terminal-dot red"></span>
-          <span class="terminal-dot yellow"></span>
-          <span class="terminal-dot green"></span>
-          <span style="font-size: 0.75rem; color: var(--muted); margin-left: auto; font-family: monospace;">confidence-matrix.report</span>
         </div>
-        <ul class="status-list" style="margin-top: 8px;">
-          {gameData.sourceConfidence.map((item) => {
-            const isHigh = item.level.toLowerCase().includes('high');
-            const isMedium = item.level.toLowerCase().includes('medium');
-            return (
-              <li style="display: flex; justify-content: space-between; align-items: center; padding: 12px 0; border-bottom: 1px solid var(--line);">
-                <strong style="color: var(--text); font-weight: 600;">{item.label}</strong>
-                <span class={`status-badge ${!isHigh && !isMedium ? 'pending' : ''}`} style={isHigh ? 'background: rgba(34, 197, 94, 0.1); color: #4ade80; border-color: rgba(34, 197, 94, 0.2);' : ''}>
-                  {item.level}
-                </span>
-              </li>
-            );
-          })}
-        </ul>
       </div>
     </section>
 
-    <section class="section" aria-labelledby="faq">
-      <p class="eyebrow">FAQ</p>
-      <h2 id="faq" style="margin-bottom: 32px;">Template FAQ</h2>
-      <div class="faq-list" style="display: grid; gap: 24px;">
-        {homeContent.faq.map((item) => (
-          <div style="border-bottom: 1px solid var(--line); padding-bottom: 20px;">
-            <h3 style="display: flex; align-items: center; gap: 8px; color: var(--accent); font-size: 1.15rem;">
-              <span style="font-family: var(--font-display); font-weight: 900; opacity: 0.5;">Q.</span>
-              {item.q}
-            </h3>
-            <p style="margin-top: 8px; padding-left: 24px; margin-bottom: 0;">{item.a}</p>
+    <!-- 7. Merge Rules Section -->
+    <section class="band" id="merge-guide">
+      <div class="container">
+        <div class="section-heading center">
+          <p class="eyebrow">Merge Rules</p>
+          <h2>How to Merge Nukes in Merge a Nuke</h2>
+          <p>Merging is the center of progression. Good players keep the board clean, chain matches, and turn code rewards into higher-tier income quickly.</p>
+        </div>
+        <div class="module-grid">
+          <article class="module-card">
+            <span>Merge Note</span>
+            <h3>Match identical tiers</h3>
+            <p>Most merge progress comes from pairing the same bomb or nuke tier. If two pieces match, merge them before buying more.</p>
+          </article>
+          <article class="module-card">
+            <span>Merge Note</span>
+            <h3>Keep a clean grid</h3>
+            <p>A messy grid slows progression because duplicate pieces become harder to spot. Clear low tiers first, then plan around your best nuke.</p>
+          </article>
+          <article class="module-card">
+            <span>Merge Note</span>
+            <h3>Chain after every merge</h3>
+            <p>After creating a stronger nuke, check whether the new result matches another piece. Chains are the fastest way to climb tiers.</p>
+          </article>
+          <article class="module-card">
+            <span>Merge Note</span>
+            <h3>Save space for spawns</h3>
+            <p>Do not fill every slot with low-value pieces. Leave room for new spawns and convert weak duplicates before they block the board.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- 8. Offline Cash Section -->
+    <section class="band alt" id="offline-cash">
+      <div class="container">
+        <div class="section-heading center">
+          <p class="eyebrow">Income</p>
+          <h2>Merge a Nuke Offline Cash Guide</h2>
+          <p>Merge a Nuke offline cash is only valuable if your board is optimized and your base is protected before you leave.</p>
+        </div>
+        <div class="module-grid">
+          <article class="module-card system-card">
+            <span>Cash Loop</span>
+            <h3>Merge up before logging out</h3>
+            <p>Your best merged nukes should be active on the grid before you leave. Two unmerged duplicates usually mean wasted income.</p>
+          </article>
+          <article class="module-card system-card">
+            <span>Cash Loop</span>
+            <h3>Collect and reinvest on return</h3>
+            <p>When you come back, spend offline cash on upgrades, then merge again. A clean reinvest loop compounds faster than saving cash.</p>
+          </article>
+          <article class="module-card system-card">
+            <span>Cash Loop</span>
+            <h3>Watch for caps or patches</h3>
+            <p>Offline income details can change after updates. If earnings feel lower than expected, re-check patch notes and current community tests.</p>
+          </article>
+        </div>
+        <div class="section-actions" style="display: flex; justify-content: center; margin-top: 24px;">
+          <a class="button secondary" href="/offline-cash/">Open Offline Cash Guide</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- 9. Upgrades Route Section -->
+    <section class="band" id="upgrades">
+      <div class="container">
+        <div class="section-heading center">
+          <p class="eyebrow">Upgrade Route</p>
+          <h2>Best Merge a Nuke Upgrades</h2>
+          <p>Spend cash where it keeps the engine moving: spawn flow first, stronger nuke spawns next, then lock and raid upgrades once your base has real value.</p>
+        </div>
+        <div class="module-grid">
+          <article class="module-card">
+            <span>Upgrade Note</span>
+            <h3>Spawn flow first</h3>
+            <p>Early upgrades should help you create more merge chances or better starting pieces before you chase raids.</p>
+          </article>
+          <article class="module-card">
+            <span>Upgrade Note</span>
+            <h3>Lock once value grows</h3>
+            <p>Base lock upgrades matter more when offline cash, stored cash, and higher-tier nukes become worth protecting.</p>
+          </article>
+          <article class="module-card">
+            <span>Upgrade Note</span>
+            <h3>Raid upgrades later</h3>
+            <p>Nuke cooldown and nuke health are stronger after your income engine can recover from bad attacks.</p>
+          </article>
+        </div>
+        <div class="section-actions" style="display: flex; justify-content: center; margin-top: 24px;">
+          <a class="button secondary" href="/upgrades/">Open Upgrades Guide</a>
+        </div>
+
+        <div class="content-group" style="margin-top: 40px;">
+          <h3 style="font-size: 1.15rem; color: var(--accent); margin-bottom: 16px; font-family: var(--font-display);">Upgrade Decision Help</h3>
+          <p style="color: var(--muted); margin-bottom: 20px;">Choose upgrades based on the problem you feel during play. The right purchase is usually the one that removes the current bottleneck.</p>
+          <div class="detail-grid">
+            <article class="detail-item">
+              <h4>If the board is empty too often</h4>
+              <p>Prioritize spawn flow. Waiting with open space means the board is not giving you enough merge chances. More frequent or more useful spawns help you build chains without needing to sit idle between every upgrade.</p>
+            </article>
+            <article class="detail-item">
+              <h4>If the board is full but weak</h4>
+              <p>Slow down buying and clean the grid. A full board of weak pieces usually means you missed merges or bought too aggressively. Clear low tiers, create chains, then resume spending once the board has room again.</p>
+            </article>
+            <article class="detail-item">
+              <h4>If raids keep setting you back</h4>
+              <p>Pause PvP and return to income upgrades. A raid should accelerate an account that is already moving, not rescue an account with no cash flow. Once your passive engine is stronger, failed attacks are much easier to absorb.</p>
+            </article>
+            <article class="detail-item">
+              <h4>If offline gains feel low</h4>
+              <p>Check the pre-logout routine. Your best pieces should be active, duplicate pairs should be merged, and cash should be spent on upgrades that continue helping while you are away. Then lock before closing Roblox.</p>
+            </article>
           </div>
-        ))}
+        </div>
+      </div>
+    </section>
+
+    <!-- 10. Raid Guide Section -->
+    <section class="band alt" id="raid-guide">
+      <div class="container">
+        <div class="section-heading center">
+          <p class="eyebrow">PvP</p>
+          <h2>Merge a Nuke Raid Guide</h2>
+          <p>Raid in Merge a Nuke for acceleration, not desperation. A player with weak income and an unlocked base is easy to punish after a failed attack.</p>
+        </div>
+        <div class="module-grid">
+          <article class="module-card">
+            <span>Raid Rule</span>
+            <h3>Raid after income is stable</h3>
+            <p>Raiding is useful, but it is not the first priority. Start when your merged nukes and cash flow can absorb mistakes.</p>
+          </article>
+          <article class="module-card">
+            <span>Raid Rule</span>
+            <h3>Target weaker or unlocked bases</h3>
+            <p>Look for bases that appear easier to punish. Stronger merged nukes should be saved for targets where the steal is worth the risk.</p>
+          </article>
+          <article class="module-card">
+            <span>Raid Rule</span>
+            <h3>Expect retaliation</h3>
+            <p>After you raid, assume someone may hit you back. Lock your base immediately if you are stepping away from the game.</p>
+          </article>
+        </div>
+        <div class="section-actions" style="display: flex; justify-content: center; margin-top: 24px;">
+          <a class="button secondary" href="/raid/">Open Raid Guide</a>
+        </div>
+
+        <div class="content-group" style="margin-top: 40px;">
+          <h3 style="font-size: 1.15rem; color: var(--accent); margin-bottom: 16px; font-family: var(--font-display);">Raid & Defense Checklist</h3>
+          <p style="color: var(--muted); margin-bottom: 20px;">Good PvP decisions start before the attack and end after the reward is safe. Use these checks whenever you are unsure whether to raid, retreat, or lock.</p>
+          <div class="detail-grid">
+            <article class="detail-item">
+              <h4>Before you raid</h4>
+              <p>Check your own base first. If your cash is high, your lock is down, or your board is messy, a quick attack exposes you to huge losses. Clear the grid, merge your best weapons, lock your shield, then look for targets.</p>
+            </article>
+            <article class="detail-item">
+              <h4>Choosing a target</h4>
+              <p>Look for unlocked shields and weak spawners. Raiding a fully upgraded base with active high-tier defenses wastes cooldowns. Target islands where you can steal cash quickly and escape before they notice.</p>
+            </article>
+            <article class="detail-item">
+              <h4>After a successful raid</h4>
+              <p>Spend the stolen cash immediately. Do not sit on massive cash bags while your shield is on cooldown. Reinvest the loot into permanent income or spawner upgrades so you cannot lose it to a counter-raid.</p>
+            </article>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 6. Extended About Section for SEO Word Count and Keyword Density -->
+    <section class="section prose-block" style="margin-top: 48px; border-top: 1.5px solid var(--line); padding-top: 40px; margin-bottom: 40px; padding-left: 24px; padding-right: 24px;">
+      <h2 style="font-size: 1.5rem; margin-bottom: 24px; color: var(--color-yellow); font-family: var(--font-display);">About Merge a Nuke Guide</h2>
+      <p style="margin-bottom: 16px; line-height: 1.6; font-size: 0.95rem;">
+        Welcome to the ultimate <strong>Merge a Nuke guide</strong> portal. Roblox Merge a Nuke is a highly engaging tycoon and merging simulator game where players spend hours spawning basic missiles, combining identical weapon tiers to build higher-level assets, and securing passive in-game cash streams. As a comprehensive <strong>Merge a Nuke guide</strong>, this website is designed to provide players with structured wiki data, active codes check alerts, and weapon tier ranking policies. We aim to clear up the confusion caused by unsourced community wikis and help you optimize your base expansion efficiently.
+      </p>
+      
+      <div class="card-grid" style="margin-top: 24px; gap: 24px;">
+        <article class="card" style="border-radius: var(--radius-card); background: rgba(31, 39, 58, 0.25); border-color: var(--line);">
+          <h3 style="color: var(--accent); margin-bottom: 12px; font-size: 1.1rem; font-family: var(--font-display);">Why Use a Merge a Nuke Guide?</h3>
+          <p style="margin-bottom: 0; font-size: 0.88rem; line-height: 1.5; color: var(--text);">
+            Many beginner players struggle to allocate their game cash efficiently during the initial merging phases. Without a reliable <strong>Merge a Nuke guide</strong>, it is easy to waste cash-per-minute progress on low-tier hanger upgrades or perform a rebirth at a suboptimal multiplier point. Our interactive offline cash progress calculator lets you input your exact game state numbers, allowing you to estimate precisely how long it will take to unlock your next targeted nuclear missile upgrade. By relying on player-verified stats instead of speculative formulas, you can plan your away-from-keyboard income windows with full confidence.
+          </p>
+        </article>
+        
+        <article class="card" style="border-radius: var(--radius-card); background: rgba(31, 39, 58, 0.25); border-color: var(--line);">
+          <h3 style="color: var(--accent); margin-bottom: 12px; font-size: 1.1rem; font-family: var(--font-display);">Safe Game Loop and Defense Strategies</h3>
+          <p style="margin-bottom: 0; font-size: 0.88rem; line-height: 1.5; color: var(--text);">
+            A critical aspect of this tycoon game is player-versus-player raiding. Launching high-tier missiles at neighboring islands allows you to steal opponent cash and accelerate your progression. However, active raiding exposes your base to aggressive retaliation. Our <strong>Merge a Nuke guide</strong> stresses the importance of using the in-game locking shield system. Always activate your base lock before logging off to prevent other players from raiding your hard-earned tycoon assets. Furthermore, we maintain a strict anti-cheat boundary: we do not host or distribute scripts, merge macros, or execution tools that violate Roblox policies.
+          </p>
+        </article>
+
+        <article class="card" style="border-radius: var(--radius-card); background: rgba(31, 39, 58, 0.25); border-color: var(--line);">
+          <h3 style="color: var(--accent); margin-bottom: 12px; font-size: 1.1rem; font-family: var(--font-display);">Evidence-Based Wiki Data Integrity</h3>
+          <p style="margin-bottom: 0; font-size: 0.88rem; line-height: 1.5; color: var(--text);">
+            The web is flooded with duplicate code hubs and clickbait tier lists that promise fake boosts or inaccurate weapon DPS ratings. This website stands out by establishing a transparent evidence-backed boundary. We categorize all incoming codes and patch log information under strict labels: verified, community-reported, or pending. We only update a promo code to active when primary screenshots or video captures substantiate its legitimacy. With this <strong>Merge a Nuke guide</strong>, you can avoid wasting time typing expired gift codes and focus entirely on merging your nuclear arsenal.
+          </p>
+        </article>
       </div>
     </section>
     

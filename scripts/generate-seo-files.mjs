@@ -1,3 +1,7 @@
+// input: siteConfig configurations, gameData stats, environment vars
+// output: Generates sitemap.xml, robots.txt, llms.txt, llms-full.txt and cleanups pages Markdown pages in dist
+// pos: scripts/generate-seo-files.mjs (更新规则：文件变更需同步本注释与所属目录 README)
+
 import fs from "node:fs";
 import path from "node:path";
 
@@ -45,7 +49,7 @@ const indexNowKey = (process.env.INDEXNOW_KEY || "").trim();
 const excludedSitemapSlugs = new Set([
   "privacy",
   "terms",
-  "guide",
+  "beginner-guide",
   "scripts",
   "macros",
   "executor",
@@ -128,3 +132,10 @@ if (indexNowKey) {
 
 console.log(`Generated ${routes.length} sitemap route(s).`);
 console.log("Generated static SEO files in dist/.");
+
+// Clean up pages markdown files generated in dist (like src/pages/README.md)
+const readmeDist = path.join(distDir, "README");
+if (fs.existsSync(readmeDist)) {
+  fs.rmSync(readmeDist, { recursive: true, force: true });
+  console.log("Cleaned up temporary README page from dist/.");
+}

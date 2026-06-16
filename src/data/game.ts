@@ -1,3 +1,7 @@
+// input: none
+// output: gameData object storing official Roblox URL, universe IDs, descriptions, and update signals
+// pos: src/data/game.ts (更新规则：文件变更需同步本注释与所属目录 README)
+
 export const gameData = {
   robloxUrl: "https://www.roblox.com/games/128784467030899/Merge-a-Nuke",
   creatorName: "Nuke The Game",

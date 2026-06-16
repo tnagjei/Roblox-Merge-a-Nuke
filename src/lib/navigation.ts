@@ -1,3 +1,7 @@
+// input: siteConfig data configurations, current path name
+// output: getAvailableLocales, getMainNavItems navigation helper functions
+// pos: src/lib/navigation.ts (更新规则：文件变更需同步本注释与所属目录 README)
+
 import { siteConfig } from "../data/config";
 
 export const localeLabels = {
@@ -9,10 +13,15 @@ export const localeLabels = {
 
 export const defaultNavItems = [
   { slug: "", label: "Home", href: "/" },
-  { slug: "calculator", label: "Calculator", href: "/calculator/" },
   { slug: "codes", label: "Codes", href: "/codes/" },
+  { slug: "guide", label: "Beginner Guide", href: "/guide/" },
+  { slug: "progression", label: "Progression", href: "/progression/" },
+  { slug: "raid", label: "Raid Guide", href: "/raid/" },
   { slug: "tier-list", label: "Tier List", href: "/tier-list/" },
-  { slug: "beginner-guide", label: "Beginner Guide", href: "/beginner-guide/" },
+  { slug: "upgrades", label: "Upgrades", href: "/upgrades/" },
+  { slug: "offline-cash", label: "Offline Cash", href: "/offline-cash/" },
+  { slug: "rebirth", label: "Rebirth", href: "/rebirth/" },
+  { slug: "calculator", label: "Calculator", href: "/calculator/" },
   { slug: "updates", label: "Updates", href: "/updates/" },
   { slug: "wiki", label: "Wiki", href: "/wiki/" }
 ];

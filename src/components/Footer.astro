@@ -1,11 +1,19 @@
 ---
+// input: siteConfig configurations
+// output: Site footer layout component displaying configurable copyright and contact email info
+// pos: src/components/Footer.astro (更新规则：文件变更需同步本注释与所属目录 README)
+
 import { siteConfig } from "../data/config";
 ---
 
 <footer class="site-footer">
-  <div>
+  <div style="display: flex; flex-direction: column; gap: 8px;">
     <strong>{siteConfig.siteName}</strong>
-    <p>Independent fan guide template. Not affiliated with Roblox Corporation or game developers.</p>
+    <p>Independent fan guide. Not affiliated with Roblox Corporation or game developers.</p>
+    <p style="font-size: 0.8rem; color: var(--muted); margin: 0;">
+      &copy; 2026 {siteConfig.siteName}. All rights reserved. 
+      Contact: <a href={`mailto:${siteConfig.contactEmail}`} style="color: var(--color-blue); text-decoration: underline; background: transparent; padding: 0; border: none; font-size: inherit;">{siteConfig.contactEmail}</a>
+    </p>
   </div>
   <nav aria-label="Footer navigation">
     <a href="/about/">About</a>

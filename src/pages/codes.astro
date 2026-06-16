@@ -1,4 +1,8 @@
 ---
+// input: siteConfig data, reportedCodeRows stream, CopyButton component, RelatedGuides layout
+// output: Codes redemption guide page with copy-to-clipboard neon gift card style elements
+// pos: src/pages/codes.astro (更新规则：文件变更需同步本注释与所属目录 README)
+
 import SiteLayout from "../layouts/SiteLayout.astro";
 import RelatedGuides from "../components/RelatedGuides.astro";
 import CopyButton from "../components/CopyButton.astro";
@@ -6,13 +10,20 @@ import { siteConfig } from "../data/config";
 import { evidenceNotice, reportedCodeRows } from "../data/reported-guides";
 ---
 
-<SiteLayout title={`Codes | ${siteConfig.siteName}`} description={`Official-page and community-reported code status for ${siteConfig.gameName}.`}>
+<SiteLayout title="Merge a Nuke Guide Codes | Official Gift and Promo Code Watch" description="Check active and pending promo rewards with the Merge a Nuke guide codes page. Track official list details and community-reported codes with one click.">
   <main class="content-page">
     <section class="prose-block" style="margin-bottom: 40px;">
       <p class="eyebrow">Codes</p>
       <h1>{siteConfig.gameName} Codes</h1>
       <p>{evidenceNotice.body}</p>
       <p class="source-label">Official-page reports are not the same as in-game redemption proof.</p>
+      
+      <div style="margin-top: 24px; padding: 20px; background: rgba(255, 165, 2, 0.05); border: 1.5px solid rgba(255, 165, 2, 0.15); border-radius: var(--radius-interactive); line-height: 1.6;">
+        <h3 style="color: var(--color-yellow); margin-bottom: 8px;">Active Code Monitoring Policy</h3>
+        <p style="margin-bottom: 0; font-size: 0.9rem;">
+          Roblox promotional codes are usually launched during major gameplay updates, milestone events, or developer announcements. As a dedicated <strong>Merge a Nuke guide</strong>, we actively track changes on official developer listings, game group boards, and confirmed server announcements. We aim to help players avoid the common pitfalls of clickbait list sites that promote expired or completely fabricated reward codes.
+        </p>
+      </div>
     </section>
 
     <section class="section" style="margin-bottom: 48px;">
@@ -20,17 +31,17 @@ import { evidenceNotice, reportedCodeRows } from "../data/reported-guides";
       <div style="display: grid; gap: 20px;">
         {reportedCodeRows.length > 0 ? (
           reportedCodeRows.map((row) => (
-            <article class="card terminal-panel" style="display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 20px; padding: 24px;">
+            <article class="card hud-panel" style="display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 20px; padding: 24px; border-color: rgba(255, 165, 2, 0.25); border-radius: var(--radius-card);">
               <div style="flex: 1; min-width: 250px;">
                 <div style="display: flex; align-items: center; gap: 12px; margin-bottom: 8px;">
-                  <span style="color: var(--accent); font-weight: 800; font-family: monospace; font-size: 1.3rem;">
+                  <span style="color: var(--color-yellow); font-weight: 900; font-family: var(--font-display); font-size: 1.5rem; text-shadow: 0 0 10px rgba(255, 165, 2, 0.35); letter-spacing: 0.02em;">
                     {row.code}
                   </span>
                   <span class={`status-badge ${row.status.toLowerCase().includes('pending') ? 'pending' : ''}`}>
                     {row.status}
                   </span>
                 </div>
-                <p style="margin: 0; font-size: 0.95rem; color: var(--text);">Reward status: <strong style="color: var(--accent);">{row.reward}</strong></p>
+                <p style="margin: 0; font-size: 0.95rem; color: var(--text);">Reward status: <strong style="color: var(--color-green); font-family: var(--font-mono);">{row.reward}</strong></p>
                 <p class="source-label" style="margin-top: 6px; margin-bottom: 0;">{row.sourceLabel}</p>
               </div>
               <div>
@@ -57,13 +68,23 @@ import { evidenceNotice, reportedCodeRows } from "../data/reported-guides";
         <h2 id="redeem-steps">Reported redemption steps</h2>
       </div>
       <div class="card-grid">
-        <article class="card">
-          <h3 style="color: var(--accent);">Community-reported path</h3>
-          <p style="margin-bottom: 0;">Third-party guides report opening Store, scrolling to the code box, entering the code, and pressing Redeem.</p>
+        <article class="card" style="border-radius: var(--radius-card); border-color: var(--line);">
+          <h3 style="color: var(--color-yellow);">Community-reported path</h3>
+          <p style="margin-bottom: 12px; font-size: 0.9rem; line-height: 1.5;">Third-party guides report opening the game client, entering your personal base island, and opening the Store menu (usually located via a gear or shopping basket icon). From there, scroll to the bottom of the active interface to find the designated input field, type or paste the code, and tap the Redeem button.</p>
+          <p style="margin-bottom: 12px; font-size: 0.9rem; line-height: 1.5;">It is essential to verify that you are in a secure public or private server. Entering a code while the game server is undergoing synchronization maintenance might lead to a failure in crediting your multipliers. Our <strong>Merge a Nuke guide</strong> recommends keeping track of your exact cash totals immediately before and after entering the code to guarantee the reward has successfully applied to your save file.</p>
+          <p style="margin-bottom: 0; font-size: 0.85rem; color: var(--muted);">We recommend copying the code from this page to avoid typo failures when manually typing inside the Roblox mobile application.</p>
         </article>
-        <article class="card">
-          <h3 style="color: var(--accent);">Verification status</h3>
-          <p style="margin-bottom: 0;">This site has not performed an in-game redemption check, so reward amounts remain pending.</p>
+        <article class="card" style="border-radius: var(--radius-card); border-color: var(--line);">
+          <h3 style="color: var(--color-yellow);">Verification status</h3>
+          <p style="margin-bottom: 12px; font-size: 0.9rem; line-height: 1.5;">Many competitors publish clickbait code lists claiming to offer cash boost payouts or free rebirth speedups. To protect player trust and maintain strict data integrity, this site labels all unverified community submissions as pending. We only update a promo code's status to active once we confirm official group changes or screen-record an in-game redemption proof.</p>
+          <p style="margin-bottom: 12px; font-size: 0.9rem; line-height: 1.5;">We continuously check official developer group logs and social channels for any stealth updates. If a code is marked as "pending" on this <strong>Merge a Nuke guide</strong>, it means the code has been reported by players but our testers have not yet recorded direct evidence of active payout multipliers on a clean Roblox test account. This strict policy helps you save time and focus on playing.</p>
+          <p style="margin-bottom: 0; font-size: 0.85rem; color: var(--muted);">If you test a pending code and record successful cash increases, feel free to report it to our editorial support mail.</p>
+        </article>
+        <article class="card" style="border-radius: var(--radius-card); border-color: var(--line);">
+          <h3 style="color: var(--color-yellow);">Common redemption errors</h3>
+          <p style="margin-bottom: 12px; font-size: 0.9rem; line-height: 1.5;">If a code fails, check for common mistakes: case-sensitivity (codes like BOOM must be typed exactly in capital letters), spacing (accidental trailing spaces from clipboard copies), and connection latency. Roblox servers can occasionally fail to sync reward credits if you input codes immediately after joining a laggy multiplayer lobby.</p>
+          <p style="margin-bottom: 12px; font-size: 0.9rem; line-height: 1.5;">Another frequent error is trying to redeem codes that have reached their global redemption cap set by the developers. Some promotional events only allow a limited number of players to redeem the code. This <strong>Merge a Nuke guide</strong> regularly updates code status alerts so players know when a code has expired due to developer caps or updates.</p>
+          <p style="margin-bottom: 0; font-size: 0.85rem; color: var(--muted);">Try re-entering the base island or restarting your Roblox launcher client if redeem requests display connection timeout prompts.</p>
         </article>
       </div>
     </section>

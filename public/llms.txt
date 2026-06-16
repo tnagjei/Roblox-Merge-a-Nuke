@@ -1,0 +1,14 @@
+# Merge a Nuke Guide
+> Interactive fansite guide and tools for Roblox Merge a Nuke game, focusing on offline upgrade planning and code status.
+
+The ultimate offline progress planner and code watcher helper for players of the Roblox game "Merge a Nuke".
+
+## 核心内容
+- [合成计算器](https://mergeanuke.online/calculator/)：输入金币效率与离线时间，估算升级差距。
+- [兑换码监控](https://mergeanuke.online/codes/)：收集游戏列表公布文本和第三方兑换码。
+- [等级排行榜](https://mergeanuke.online/tier-list/)：整理核武器与玩法的玩家评测级别边界。
+
+## 常用资源
+- [关于我们](https://mergeanuke.online/about/)：介绍我们为玩家提供攻略站的创作意图。
+- [联系我们](https://mergeanuke.online/contact/)：如果有攻略线索或报错，反馈邮箱 tangjei414@gmail.com
+- [编辑政策](https://mergeanuke.online/editorial-policy/)：我们的核查与证据链边界声明声明。

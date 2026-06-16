@@ -1,3 +1,7 @@
+// input: none
+// output: siteConfig object containing domain, mail, slugs, locales, and theme assets
+// pos: src/data/config.ts (更新规则：文件变更需同步本注释与所属目录 README)
+
 export const siteConfig = {
   siteName: "Merge a Nuke Guide",
   gameName: "Merge a Nuke",
@@ -9,17 +13,17 @@ export const siteConfig = {
   defaultLocale: "en",
   availableLocales: ["en", "th", "fil", "id"],
   completedLocales: ["en"],
-  coreSlugs: ["", "calculator", "codes", "tier-list", "beginner-guide", "updates", "wiki"],
-  completedCoreSlugs: ["", "calculator", "codes", "tier-list", "beginner-guide", "updates", "wiki"],
+  coreSlugs: ["", "calculator", "codes", "tier-list", "guide", "updates", "wiki", "progression", "raid", "upgrades", "offline-cash", "rebirth"],
+  completedCoreSlugs: ["", "calculator", "codes", "tier-list", "guide", "updates", "wiki", "progression", "raid", "upgrades", "offline-cash", "rebirth"],
   englishOnlySlugs: [],
   completedEnglishOnlySlugs: [],
   systemSlugs: ["about", "contact", "editorial-policy"],
-  blockedSlugs: ["scripts", "macros", "executor", "exploit", "guide"],
-  navigationSlugs: ["", "calculator", "codes", "tier-list", "beginner-guide", "updates", "wiki"],
+  blockedSlugs: ["scripts", "macros", "executor", "exploit"],
+  navigationSlugs: ["", "calculator", "codes", "tier-list", "guide", "updates", "wiki", "progression", "raid", "upgrades", "offline-cash", "rebirth"],
   routePolicy: {
-    publicPaths: ["/", "/calculator/", "/codes/", "/tier-list/", "/beginner-guide/", "/updates/", "/wiki/", "/about/", "/contact/", "/editorial-policy/"],
+    publicPaths: ["/", "/calculator/", "/codes/", "/tier-list/", "/guide/", "/updates/", "/wiki/", "/about/", "/contact/", "/editorial-policy/", "/progression/", "/raid/", "/upgrades/", "/offline-cash/", "/rebirth/"],
     noindexPaths: ["/privacy/", "/terms/"],
-    blockedPaths: ["/scripts/", "/macros/", "/executor/", "/exploit/", "/guide/"]
+    blockedPaths: ["/scripts/", "/macros/", "/executor/", "/exploit/"]
   },
   wwwPolicy: {
     source: "https://www.mergeanuke.online",

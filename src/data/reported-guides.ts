@@ -1,3 +1,7 @@
+// input: none
+// output: evidenceNotice, competitorSources, reportedCodeRows, reportedClassTiers for site guides
+// pos: src/data/reported-guides.ts (更新规则：文件变更需同步本注释与所属目录 README)
+
 export const evidenceNotice = {
   title: "Evidence boundaries",
   body: "This site separates verified evidence from community-reported and pending information. Third-party pages are research signals only. Do not present active codes, rewards, calculator formulas, rankings, patch notes, or wiki claims as verified unless official, Roblox API, or in-game proof exists.",

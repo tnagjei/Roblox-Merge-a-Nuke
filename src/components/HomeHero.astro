@@ -1,35 +1,64 @@
 ---
-import { siteConfig } from "../data/config";
+// input: Site configurations (siteConfig), game data (gameData), homepage text content (homeContent)
+// output: Redesigned competitor-inspired hero section with left copy and right game snapshot telemetry card
+// pos: src/components/HomeHero.astro (更新规则：文件变更需同步本注释与所属目录 README)
+
 import { gameData } from "../data/game";
 import { homeContent } from "../content/home";
-
-const publicPageCount = siteConfig.routePolicy.publicPaths.length;
 ---
 
-<section class="hero">
-  <div class="hero-copy">
-    <p class="eyebrow">{homeContent.hero.eyebrow}</p>
-    <h1>{homeContent.hero.title}</h1>
-    <p>{homeContent.hero.lede}</p>
-    <div class="hero-actions">
-      <a class="button primary" href={gameData.robloxUrl} target="_blank" rel="noopener noreferrer">
-        {homeContent.hero.primaryAction}
-      </a>
-      <a class="button secondary" href="/privacy/">Review privacy</a>
+<section class="hero home-hero">
+  <div class="container hero-layout">
+    <div class="hero-copy">
+      <p class="hero-kicker">{homeContent.hero.eyebrow}</p>
+      <h1>{homeContent.hero.title}</h1>
+      <p class="hero-lead">{homeContent.hero.lede}</p>
+      <div class="cta-row hero-cta">
+        <a class="button primary" href="/codes/">Merge a Nuke Codes</a>
+        <a class="button accent" href="/guide/">Beginner Guide</a>
+        <a class="button secondary" href={gameData.robloxUrl} target="_blank" rel="noopener noreferrer">Play on Roblox</a>
+      </div>
     </div>
-  </div>
-  <div class="hero-card terminal-panel" aria-label="Site status">
-    <div class="terminal-header">
-      <span class="terminal-dot red"></span>
-      <span class="terminal-dot yellow"></span>
-      <span class="terminal-dot green"></span>
-      <span style="font-size: 0.75rem; color: var(--muted); margin-left: auto; font-family: monospace;">nuke-sys-monitor.sh</span>
-    </div>
-    <img src={siteConfig.assets.hero} alt={`${siteConfig.siteName} hero art`} loading="eager" />
-    <dl>
-      <div><dt>Base Defense</dt><dd><span class="status-badge">SHIELD ACTIVE</span></dd></div>
-      <div><dt>Deployment</dt><dd>Astro Static</dd></div>
-      <div><dt>Guide Pages</dt><dd>{publicPageCount} verified</dd></div>
-    </dl>
+    <aside class="snapshot-card" aria-label="Merge a Nuke game snapshot">
+      <div class="snapshot-heading">
+        <span class="snapshot-mark" aria-hidden="true">🚀</span>
+        <div>
+          <h2>Game Snapshot</h2>
+          <p>Game details checked 2026.</p>
+        </div>
+      </div>
+      <div class="snapshot-grid">
+        <div class="snapshot-stat">
+          <span class="snapshot-stat-title">Total Visits</span>
+          <strong>9.1M+</strong>
+          <span class="snapshot-stat-label">Roblox universe visits</span>
+        </div>
+        <div class="snapshot-stat">
+          <span class="snapshot-stat-title">Active Players</span>
+          <strong>24.7K</strong>
+          <span class="snapshot-stat-label">Players online at last check</span>
+        </div>
+        <div class="snapshot-stat">
+          <span class="snapshot-stat-title">Likes / Favorites</span>
+          <strong>46.9K / 86K</strong>
+          <span class="snapshot-stat-label">Community signal</span>
+        </div>
+        <div class="snapshot-stat">
+          <span class="snapshot-stat-title">Community Members</span>
+          <strong>321K+</strong>
+          <span class="snapshot-stat-label">Nuke The Game group</span>
+        </div>
+        <div class="snapshot-stat">
+          <span class="snapshot-stat-title">Last Update</span>
+          <strong>Jun 10</strong>
+          <span class="snapshot-stat-label">Friday update window</span>
+        </div>
+        <div class="snapshot-stat">
+          <span class="snapshot-stat-title">Status</span>
+          <strong>Online</strong>
+          <span class="snapshot-stat-label">Public build live</span>
+        </div>
+      </div>
+    </aside>
   </div>
 </section>

@@ -1,75 +1,18 @@
 ---
-import SiteLayout from "../layouts/SiteLayout.astro";
-import RelatedGuides from "../components/RelatedGuides.astro";
-import { siteConfig } from "../data/config";
-import { gameData } from "../data/game";
+// input: none
+// output: HTML redirect to the new shorter /guide/ path
+// pos: src/pages/beginner-guide.astro (更新规则：文件变更需同步本注释与所属目录 README)
 ---
 
-<SiteLayout title={`Beginner Guide | ${siteConfig.siteName}`} description={`Beginner guide for ${siteConfig.gameName} based on the official Roblox listing and conservative source checks.`}>
-  <main class="content-page">
-    <section class="prose-block" style="margin-bottom: 40px;">
-      <p class="eyebrow">Beginner guide</p>
-      <h1>{siteConfig.gameName} Beginner Guide</h1>
-      <p>{gameData.officialDescription}</p>
-      <p class="source-label">Source: official Roblox listing, checked 2026-06-16.</p>
-    </section>
-
-    <section class="section" aria-labelledby="starter-loop" style="margin-bottom: 48px;">
-      <p class="eyebrow">Core loop</p>
-      <h2 id="starter-loop" style="margin-bottom: 32px;">What to do first</h2>
-      
-      <div class="timeline">
-        <div class="timeline-item">
-          <div class="timeline-marker">1</div>
-          <div style="padding-left: 12px;">
-            <h3 style="color: var(--accent);">Merge bombs upward</h3>
-            <p style="margin-bottom: 0;">The listing describes merging bombs into bigger nukes. Prioritize clean merges before chasing unverified tier claims.</p>
-          </div>
-        </div>
-        
-        <div class="timeline-item">
-          <div class="timeline-marker">2</div>
-          <div style="padding-left: 12px;">
-            <h3 style="color: var(--accent);">Watch your cash rate</h3>
-            <p style="margin-bottom: 0;">Your nukes earn cash over time, including while offline according to the Roblox description.</p>
-          </div>
-        </div>
-        
-        <div class="timeline-item">
-          <div class="timeline-marker">3</div>
-          <div style="padding-left: 12px;">
-            <h3 style="color: var(--accent);">Raid with caution</h3>
-            <p style="margin-bottom: 0;">Launching nukes at enemy bases can steal cash, but this site has not verified raid formulas or defense values.</p>
-          </div>
-        </div>
-        
-        <div class="timeline-item">
-          <div class="timeline-marker">4</div>
-          <div style="padding-left: 12px;">
-            <h3 style="color: var(--accent);">Lock your base</h3>
-            <p style="margin-bottom: 0;">The official listing warns players to lock their base before someone nukes them back.</p>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <section class="section grid-section" aria-labelledby="starter-safety" style="margin-bottom: 48px;">
-      <div>
-        <p class="eyebrow">Safety</p>
-        <h2 id="starter-safety">Avoid risky shortcuts</h2>
-      </div>
-      <div class="card-grid">
-        <article class="card">
-          <h3 style="color: var(--accent);">No script or executor pages</h3>
-          <p style="margin-bottom: 0;">This site blocks exploit routes and does not publish Roblox scripts, macros, or executors.</p>
-        </article>
-        <article class="card">
-          <h3 style="color: var(--accent);">No fake rewards</h3>
-          <p style="margin-bottom: 0;">Code rewards stay pending unless an official source or in-game check supports the claim.</p>
-        </article>
-      </div>
-    </section>
-
-    <RelatedGuides currentSlug="beginner-guide" />
-  </main>
-</SiteLayout>
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>Redirecting...</title>
+    <meta http-equiv="refresh" content="0;url=/guide/" />
+    <link rel="canonical" href="https://mergeanuke.online/guide/" />
+  </head>
+  <body>
+    <p>Redirecting to <a href="/guide/">/guide/</a>...</p>
+  </body>
+</html>

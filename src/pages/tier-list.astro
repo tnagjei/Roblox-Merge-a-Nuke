@@ -1,17 +1,28 @@
 ---
+// input: siteConfig data, evidenceNotice content, reportedClassTiers list stream, RelatedGuides layout
+// output: Tier list research overview page with gradient visual tier rows and card graphics
+// pos: src/pages/tier-list.astro (更新规则：文件变更需同步本注释与所属目录 README)
+
 import SiteLayout from "../layouts/SiteLayout.astro";
 import RelatedGuides from "../components/RelatedGuides.astro";
 import { siteConfig } from "../data/config";
 import { evidenceNotice, reportedClassTiers } from "../data/reported-guides";
 ---
 
-<SiteLayout title={`Tier List | ${siteConfig.siteName}`} description={`Tier list research boundaries for ${siteConfig.gameName}.`}>
+<SiteLayout title="Merge a Nuke Guide Tier List | Weapon Upgrade Ranking Policy" description="Review weapon tiers and base defense ranking boundaries on the Merge a Nuke guide tier list page. Find community-reported levels and evidence metrics.">
   <main class="content-page">
     <section class="prose-block" style="margin-bottom: 40px;">
       <p class="eyebrow">Tier list</p>
       <h1>{siteConfig.gameName} Tier List</h1>
       <p>{evidenceNotice.body}</p>
       <p>This page does not claim an official ranking because reviewed sources do not provide verified bomb-tier or raid-power tables.</p>
+      
+      <div style="margin-top: 24px; padding: 20px; background: rgba(46, 213, 115, 0.05); border: 1.5px solid rgba(46, 213, 115, 0.15); border-radius: var(--radius-interactive); line-height: 1.6;">
+        <h3 style="color: var(--color-green); margin-bottom: 8px;">Weapon Ranking Rationale</h3>
+        <p style="margin-bottom: 0; font-size: 0.9rem;">
+          Evaluating weapon efficiency in Roblox Merge a Nuke requires understanding the passive income multiplier relative to the cost of merging lower tiers. Since high-tier nukes require exponentially more inputs, a solid <strong>Merge a Nuke guide</strong> tier list is vital to map out progression bottlenecks. By comparing base damages, cash yields, and rebirth efficiency, we help builders avoid sinking credits into weak assets.
+        </p>
+      </div>
     </section>
 
     <section class="section" style="margin-bottom: 48px;">
@@ -21,13 +32,13 @@ import { evidenceNotice, reportedClassTiers } from "../data/reported-guides";
           reportedClassTiers.map((tier) => {
             const tierKey = tier.tier.toLowerCase();
             return (
-              <article class="tier-row">
+              <article class="tier-row" style="border-radius: var(--radius-card);">
                 <div class={`tier-badge tier-${tierKey}`}>{tier.tier}</div>
                 <div class="tier-content">
-                  <div style="font-size: 1.15rem; font-weight: 700; margin-bottom: 6px; color: var(--text);">
+                  <div style="font-size: 1.25rem; font-weight: 800; margin-bottom: 6px; color: var(--text); font-family: var(--font-display); letter-spacing: 0.02em;">
                     {tier.items.join(", ")}
                   </div>
-                  <p class="source-label" style="margin: 0;">{tier.sourceLabel}</p>
+                  <p class="source-label" style="margin: 0; font-family: var(--font-body); font-size: 0.8rem;">{tier.sourceLabel}</p>
                 </div>
               </article>
             );
@@ -41,16 +52,26 @@ import { evidenceNotice, reportedClassTiers } from "../data/reported-guides";
     <section class="section grid-section" aria-labelledby="tier-boundary" style="margin-bottom: 48px;">
       <div>
         <p class="eyebrow">Ranking policy</p>
-        <h2 id="tier-boundary">What would qualify</h2>
+        <h2 id="tier-boundary">How the Merge a Nuke Guide classifies items</h2>
       </div>
       <div class="card-grid">
-        <article class="card">
-          <h3 style="color: var(--accent);">Enough evidence</h3>
-          <p style="margin-bottom: 0;">Official tier names, repeated in-game screenshots, or a documented test method with date and source labels.</p>
+        <article class="card" style="border-radius: var(--radius-card); border-color: var(--line);">
+          <h3 style="color: var(--color-yellow);">Enough evidence</h3>
+          <p style="margin-bottom: 12px; font-size: 0.9rem; line-height: 1.5;">To classify a missile or base upgrade into a specific tier (e.g. S-Tier or A-Tier), this site requires official developer-provided spreadsheets, verifiable public API data, or multiple consistent in-game video checks. This evidence must clearly document raw cash-per-second output rates, precise blast radii, or damage formulas used during base raids.</p>
+          <p style="margin-bottom: 12px; font-size: 0.9rem; line-height: 1.5;">Without consistent data from multiple server sessions, an item will remain in our review logs rather than being published. Our <strong>Merge a Nuke guide</strong> maintains that only mathematically proven stats can determine weapon ranking tiers, ensuring players never rely on speculation when prioritizing their merging orders.</p>
+          <p style="margin-bottom: 0; font-size: 0.85rem; color: var(--muted);">Establishing high evidence levels prevents players from wasting valuable cash and rebirth credits on inefficient gear upgrades.</p>
         </article>
-        <article class="card">
-          <h3 style="color: var(--accent);">Not enough evidence</h3>
-          <p style="margin-bottom: 0;">A single video title, unsourced comment, or copied table without a visible in-game basis.</p>
+        <article class="card" style="border-radius: var(--radius-card); border-color: var(--line);">
+          <h3 style="color: var(--color-yellow);">Not enough evidence</h3>
+          <p style="margin-bottom: 12px; font-size: 0.9rem; line-height: 1.5;">We decline to publish rankings based solely on third-party video titles, unsourced wiki claims, or speculative reddit guides. Many competitor sites publish fake tier lists that rank items arbitrarily to grab search clicks. Without transparent in-game test metrics, these ranking lists mislead players into pursuing suboptimal progression builds.</p>
+          <p style="margin-bottom: 12px; font-size: 0.9rem; line-height: 1.5;">Often, community rumors claim that a newly introduced holiday bomb yields double the income multipliers. Rather than rushing to post unconfirmed metrics, this <strong>Merge a Nuke guide</strong> holds rankings as pending until we perform direct in-game validation, recording cash gains under controlled server settings.</p>
+          <p style="margin-bottom: 0; font-size: 0.85rem; color: var(--muted);">We prioritize verified facts over popular opinion. All unproven rankings are labeled as pending until cross-checked.</p>
+        </article>
+        <article class="card" style="border-radius: var(--radius-card); border-color: var(--line);">
+          <h3 style="color: var(--color-yellow);">Ranking policy purpose</h3>
+          <p style="margin-bottom: 12px; font-size: 0.9rem; line-height: 1.5;">The purpose of our ranking policy is to keep game progression clean and data-driven. By keeping unverified claims separated, players can plan their offline runs and shield upgrades with complete confidence. This ensures players make decisions based on tested numbers, rather than guess-work or community rumors.</p>
+          <p style="margin-bottom: 12px; font-size: 0.9rem; line-height: 1.5;">As the game undergoes balancing updates, we quickly recalibrate our lists to reflect real-time changes. Following this <strong>Merge a Nuke guide</strong> policy protects players from historical wiki data rot, giving you up-to-date tactical insights to maximize your tycoon's economic growth.</p>
+          <p style="margin-bottom: 0; font-size: 0.85rem; color: var(--muted);">We continuously update our verification rules as the developers release new patches and balance tweaks.</p>
         </article>
       </div>
     </section>

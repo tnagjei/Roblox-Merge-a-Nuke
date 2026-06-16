@@ -1,4 +1,8 @@
 ---
+// input: siteConfig configurations, locales list, navigation items
+// output: Main navigation bar component with language selectors and brand initials
+// pos: src/components/Header.astro (更新规则：文件变更需同步本注释与所属目录 README)
+
 import { siteConfig } from "../data/config";
 import { getAvailableLocales, getMainNavItems } from "../lib/navigation";
 
@@ -14,25 +18,37 @@ const brandInitials = siteConfig.gameName
   .toUpperCase();
 ---
 
-<header class="site-header">
-  <a class="brand" href="/">
-    <span class="brand-mark">{brandInitials}</span>
-    <span>
-      <strong>{siteConfig.siteName}</strong>
-      <small>Astro Roblox tools hub</small>
-    </span>
-  </a>
-  <nav aria-label="Main navigation">
-    {navItems.map((item) => <a href={item.href}>{item.label}</a>)}
-  </nav>
-  <details class="language-menu">
-    <summary>Language</summary>
-    <div class="language-list">
-      {locales.map((item) => (
-        <a href={item.completed ? item.href : "#"} aria-disabled={item.completed ? "false" : "true"}>
-          {item.label}{item.completed ? "" : " · pending"}
-        </a>
+<header class="site-header" data-site-header>
+  <nav class="site-nav" aria-label="Primary navigation">
+    <a class="brand" href="/" aria-label={`${siteConfig.siteName} home`}>
+      <span class="brand-mark" aria-hidden="true">{brandInitials}</span>
+      <span class="brand-text">
+        <strong>{siteConfig.siteName}</strong>
+        <small>Roblox Guide</small>
+      </span>
+    </a>
+    <div class="nav-scroll" role="list">
+      {navItems.map((item) => (
+        <div class="nav-item" role="listitem">
+          <a class="nav-link" href={item.href}>
+            <span>{item.label}</span>
+          </a>
+        </div>
       ))}
     </div>
-  </details>
+    <div class="site-actions" aria-label="Site actions">
+      <details class="language-menu">
+        <summary>
+          <span>Language</span>
+        </summary>
+        <div class="language-list">
+          {locales.map((item) => (
+            <a href={item.completed ? item.href : "#"} aria-disabled={item.completed ? "false" : "true"}>
+              {item.label}{item.completed ? "" : " · pending"}
+            </a>
+          ))}
+        </div>
+      </details>
+    </div>
+  </nav>
 </header>
