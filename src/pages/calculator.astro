@@ -1,0 +1,102 @@
+---
+import SiteLayout from "../layouts/SiteLayout.astro";
+import RelatedGuides from "../components/RelatedGuides.astro";
+import ToolEventTracker from "../components/ToolEventTracker.astro";
+import { siteConfig } from "../data/config";
+---
+
+<SiteLayout title={`Calculator | ${siteConfig.siteName}`} description={`Player-input calculator for ${siteConfig.gameName} offline cash and upgrade planning.`}>
+  <main class="content-page">
+    <section class="prose-block">
+      <p class="eyebrow">Calculator</p>
+      <h1>{siteConfig.gameName} Calculator</h1>
+      <p>This tool uses numbers you enter. It does not claim official cash-per-second, upgrade, raid, or nuke formula data.</p>
+      <p class="source-label">Status: player-input estimate, not official formula data.</p>
+    </section>
+
+    <section class="section tool-panel" aria-labelledby="offline-cash">
+      <div>
+        <p class="eyebrow">Offline cash planner</p>
+        <h2 id="offline-cash">Estimate your next upgrade window</h2>
+        <p>Enter your current cash rate from the game screen, the time you expect to be away, and your target cost.</p>
+      </div>
+      <form class="calculator-form" data-tool-form>
+        <label>
+          Cash per minute
+          <input id="cash-rate" name="cash_rate" type="number" min="0" step="1" value="0" inputmode="decimal" />
+        </label>
+        <label>
+          Offline minutes
+          <input id="offline-minutes" name="offline_minutes" type="number" min="0" step="1" value="60" inputmode="decimal" />
+        </label>
+        <label>
+          Target upgrade cost
+          <input id="target-cost" name="target_cost" type="number" min="0" step="1" value="0" inputmode="decimal" />
+        </label>
+        <output class="result-card" id="calculator-result" aria-live="polite">
+          Enter your in-game numbers to estimate progress.
+        </output>
+      </form>
+      <ToolEventTracker toolName="offline_cash_calculator" />
+    </section>
+
+    <section class="section grid-section" aria-labelledby="calculator-boundary">
+      <div>
+        <p class="eyebrow">Evidence boundary</p>
+        <h2 id="calculator-boundary">What this calculator does not assume</h2>
+      </div>
+      <div class="card-grid">
+        <article class="card">
+          <h3>No hidden rate table</h3>
+          <p>The reviewed sources do not publish official bomb tiers, cash multipliers, or upgrade prices.</p>
+        </article>
+        <article class="card">
+          <h3>No raid guarantee</h3>
+          <p>Raid outcomes and stolen cash depend on live play. This page does not model enemy-base results.</p>
+        </article>
+        <article class="card">
+          <h3>Static deployment</h3>
+          <p>The calculator runs in the browser from Astro static HTML and JavaScript, so Cloudflare Pages can serve it from dist.</p>
+        </article>
+      </div>
+    </section>
+
+    <RelatedGuides currentSlug="calculator" />
+  </main>
+</SiteLayout>
+
+<script>
+  const rate = document.querySelector("#cash-rate");
+  const minutes = document.querySelector("#offline-minutes");
+  const target = document.querySelector("#target-cost");
+  const result = document.querySelector("#calculator-result");
+
+  function numericValue(input) {
+    return input instanceof HTMLInputElement ? Number(input.value || 0) : 0;
+  }
+
+  function formatNumber(value) {
+    return new Intl.NumberFormat("en-US", { maximumFractionDigits: 0 }).format(Math.max(0, value));
+  }
+
+  function updateCalculator() {
+    const estimatedCash = numericValue(rate) * numericValue(minutes);
+    const remaining = numericValue(target) - estimatedCash;
+    if (!result) return;
+
+    if (numericValue(rate) <= 0 && numericValue(target) <= 0) {
+      result.textContent = "Enter your in-game numbers to estimate progress.";
+      return;
+    }
+
+    result.textContent = remaining <= 0
+      ? `Estimated cash: ${formatNumber(estimatedCash)}. Your target can be covered by this estimate.`
+      : `Estimated cash: ${formatNumber(estimatedCash)}. Remaining target gap: ${formatNumber(remaining)}.`;
+  }
+
+  for (const input of [rate, minutes, target]) {
+    input?.addEventListener("input", updateCalculator);
+  }
+
+  updateCalculator();
+</script>

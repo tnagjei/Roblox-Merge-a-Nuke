@@ -1,0 +1,51 @@
+---
+import SiteLayout from "../layouts/SiteLayout.astro";
+import RelatedGuides from "../components/RelatedGuides.astro";
+import { siteConfig } from "../data/config";
+import { evidenceNotice, reportedCodeRows } from "../data/reported-guides";
+---
+
+<SiteLayout title={`Codes | ${siteConfig.siteName}`} description={`Official-page and community-reported code status for ${siteConfig.gameName}.`}>
+  <main class="content-page">
+    <section class="prose-block">
+      <p class="eyebrow">Codes</p>
+      <h1>{siteConfig.gameName} Codes</h1>
+      <p>{evidenceNotice.body}</p>
+      <p class="source-label">Official-page reports are not the same as in-game redemption proof.</p>
+    </section>
+    <section class="section">
+      <h2>Reported code watch</h2>
+      <div class="card-grid">
+        {reportedCodeRows.length > 0 ? (
+          reportedCodeRows.map((row) => (
+            <article class="card">
+              <h3>{row.code}</h3>
+              <p>Reward status: {row.reward}</p>
+              <p>Status: {row.status}</p>
+              <p class="source-label">{row.sourceLabel}</p>
+            </article>
+          ))
+        ) : (
+          <p class="empty-state">No code rows are published yet because none are verified or ready to record.</p>
+        )}
+      </div>
+    </section>
+    <section class="section grid-section" aria-labelledby="redeem-steps">
+      <div>
+        <p class="eyebrow">Redeem path</p>
+        <h2 id="redeem-steps">Reported redemption steps</h2>
+      </div>
+      <div class="card-grid">
+        <article class="card">
+          <h3>Community-reported path</h3>
+          <p>Third-party guides report opening Store, scrolling to the code box, entering the code, and pressing Redeem.</p>
+        </article>
+        <article class="card">
+          <h3>Verification status</h3>
+          <p>This site has not performed an in-game redemption check, so reward amounts remain pending.</p>
+        </article>
+      </div>
+    </section>
+    <RelatedGuides currentSlug="codes" />
+  </main>
+</SiteLayout>

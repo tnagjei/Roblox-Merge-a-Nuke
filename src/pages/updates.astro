@@ -1,0 +1,51 @@
+---
+import SiteLayout from "../layouts/SiteLayout.astro";
+import RelatedGuides from "../components/RelatedGuides.astro";
+import { siteConfig } from "../data/config";
+import { gameData } from "../data/game";
+---
+
+<SiteLayout title={`Updates | ${siteConfig.siteName}`} description={`Update tracker for ${siteConfig.gameName} with confirmed cadence and pending patch details.`}>
+  <main class="content-page">
+    <section class="prose-block">
+      <p class="eyebrow">Updates</p>
+      <h1>{siteConfig.gameName} Updates</h1>
+      <p>{gameData.updateCadence}</p>
+      <p class="source-label">Patch-note detail status: pending. Do not treat video titles or third-party posts as official patch notes.</p>
+    </section>
+
+    <section class="section" aria-labelledby="update-log">
+      <p class="eyebrow">Update log</p>
+      <h2 id="update-log">Reviewed timeline</h2>
+      <div class="card-grid">
+        <article class="card">
+          <h3>2026-06-16 source check</h3>
+          <p>Roblox listing reports Friday updates. Public sources show recent code and gameplay coverage, but no official patch-note body has been verified here.</p>
+        </article>
+        <article class="card">
+          <h3>Next action</h3>
+          <p>Recheck the Roblox listing, official group channels, and in-game notices after the next Friday update window.</p>
+        </article>
+      </div>
+    </section>
+
+    <section class="section grid-section" aria-labelledby="update-rules">
+      <div>
+        <p class="eyebrow">Publishing rule</p>
+        <h2 id="update-rules">What can be promoted</h2>
+      </div>
+      <div class="card-grid">
+        <article class="card">
+          <h3>Allowed</h3>
+          <p>Official Roblox listing changes, official group posts, in-game notices, and verified screenshots.</p>
+        </article>
+        <article class="card">
+          <h3>Not enough alone</h3>
+          <p>YouTube titles, Reddit posts, and third-party code pages are signals until cross-checked.</p>
+        </article>
+      </div>
+    </section>
+
+    <RelatedGuides currentSlug="updates" />
+  </main>
+</SiteLayout>

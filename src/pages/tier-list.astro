@@ -1,0 +1,50 @@
+---
+import SiteLayout from "../layouts/SiteLayout.astro";
+import RelatedGuides from "../components/RelatedGuides.astro";
+import { siteConfig } from "../data/config";
+import { evidenceNotice, reportedClassTiers } from "../data/reported-guides";
+---
+
+<SiteLayout title={`Tier List | ${siteConfig.siteName}`} description={`Tier list research boundaries for ${siteConfig.gameName}.`}>
+  <main class="content-page">
+    <section class="prose-block">
+      <p class="eyebrow">Tier list</p>
+      <h1>{siteConfig.gameName} Tier List</h1>
+      <p>{evidenceNotice.body}</p>
+      <p>This page does not claim an official ranking because reviewed sources do not provide verified bomb-tier or raid-power tables.</p>
+    </section>
+    <section class="section">
+      <h2>Reported tiers</h2>
+      <div class="card-grid">
+        {reportedClassTiers.length > 0 ? (
+          reportedClassTiers.map((tier) => (
+            <article class="card">
+              <h3>Tier {tier.tier}</h3>
+              <p>{tier.items.join(", ")}</p>
+              <p class="source-label">{tier.sourceLabel}</p>
+            </article>
+          ))
+        ) : (
+          <p class="empty-state">No tier list is published yet because there is no verified or reviewed community-reported ranking for nuke tiers, upgrades, or raid strength.</p>
+        )}
+      </div>
+    </section>
+    <section class="section grid-section" aria-labelledby="tier-boundary">
+      <div>
+        <p class="eyebrow">Ranking policy</p>
+        <h2 id="tier-boundary">What would qualify</h2>
+      </div>
+      <div class="card-grid">
+        <article class="card">
+          <h3>Enough evidence</h3>
+          <p>Official tier names, repeated in-game screenshots, or a documented test method with date and source labels.</p>
+        </article>
+        <article class="card">
+          <h3>Not enough evidence</h3>
+          <p>A single video title, unsourced comment, or copied table without a visible in-game basis.</p>
+        </article>
+      </div>
+    </section>
+    <RelatedGuides currentSlug="tier-list" />
+  </main>
+</SiteLayout>

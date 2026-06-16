@@ -1,0 +1,56 @@
+---
+import SiteLayout from "../layouts/SiteLayout.astro";
+import RelatedGuides from "../components/RelatedGuides.astro";
+import { siteConfig } from "../data/config";
+import { gameData } from "../data/game";
+import { competitorSources, evidenceNotice } from "../data/reported-guides";
+---
+
+<SiteLayout title={`Wiki | ${siteConfig.siteName}`} description={`Evidence-first wiki for ${siteConfig.gameName} mechanics, sources, and open research gaps.`}>
+  <main class="content-page">
+    <section class="prose-block">
+      <p class="eyebrow">Wiki</p>
+      <h1>{siteConfig.gameName} Wiki</h1>
+      <p>{evidenceNotice.body}</p>
+      <p>{gameData.officialDescription}</p>
+    </section>
+
+    <section class="section" aria-labelledby="source-table">
+      <p class="eyebrow">Sources</p>
+      <h2 id="source-table">Reviewed source map</h2>
+      <div class="card-grid">
+        {competitorSources.map((source) => (
+          <article class="card">
+            <h3>{source.label}</h3>
+            <p>Status: {source.evidenceLevel}</p>
+            <p>{source.note}</p>
+            <a class="source-link" href={source.url} target="_blank" rel="noopener noreferrer">Open source</a>
+          </article>
+        ))}
+      </div>
+    </section>
+
+    <section class="section grid-section" aria-labelledby="open-gaps">
+      <div>
+        <p class="eyebrow">Open gaps</p>
+        <h2 id="open-gaps">Do not invent these fields</h2>
+      </div>
+      <div class="card-grid">
+        <article class="card">
+          <h3>Bomb tier stats</h3>
+          <p>No official table for bomb tiers, nuke values, or cash multipliers has been recorded yet.</p>
+        </article>
+        <article class="card">
+          <h3>Raid formulas</h3>
+          <p>Enemy-base raid outcomes remain unverified and should not be published as deterministic math.</p>
+        </article>
+        <article class="card">
+          <h3>Code rewards</h3>
+          <p>BOOM is listed on the Roblox page, but the reward amount remains pending unless in-game evidence is added.</p>
+        </article>
+      </div>
+    </section>
+
+    <RelatedGuides currentSlug="wiki" />
+  </main>
+</SiteLayout>

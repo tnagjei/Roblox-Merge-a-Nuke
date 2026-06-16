@@ -1,0 +1,63 @@
+---
+import SiteLayout from "../layouts/SiteLayout.astro";
+import RelatedGuides from "../components/RelatedGuides.astro";
+import { siteConfig } from "../data/config";
+import { gameData } from "../data/game";
+---
+
+<SiteLayout title={`Beginner Guide | ${siteConfig.siteName}`} description={`Beginner guide for ${siteConfig.gameName} based on the official Roblox listing and conservative source checks.`}>
+  <main class="content-page">
+    <section class="prose-block">
+      <p class="eyebrow">Beginner guide</p>
+      <h1>{siteConfig.gameName} Beginner Guide</h1>
+      <p>{gameData.officialDescription}</p>
+      <p class="source-label">Source: official Roblox listing, checked 2026-06-16.</p>
+    </section>
+
+    <section class="section" aria-labelledby="starter-loop">
+      <p class="eyebrow">Core loop</p>
+      <h2 id="starter-loop">What to do first</h2>
+      <div class="card-grid numbered-grid">
+        <article class="card">
+          <p class="step-number">1</p>
+          <h3>Merge bombs upward</h3>
+          <p>The listing describes merging bombs into bigger nukes. Prioritize clean merges before chasing unverified tier claims.</p>
+        </article>
+        <article class="card">
+          <p class="step-number">2</p>
+          <h3>Watch your cash rate</h3>
+          <p>Your nukes earn cash over time, including while offline according to the Roblox description.</p>
+        </article>
+        <article class="card">
+          <p class="step-number">3</p>
+          <h3>Raid with caution</h3>
+          <p>Launching nukes at enemy bases can steal cash, but this site has not verified raid formulas or defense values.</p>
+        </article>
+        <article class="card">
+          <p class="step-number">4</p>
+          <h3>Lock your base</h3>
+          <p>The official listing warns players to lock their base before someone nukes them back.</p>
+        </article>
+      </div>
+    </section>
+
+    <section class="section grid-section" aria-labelledby="starter-safety">
+      <div>
+        <p class="eyebrow">Safety</p>
+        <h2 id="starter-safety">Avoid risky shortcuts</h2>
+      </div>
+      <div class="card-grid">
+        <article class="card">
+          <h3>No script or executor pages</h3>
+          <p>This site blocks exploit routes and does not publish Roblox scripts, macros, or executors.</p>
+        </article>
+        <article class="card">
+          <h3>No fake rewards</h3>
+          <p>Code rewards stay pending unless an official source or in-game check supports the claim.</p>
+        </article>
+      </div>
+    </section>
+
+    <RelatedGuides currentSlug="beginner-guide" />
+  </main>
+</SiteLayout>
