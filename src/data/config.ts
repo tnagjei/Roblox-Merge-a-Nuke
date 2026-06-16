@@ -49,7 +49,7 @@ export const siteConfig = {
     adPolicy: false
   },
   analytics: {
-    googleAnalyticsId: "",
+    googleAnalyticsId: "G-MPNFPXHHBF",
     adsenseClient: "",
     clarityId: "x7ub91pldc",
     thirdPartyAdScripts: []

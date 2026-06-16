@@ -22,6 +22,17 @@ const ogImage = siteConfig.assets.ogImage || siteConfig.assets.hero;
 <!doctype html>
 <html lang="en">
   <head>
+    {siteConfig.analytics.googleAnalyticsId && (
+      <>
+        <script async src={`https://www.googletagmanager.com/gtag/js?id=${siteConfig.analytics.googleAnalyticsId}`} is:inline></script>
+        <script is:inline set:html={`
+          window.dataLayer = window.dataLayer || [];
+          function gtag(){dataLayer.push(arguments);}
+          gtag('js', new Date());
+          gtag('config', '${siteConfig.analytics.googleAnalyticsId}');
+        `} />
+      </>
+    )}
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>{title}</title>
