@@ -51,7 +51,7 @@ export const siteConfig = {
   analytics: {
     googleAnalyticsId: "",
     adsenseClient: "",
-    clarityId: "",
+    clarityId: "x7ub91pldc",
     thirdPartyAdScripts: []
   },
   assets: {
