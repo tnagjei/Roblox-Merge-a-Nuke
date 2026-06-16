@@ -1,0 +1,148 @@
+---
+// input: none (automatically parses Astro.url)
+// output: HTML breadcrumb navigation and JSON-LD structured data for SEO rich snippets
+// pos: src/components/Breadcrumbs.astro (更新规则：文件变更需同步本注释与所属目录 README)
+
+import { siteConfig } from "../data/config";
+
+const pathname = Astro.url.pathname.replace(/\/+$/g, "").replace(/^\/+/g, "");
+
+// If homepage, do not render breadcrumbs
+const shouldRender = pathname !== "";
+
+// Map slugs to human-readable breadcrumb labels
+const labels: Record<string, string> = {
+  "wiki": "Wiki Hub",
+  "beginner-guide": "Beginner Guide",
+  "calculator": "Calculator",
+  "codes": "Codes & Payouts",
+  "tier-list": "Tier List",
+  "offline-cash": "Offline Cash",
+  "progression": "Progression",
+  "raid": "Raid Guide",
+  "rebirth": "Rebirth Guide",
+  "updates": "Updates",
+  "upgrades": "Upgrades",
+  "about": "About",
+  "contact": "Contact",
+  "editorial-policy": "Editorial Policy",
+  "privacy": "Privacy Policy",
+  "terms": "Terms of Use"
+};
+
+// Check if it's a guide/tool sub-item under Wiki
+const isWikiSubItem = [
+  "beginner-guide",
+  "calculator",
+  "codes",
+  "tier-list",
+  "offline-cash",
+  "progression",
+  "raid",
+  "rebirth",
+  "updates",
+  "upgrades"
+].includes(pathname);
+
+const breadcrumbs = [
+  { label: "Home", url: "/" }
+];
+
+if (isWikiSubItem) {
+  breadcrumbs.push({ label: "Wiki Hub", url: "/wiki/" });
+}
+
+if (shouldRender) {
+  const currentLabel = labels[pathname] || pathname.charAt(0).toUpperCase() + pathname.slice(1);
+  breadcrumbs.push({ label: currentLabel, url: `/${pathname}/` });
+}
+
+// Construct absolute URL for Schema.org JSON-LD
+const domain = siteConfig.siteDomain.replace(/\/+$/g, "");
+const jsonLdData = {
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": breadcrumbs.map((item, index) => ({
+    "@type": "ListItem",
+    "position": index + 1,
+    "name": item.label,
+    "item": item.url === "/" ? `${domain}/` : `${domain}${item.url}`
+  }))
+};
+---
+
+{shouldRender && (
+  <>
+    <!-- JSON-LD Structured Data for Google Search Rich Snippets -->
+    <script type="application/ld+json" is:inline set:html={JSON.stringify(jsonLdData)} />
+
+    <!-- Visible HTML Breadcrumbs Navigation -->
+    <div class="breadcrumbs-container">
+      <nav class="breadcrumbs" aria-label="Breadcrumb">
+        {breadcrumbs.map((item, index) => {
+          const isLast = index === breadcrumbs.length - 1;
+          return (
+            <div class="breadcrumb-item">
+              {isLast ? (
+                <span class="current-item" aria-current="page">{item.label}</span>
+              ) : (
+                <a href={item.url} class="parent-link">{item.label}</a>
+              )}
+              {!isLast && (
+                <svg class="separator" viewBox="0 0 24 24" width="10" height="10" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+                  <polyline points="9 18 15 12 9 6"></polyline>
+                </svg>
+              )}
+            </div>
+          );
+        })}
+      </nav>
+    </div>
+  </>
+)}
+
+<style>
+  .breadcrumbs-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 32px 24px 0px;
+  }
+
+  .breadcrumbs {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 8px;
+    font-size: 0.78rem;
+    font-family: var(--font-display);
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+  }
+
+  .breadcrumb-item {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .parent-link {
+    color: var(--muted);
+    transition: var(--transition-smooth);
+  }
+
+  .parent-link:hover {
+    color: var(--color-yellow);
+  }
+
+  .current-item {
+    color: var(--color-yellow);
+    opacity: 0.9;
+  }
+
+  .separator {
+    color: var(--line);
+    opacity: 0.7;
+    flex-shrink: 0;
+  }
+</style>
