@@ -7,56 +7,68 @@ import { siteConfig } from "../data/config";
 
 <SiteLayout title={`Calculator | ${siteConfig.siteName}`} description={`Player-input calculator for ${siteConfig.gameName} offline cash and upgrade planning.`}>
   <main class="content-page">
-    <section class="prose-block">
+    <section class="prose-block" style="margin-bottom: 40px;">
       <p class="eyebrow">Calculator</p>
       <h1>{siteConfig.gameName} Calculator</h1>
       <p>This tool uses numbers you enter. It does not claim official cash-per-second, upgrade, raid, or nuke formula data.</p>
       <p class="source-label">Status: player-input estimate, not official formula data.</p>
     </section>
 
-    <section class="section tool-panel" aria-labelledby="offline-cash">
+    <section class="section tool-panel" aria-labelledby="offline-cash" style="margin-bottom: 48px;">
       <div>
         <p class="eyebrow">Offline cash planner</p>
         <h2 id="offline-cash">Estimate your next upgrade window</h2>
-        <p>Enter your current cash rate from the game screen, the time you expect to be away, and your target cost.</p>
+        <p style="margin-bottom: 24px;">Enter your current cash rate from the game screen, the time you expect to be away, and your target cost.</p>
       </div>
-      <form class="calculator-form" data-tool-form>
-        <label>
-          Cash per minute
-          <input id="cash-rate" name="cash_rate" type="number" min="0" step="1" value="0" inputmode="decimal" />
-        </label>
-        <label>
-          Offline minutes
-          <input id="offline-minutes" name="offline_minutes" type="number" min="0" step="1" value="60" inputmode="decimal" />
-        </label>
-        <label>
-          Target upgrade cost
-          <input id="target-cost" name="target_cost" type="number" min="0" step="1" value="0" inputmode="decimal" />
-        </label>
-        <output class="result-card" id="calculator-result" aria-live="polite">
-          Enter your in-game numbers to estimate progress.
-        </output>
-      </form>
+      
+      <div class="card" style="background: rgba(18, 21, 27, 0.6);">
+        <form class="calculator-form" data-tool-form>
+          <label>
+            Cash per minute
+            <input id="cash-rate" name="cash_rate" type="number" min="0" step="1" value="0" inputmode="decimal" placeholder="e.g. 500" />
+          </label>
+          <label>
+            Offline minutes
+            <input id="offline-minutes" name="offline_minutes" type="number" min="0" step="1" value="60" inputmode="decimal" placeholder="e.g. 60" />
+          </label>
+          <label>
+            Target upgrade cost
+            <input id="target-cost" name="target_cost" type="number" min="0" step="1" value="0" inputmode="decimal" placeholder="e.g. 25000" />
+          </label>
+          
+          <div class="terminal-panel" style="border-radius: var(--radius-interactive); padding: 18px; border: 1px solid rgba(250, 204, 21, 0.3);">
+            <div class="terminal-header" style="margin-bottom: 12px; border-bottom: 1px solid var(--line); padding-bottom: 8px;">
+              <span class="terminal-dot red"></span>
+              <span class="terminal-dot yellow"></span>
+              <span class="terminal-dot green"></span>
+              <span style="font-size: 0.7rem; color: var(--muted); margin-left: auto; font-family: monospace;">calc-compute.sh</span>
+            </div>
+            <output class="result-card" id="calculator-result" aria-live="polite" style="display: block; width: 100%; border: none; background: transparent; padding: 0; box-shadow: none; font-family: monospace; font-size: 0.95rem; color: var(--text);">
+              Enter your in-game numbers to estimate progress.
+            </output>
+          </div>
+        </form>
+      </div>
       <ToolEventTracker toolName="offline_cash_calculator" />
     </section>
 
-    <section class="section grid-section" aria-labelledby="calculator-boundary">
+    <section class="section grid-section" aria-labelledby="calculator-boundary" style="margin-bottom: 48px;">
       <div>
         <p class="eyebrow">Evidence boundary</p>
         <h2 id="calculator-boundary">What this calculator does not assume</h2>
       </div>
       <div class="card-grid">
         <article class="card">
-          <h3>No hidden rate table</h3>
-          <p>The reviewed sources do not publish official bomb tiers, cash multipliers, or upgrade prices.</p>
+          <h3 style="color: var(--accent);">No hidden rate table</h3>
+          <p style="margin-bottom: 0;">The reviewed sources do not publish official bomb tiers, cash multipliers, or upgrade prices.</p>
         </article>
         <article class="card">
-          <h3>No raid guarantee</h3>
-          <p>Raid outcomes and stolen cash depend on live play. This page does not model enemy-base results.</p>
+          <h3 style="color: var(--accent);">No raid guarantee</h3>
+          <p style="margin-bottom: 0;">Raid outcomes and stolen cash depend on live play. This page does not model enemy-base results.</p>
         </article>
         <article class="card">
-          <h3>Static deployment</h3>
-          <p>The calculator runs in the browser from Astro static HTML and JavaScript, so Cloudflare Pages can serve it from dist.</p>
+          <h3 style="color: var(--accent);">Static deployment</h3>
+          <p style="margin-bottom: 0;">The calculator runs in the browser from Astro static HTML and JavaScript, so Cloudflare Pages can serve it from dist.</p>
         </article>
       </div>
     </section>

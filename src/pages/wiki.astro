@@ -8,45 +8,58 @@ import { competitorSources, evidenceNotice } from "../data/reported-guides";
 
 <SiteLayout title={`Wiki | ${siteConfig.siteName}`} description={`Evidence-first wiki for ${siteConfig.gameName} mechanics, sources, and open research gaps.`}>
   <main class="content-page">
-    <section class="prose-block">
+    <section class="prose-block" style="margin-bottom: 40px;">
       <p class="eyebrow">Wiki</p>
       <h1>{siteConfig.gameName} Wiki</h1>
       <p>{evidenceNotice.body}</p>
       <p>{gameData.officialDescription}</p>
     </section>
 
-    <section class="section" aria-labelledby="source-table">
+    <section class="section" aria-labelledby="source-table" style="margin-bottom: 48px;">
       <p class="eyebrow">Sources</p>
-      <h2 id="source-table">Reviewed source map</h2>
-      <div class="card-grid">
-        {competitorSources.map((source) => (
-          <article class="card">
-            <h3>{source.label}</h3>
-            <p>Status: {source.evidenceLevel}</p>
-            <p>{source.note}</p>
-            <a class="source-link" href={source.url} target="_blank" rel="noopener noreferrer">Open source</a>
-          </article>
-        ))}
+      <h2 id="source-table" style="margin-bottom: 24px;">Reviewed source map</h2>
+      <div style="display: grid; gap: 20px;">
+        {competitorSources.map((source) => {
+          const isHigh = source.evidenceLevel.toLowerCase().includes('high');
+          return (
+            <article class="card terminal-panel" style="display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 20px; padding: 24px;">
+              <div style="flex: 1; min-width: 250px;">
+                <div style="display: flex; align-items: center; gap: 12px; margin-bottom: 8px;">
+                  <h3 style="margin: 0; font-size: 1.2rem; color: var(--text);">{source.label}</h3>
+                  <span class={`status-badge ${!isHigh ? 'pending' : ''}`}>
+                    {source.evidenceLevel}
+                  </span>
+                </div>
+                <p style="margin: 0; font-size: 0.95rem; color: var(--muted);">{source.note}</p>
+              </div>
+              <div>
+                <a class="button secondary" href={source.url} target="_blank" rel="noopener noreferrer" style="min-height: 40px; font-size: 0.85rem; padding: 0 16px;">
+                  Open source →
+                </a>
+              </div>
+            </article>
+          );
+        })}
       </div>
     </section>
 
-    <section class="section grid-section" aria-labelledby="open-gaps">
+    <section class="section grid-section" aria-labelledby="open-gaps" style="margin-bottom: 48px;">
       <div>
         <p class="eyebrow">Open gaps</p>
         <h2 id="open-gaps">Do not invent these fields</h2>
       </div>
       <div class="card-grid">
         <article class="card">
-          <h3>Bomb tier stats</h3>
-          <p>No official table for bomb tiers, nuke values, or cash multipliers has been recorded yet.</p>
+          <h3 style="color: var(--accent);">Bomb tier stats</h3>
+          <p style="margin-bottom: 0;">No official table for bomb tiers, nuke values, or cash multipliers has been recorded yet.</p>
         </article>
         <article class="card">
-          <h3>Raid formulas</h3>
-          <p>Enemy-base raid outcomes remain unverified and should not be published as deterministic math.</p>
+          <h3 style="color: var(--accent);">Raid formulas</h3>
+          <p style="margin-bottom: 0;">Enemy-base raid outcomes remain unverified and should not be published as deterministic math.</p>
         </article>
         <article class="card">
-          <h3>Code rewards</h3>
-          <p>BOOM is listed on the Roblox page, but the reward amount remains pending unless in-game evidence is added.</p>
+          <h3 style="color: var(--accent);">Code rewards</h3>
+          <p style="margin-bottom: 0;">BOOM is listed on the Roblox page, but the reward amount remains pending unless in-game evidence is added.</p>
         </article>
       </div>
     </section>

@@ -7,44 +7,54 @@ import { evidenceNotice, reportedClassTiers } from "../data/reported-guides";
 
 <SiteLayout title={`Tier List | ${siteConfig.siteName}`} description={`Tier list research boundaries for ${siteConfig.gameName}.`}>
   <main class="content-page">
-    <section class="prose-block">
+    <section class="prose-block" style="margin-bottom: 40px;">
       <p class="eyebrow">Tier list</p>
       <h1>{siteConfig.gameName} Tier List</h1>
       <p>{evidenceNotice.body}</p>
       <p>This page does not claim an official ranking because reviewed sources do not provide verified bomb-tier or raid-power tables.</p>
     </section>
-    <section class="section">
-      <h2>Reported tiers</h2>
-      <div class="card-grid">
+
+    <section class="section" style="margin-bottom: 48px;">
+      <h2 style="margin-bottom: 24px;">Reported tiers</h2>
+      <div style="display: grid; gap: 16px;">
         {reportedClassTiers.length > 0 ? (
-          reportedClassTiers.map((tier) => (
-            <article class="card">
-              <h3>Tier {tier.tier}</h3>
-              <p>{tier.items.join(", ")}</p>
-              <p class="source-label">{tier.sourceLabel}</p>
-            </article>
-          ))
+          reportedClassTiers.map((tier) => {
+            const tierKey = tier.tier.toLowerCase();
+            return (
+              <article class="tier-row">
+                <div class={`tier-badge tier-${tierKey}`}>{tier.tier}</div>
+                <div class="tier-content">
+                  <div style="font-size: 1.15rem; font-weight: 700; margin-bottom: 6px; color: var(--text);">
+                    {tier.items.join(", ")}
+                  </div>
+                  <p class="source-label" style="margin: 0;">{tier.sourceLabel}</p>
+                </div>
+              </article>
+            );
+          })
         ) : (
           <p class="empty-state">No tier list is published yet because there is no verified or reviewed community-reported ranking for nuke tiers, upgrades, or raid strength.</p>
         )}
       </div>
     </section>
-    <section class="section grid-section" aria-labelledby="tier-boundary">
+
+    <section class="section grid-section" aria-labelledby="tier-boundary" style="margin-bottom: 48px;">
       <div>
         <p class="eyebrow">Ranking policy</p>
         <h2 id="tier-boundary">What would qualify</h2>
       </div>
       <div class="card-grid">
         <article class="card">
-          <h3>Enough evidence</h3>
-          <p>Official tier names, repeated in-game screenshots, or a documented test method with date and source labels.</p>
+          <h3 style="color: var(--accent);">Enough evidence</h3>
+          <p style="margin-bottom: 0;">Official tier names, repeated in-game screenshots, or a documented test method with date and source labels.</p>
         </article>
         <article class="card">
-          <h3>Not enough evidence</h3>
-          <p>A single video title, unsourced comment, or copied table without a visible in-game basis.</p>
+          <h3 style="color: var(--accent);">Not enough evidence</h3>
+          <p style="margin-bottom: 0;">A single video title, unsourced comment, or copied table without a visible in-game basis.</p>
         </article>
       </div>
     </section>
+
     <RelatedGuides currentSlug="tier-list" />
   </main>
 </SiteLayout>

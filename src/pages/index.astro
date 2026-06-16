@@ -18,76 +18,100 @@ const showReportedCodeWatch = siteConfig.completedCoreSlugs.includes("codes");
     {completedGuideLinks.length > 0 && (
       <section class="section" aria-labelledby="wiki-entry">
         <p class="eyebrow">Wiki index</p>
-        <h2 id="wiki-entry">Core guide entrances</h2>
-        <div class="card-grid hub-grid">
-          {completedGuideLinks.map((link) => (
-            <a class="card hub-card" href={`/${link.slug}/`}>
-              <h3>{link.title}</h3>
-              <p>{link.description}</p>
-              <span>Open {link.title}</span>
-            </a>
-          ))}
+        <h2 id="wiki-entry" style="margin-bottom: 32px;">Core guide entrances</h2>
+        <div class="bento-grid">
+          {completedGuideLinks.map((link, idx) => {
+            // Calculator (0), Beginner Guide (3), Wiki (5) are featured
+            const isFeatured = idx === 0 || idx === 3 || idx === 5;
+            return (
+              <a class={`card bento-card ${isFeatured ? 'featured' : ''}`} href={`/${link.slug}/`}>
+                <h3>{link.title}</h3>
+                <p style="margin-bottom: 16px;">{link.description}</p>
+                <span class="source-link">Open {link.title} →</span>
+              </a>
+            );
+          })}
         </div>
       </section>
     )}
 
-    <section class="section grid-section" aria-labelledby="quick-facts">
-      <div>
+    <section class="section" aria-labelledby="quick-facts">
+      <div style="margin-bottom: 32px;">
         <p class="eyebrow">Quick facts</p>
-        <h2 id="quick-facts">Launch facts</h2>
-        <p>Use this hub to publish only the pages that pass source and static export checks.</p>
+        <h2 id="quick-facts">Launch monitor metrics</h2>
       </div>
-      <div class="card-grid">
+      <div class="stats-strip">
         {homeContent.quickFacts.map((fact) => (
-          <article class="card">
-            <h3>{fact.label}</h3>
-            <p>{fact.value}</p>
-          </article>
+          <div class="stat-item">
+            <div class="stat-label" style="color: var(--accent); font-weight: 800; margin-bottom: 8px;">{fact.label}</div>
+            <div style="font-size: 1.25rem; font-weight: 700; color: var(--text);">{fact.value}</div>
+          </div>
         ))}
       </div>
     </section>
 
     <section class="section" aria-labelledby="trending-searches">
       <p class="eyebrow">Trending searches</p>
-      <h2 id="trending-searches">Search demand map</h2>
+      <h2 id="trending-searches" style="margin-bottom: 20px;">Search demand map</h2>
       <div class="tag-list">
-        {homeContent.trendingSearches.map((query) => <span>{query}</span>)}
+        {homeContent.trendingSearches.map((query) => (
+          <span class="tag-pill">{query}</span>
+        ))}
       </div>
     </section>
 
     {showReportedCodeWatch && (
-      <section class="section grid-section" aria-labelledby="reported-code-watch">
-        <div>
-          <p class="eyebrow">Code watch</p>
-          <h2 id="reported-code-watch">Official-page and community signals</h2>
-          <p>Official listing text, third-party pages, and in-game redemption checks stay separated.</p>
-        </div>
-        <div class="card-grid">
-          {reportedCodeRows.length > 0 ? (
-            reportedCodeRows.map((row) => (
-              <article class="card">
-                <h3>{row.code}</h3>
-                <p>{row.reward}</p>
-                <p class="source-label">{row.sourceLabel}</p>
-              </article>
-            ))
-          ) : (
-            <p class="empty-state">No community-reported code rows are recorded yet.</p>
-          )}
+      <section class="section" aria-labelledby="reported-code-watch">
+        <p class="eyebrow">Code watch</p>
+        <h2 id="reported-code-watch">Official-page and community signals</h2>
+        <p style="margin-bottom: 24px;">Official listing text, third-party pages, and in-game redemption checks stay separated.</p>
+        
+        <div class="card terminal-panel">
+          <div class="terminal-header">
+            <span class="terminal-dot red"></span>
+            <span class="terminal-dot yellow"></span>
+            <span class="terminal-dot green"></span>
+            <span style="font-size: 0.75rem; color: var(--muted); margin-left: auto; font-family: monospace;">codes-watch.log</span>
+          </div>
+          <div style="display: grid; gap: 16px; margin-top: 8px;">
+            {reportedCodeRows.length > 0 ? (
+              reportedCodeRows.map((row) => (
+                <div style="display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 16px; border-bottom: 1px dashed var(--line); padding-bottom: 12px;">
+                  <div>
+                    <span style="color: var(--accent); font-weight: 800; font-family: monospace; font-size: 1.1rem;">$ nuke-code --redeem {row.code}</span>
+                    <p style="margin: 4px 0 0; font-size: 0.85rem; color: var(--muted);">{row.sourceLabel}</p>
+                  </div>
+                  <div style="display: flex; align-items: center; gap: 12px;">
+                    <span style="font-size: 0.95rem; color: var(--text); font-weight: 600;">{row.reward}</span>
+                    <span class={`status-badge ${row.status.toLowerCase().includes('pending') ? 'pending' : ''}`}>
+                      {row.status}
+                    </span>
+                  </div>
+                </div>
+              ))
+            ) : (
+              <p class="empty-state">No community-reported code rows are recorded yet.</p>
+            )}
+            <div style="font-size: 0.85rem; color: var(--muted); font-family: monospace; margin-top: 8px;">
+              <span>> System monitoring live...</span><span class="terminal-cursor"></span>
+            </div>
+          </div>
         </div>
       </section>
     )}
 
     <section class="section" aria-labelledby="guide-map">
       <p class="eyebrow">Guide map</p>
-      <h2 id="guide-map">Evidence-first publishing flow</h2>
-      <div class="card-grid">
+      <h2 id="guide-map" style="margin-bottom: 32px;">Evidence-first publishing flow</h2>
+      <div class="timeline">
         {homeContent.guideMap.map((item) => (
-          <article class="card">
-            <p class="eyebrow">Step {item.step}</p>
-            <h3>{item.title}</h3>
-            <p>{item.body}</p>
-          </article>
+          <div class="timeline-item">
+            <div class="timeline-marker">{item.step}</div>
+            <div style="padding-left: 12px;">
+              <h3 style="margin-bottom: 8px;">{item.title}</h3>
+              <p style="margin-bottom: 0;">{item.body}</p>
+            </div>
+          </div>
         ))}
       </div>
     </section>
@@ -95,26 +119,48 @@ const showReportedCodeWatch = siteConfig.completedCoreSlugs.includes("codes");
     <section class="section" aria-labelledby="source-status">
       <p class="eyebrow">Evidence boundaries</p>
       <h2 id="source-status">{evidenceNotice.title}</h2>
-      <p>{evidenceNotice.body}</p>
-      <ul class="status-list">
-        {gameData.sourceConfidence.map((item) => (
-          <li><strong>{item.label}</strong><span>{item.level}</span></li>
-        ))}
-      </ul>
+      <p style="margin-bottom: 24px;">{evidenceNotice.body}</p>
+      
+      <div class="card terminal-panel">
+        <div class="terminal-header">
+          <span class="terminal-dot red"></span>
+          <span class="terminal-dot yellow"></span>
+          <span class="terminal-dot green"></span>
+          <span style="font-size: 0.75rem; color: var(--muted); margin-left: auto; font-family: monospace;">confidence-matrix.report</span>
+        </div>
+        <ul class="status-list" style="margin-top: 8px;">
+          {gameData.sourceConfidence.map((item) => {
+            const isHigh = item.level.toLowerCase().includes('high');
+            const isMedium = item.level.toLowerCase().includes('medium');
+            return (
+              <li style="display: flex; justify-content: space-between; align-items: center; padding: 12px 0; border-bottom: 1px solid var(--line);">
+                <strong style="color: var(--text); font-weight: 600;">{item.label}</strong>
+                <span class={`status-badge ${!isHigh && !isMedium ? 'pending' : ''}`} style={isHigh ? 'background: rgba(34, 197, 94, 0.1); color: #4ade80; border-color: rgba(34, 197, 94, 0.2);' : ''}>
+                  {item.level}
+                </span>
+              </li>
+            );
+          })}
+        </ul>
+      </div>
     </section>
 
     <section class="section" aria-labelledby="faq">
       <p class="eyebrow">FAQ</p>
-      <h2 id="faq">Template FAQ</h2>
-      <div class="faq-list">
+      <h2 id="faq" style="margin-bottom: 32px;">Template FAQ</h2>
+      <div class="faq-list" style="display: grid; gap: 24px;">
         {homeContent.faq.map((item) => (
-          <article>
-            <h3>{item.q}</h3>
-            <p>{item.a}</p>
-          </article>
+          <div style="border-bottom: 1px solid var(--line); padding-bottom: 20px;">
+            <h3 style="display: flex; align-items: center; gap: 8px; color: var(--accent); font-size: 1.15rem;">
+              <span style="font-family: var(--font-display); font-weight: 900; opacity: 0.5;">Q.</span>
+              {item.q}
+            </h3>
+            <p style="margin-top: 8px; padding-left: 24px; margin-bottom: 0;">{item.a}</p>
+          </div>
         ))}
       </div>
     </section>
+    
     <script type="application/ld+json" set:html={jsonLd({
       "@context": "https://schema.org",
       "@type": "WebSite",

@@ -18,12 +18,18 @@ const publicPageCount = siteConfig.routePolicy.publicPaths.length;
       <a class="button secondary" href="/privacy/">Review privacy</a>
     </div>
   </div>
-  <div class="hero-card" aria-label="Site status">
+  <div class="hero-card terminal-panel" aria-label="Site status">
+    <div class="terminal-header">
+      <span class="terminal-dot red"></span>
+      <span class="terminal-dot yellow"></span>
+      <span class="terminal-dot green"></span>
+      <span style="font-size: 0.75rem; color: var(--muted); margin-left: auto; font-family: monospace;">nuke-sys-monitor.sh</span>
+    </div>
     <img src={siteConfig.assets.hero} alt={`${siteConfig.siteName} hero art`} loading="eager" />
     <dl>
-      <div><dt>Default output</dt><dd>Static dist/</dd></div>
-      <div><dt>Public pages</dt><dd>{publicPageCount} indexable</dd></div>
-      <div><dt>Noindex pages</dt><dd>Privacy, Terms</dd></div>
+      <div><dt>Base Defense</dt><dd><span class="status-badge">SHIELD ACTIVE</span></dd></div>
+      <div><dt>Deployment</dt><dd>Astro Static</dd></div>
+      <div><dt>Guide Pages</dt><dd>{publicPageCount} verified</dd></div>
     </dl>
   </div>
 </section>

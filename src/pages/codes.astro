@@ -1,28 +1,48 @@
 ---
 import SiteLayout from "../layouts/SiteLayout.astro";
 import RelatedGuides from "../components/RelatedGuides.astro";
+import CopyButton from "../components/CopyButton.astro";
 import { siteConfig } from "../data/config";
 import { evidenceNotice, reportedCodeRows } from "../data/reported-guides";
 ---
 
 <SiteLayout title={`Codes | ${siteConfig.siteName}`} description={`Official-page and community-reported code status for ${siteConfig.gameName}.`}>
   <main class="content-page">
-    <section class="prose-block">
+    <section class="prose-block" style="margin-bottom: 40px;">
       <p class="eyebrow">Codes</p>
       <h1>{siteConfig.gameName} Codes</h1>
       <p>{evidenceNotice.body}</p>
       <p class="source-label">Official-page reports are not the same as in-game redemption proof.</p>
     </section>
-    <section class="section">
-      <h2>Reported code watch</h2>
-      <div class="card-grid">
+
+    <section class="section" style="margin-bottom: 48px;">
+      <h2 style="margin-bottom: 24px;">Reported code watch</h2>
+      <div style="display: grid; gap: 20px;">
         {reportedCodeRows.length > 0 ? (
           reportedCodeRows.map((row) => (
-            <article class="card">
-              <h3>{row.code}</h3>
-              <p>Reward status: {row.reward}</p>
-              <p>Status: {row.status}</p>
-              <p class="source-label">{row.sourceLabel}</p>
+            <article class="card terminal-panel" style="display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 20px; padding: 24px;">
+              <div style="flex: 1; min-width: 250px;">
+                <div style="display: flex; align-items: center; gap: 12px; margin-bottom: 8px;">
+                  <span style="color: var(--accent); font-weight: 800; font-family: monospace; font-size: 1.3rem;">
+                    {row.code}
+                  </span>
+                  <span class={`status-badge ${row.status.toLowerCase().includes('pending') ? 'pending' : ''}`}>
+                    {row.status}
+                  </span>
+                </div>
+                <p style="margin: 0; font-size: 0.95rem; color: var(--text);">Reward status: <strong style="color: var(--accent);">{row.reward}</strong></p>
+                <p class="source-label" style="margin-top: 6px; margin-bottom: 0;">{row.sourceLabel}</p>
+              </div>
+              <div>
+                <CopyButton
+                  value={row.code}
+                  label="Copy Code"
+                  class="button primary"
+                  eventSource="codes_page"
+                  itemType="roblox_code"
+                  itemName={row.code}
+                />
+              </div>
             </article>
           ))
         ) : (
@@ -30,22 +50,24 @@ import { evidenceNotice, reportedCodeRows } from "../data/reported-guides";
         )}
       </div>
     </section>
-    <section class="section grid-section" aria-labelledby="redeem-steps">
+
+    <section class="section grid-section" aria-labelledby="redeem-steps" style="margin-bottom: 48px;">
       <div>
         <p class="eyebrow">Redeem path</p>
         <h2 id="redeem-steps">Reported redemption steps</h2>
       </div>
       <div class="card-grid">
         <article class="card">
-          <h3>Community-reported path</h3>
-          <p>Third-party guides report opening Store, scrolling to the code box, entering the code, and pressing Redeem.</p>
+          <h3 style="color: var(--accent);">Community-reported path</h3>
+          <p style="margin-bottom: 0;">Third-party guides report opening Store, scrolling to the code box, entering the code, and pressing Redeem.</p>
         </article>
         <article class="card">
-          <h3>Verification status</h3>
-          <p>This site has not performed an in-game redemption check, so reward amounts remain pending.</p>
+          <h3 style="color: var(--accent);">Verification status</h3>
+          <p style="margin-bottom: 0;">This site has not performed an in-game redemption check, so reward amounts remain pending.</p>
         </article>
       </div>
     </section>
+
     <RelatedGuides currentSlug="codes" />
   </main>
 </SiteLayout>
