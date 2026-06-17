@@ -16,3 +16,5 @@
 - RelatedGuides.astro：位于各文章底部的相关攻略快速导航组件
 - ToolEventTracker.astro：挂机计算器数据输入埋点统计
 - TrackedLink.astro：埋点追踪外链
+- NativeAdBanner.astro：原生广告展示位，集成 CPM 广告联盟脚本与容器
+

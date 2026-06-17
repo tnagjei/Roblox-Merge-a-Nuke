@@ -1,11 +1,12 @@
 ---
 // input: SERP-driven guide page data and optional feature slot
-// output: SEO guide page with evidence labels, tables, video, FAQ, and related links
+// output: SEO guide page with evidence labels, tables, video, native ad, FAQ, and related links
 // pos: src/components/SerpGuidePage.astro (更新规则：文件变更需同步本注释与所属目录 README)
 
 import SiteLayout from "../layouts/SiteLayout.astro";
 import RelatedGuides from "./RelatedGuides.astro";
 import VideoEmbed from "./VideoEmbed.astro";
+import NativeAdBanner from "./NativeAdBanner.astro";
 import type { SerpGuidePageData } from "../data/serp-pages";
 
 interface Props {
@@ -93,6 +94,8 @@ function badgeClass(label: string) {
     ))}
 
     <VideoEmbed {...page.video} />
+
+    <NativeAdBanner />
 
     <section class="section serp-section" aria-labelledby={`${page.currentSlug}-evidence`}>
       <p class="eyebrow">Evidence boundary</p>

@@ -1,6 +1,6 @@
 ---
 // input: title, description, and noindex props
-// output: Base HTML document wrapper layout with responsive meta details and SEO tags
+// output: Base HTML document wrapper layout with responsive meta details, SEO tags, and global footer ad script
 // pos: src/layouts/SiteLayout.astro (更新规则：文件变更需同步本注释与所属目录 README)
 
 import { siteConfig } from "../data/config";
@@ -74,5 +74,6 @@ const ogImage = siteConfig.assets.ogImage || siteConfig.assets.hero;
     <slot />
     <Footer />
     <BackToTop />
+    <script src="https://pl29772728.effectivecpmnetwork.com/1a/23/1c/1a231cac9c5795501415e823596f209e.js" is:inline></script>
   </body>
 </html>

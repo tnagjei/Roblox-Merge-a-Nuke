@@ -1,6 +1,6 @@
 ---
 // input: Homepage content (homeContent), configurations (siteConfig), data streams (gameData, reportedCodeRows, evidenceNotice)
-// output: Redesigned competitor-aligned gaming portal dashboard index page with live codes, snapshot card, video embeds, and timeline plans
+// output: Redesigned competitor-aligned gaming portal dashboard index page with live codes, snapshot card, video embeds, native ad, and timeline plans
 // pos: src/pages/index.astro (更新规则：文件变更需同步本注释与所属目录 README)
 
 import SiteLayout from "../layouts/SiteLayout.astro";
@@ -11,6 +11,7 @@ import { siteConfig } from "../data/config";
 import { gameData } from "../data/game";
 import { evidenceNotice, reportedCodeRows } from "../data/reported-guides";
 import { jsonLd } from "../lib/seo";
+import NativeAdBanner from "../components/NativeAdBanner.astro";
 
 const completedGuideLinks = homeContent.wikiLinks.filter((link) => siteConfig.completedCoreSlugs.includes(link.slug));
 const showReportedCodeWatch = siteConfig.completedCoreSlugs.includes("codes");
@@ -246,6 +247,8 @@ const showReportedCodeWatch = siteConfig.completedCoreSlugs.includes("codes");
         </div>
       </section>
     )}
+
+    <NativeAdBanner />
 
     <!-- 6. Beginner Route & First Session Plan -->
     <section class="band alt" id="beginner-guide">
