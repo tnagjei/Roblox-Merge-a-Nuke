@@ -8,4 +8,4 @@
 - config.ts：站点版权、邮箱、域名及 SEO 首选关键词等全局配置。
 - game.ts：官方 Roblox 游戏链接、Universe ID、游戏官方英文介绍等基本数据。
 - reported-guides.ts：社区待审核代码源列表、第三方竞争对手站点列表、信赖度等级设置。
-- serp-pages.ts：SERP 蓝图驱动的 10 个内页内容、证据标签、视频嵌入和 FAQ 数据。
+- serp-pages.ts：SERP 蓝图驱动的 11 个内页内容、证据标签、视频嵌入和 FAQ 数据。

@@ -120,7 +120,7 @@ export const serpPages = {
     cardSections: [
       {
         eyebrow: "Safety",
-        heading: "Avoid Risky Shortcuts",
+        heading: "No Scripts or Executors",
         cards: [
           {
             title: "No scripts or executors",
@@ -150,8 +150,8 @@ export const serpPages = {
     video: {
       heading: "Beginner Gameplay Video",
       title: "Merge a Nuke beginner gameplay video",
-      embedUrl: "https://www.youtube-nocookie.com/embed/qYVHWmSC05U",
-      originalUrl: "https://www.youtube.com/watch?v=qYVHWmSC05U",
+      embedUrl: "https://www.youtube-nocookie.com/embed/KG_lFaKZW1o",
+      originalUrl: "https://www.youtube.com/watch?v=KG_lFaKZW1o",
       note: "This video gives visual context for the store, codes, and early loop. It does not verify code status, rewards, upgrade costs, or the best route."
     },
     evidence: {
@@ -168,7 +168,8 @@ export const serpPages = {
       { question: "What should I do first in Merge a Nuke?", answer: "Merge cleanly, improve the cash loop, and keep enough board space open before chasing raids.", label: "reported" },
       { question: "Should beginners raid immediately?", answer: "Usually no. Raid after your economy can recover from mistakes and exposed cash is protected.", label: "pending" },
       { question: "Are beginner codes verified here?", answer: "No. This site currently has 0 directly verified active codes, so reported codes remain labeled.", label: "reported" },
-      { question: "Is there a safe script for beginners?", answer: "No. Scripts, executors, and automation shortcuts are unsafe and outside this guide.", label: "unsafe" }
+      { question: "Is there a safe script for beginners?", answer: "No. Scripts, executors, and automation shortcuts are unsafe and outside this guide.", label: "unsafe" },
+      { question: "Can I use this guide on mobile or console?", answer: "Yes, use the same merge, upgrade, lock, and raid timing habits. Device-specific controls should be checked in the live Roblox client.", label: "reported" }
     ]
   },
   raid: {
@@ -188,21 +189,20 @@ export const serpPages = {
       tone: "red"
     },
     checklist: {
-      eyebrow: "Quick answer",
-      heading: "Quick Raid Checklist",
+      eyebrow: "After raid",
+      heading: "After Raid Routine",
       items: [
-        { title: "Stabilize your engine", body: "Upgrade spawn flow and hangar value before you spend time hunting targets." },
-        { title: "Spend obvious cash", body: "Convert exposed pocket cash into upgrades so a counter-raid has less value." },
-        { title: "Pick a readable target", body: "Prefer a base with visible activity and no obvious lock signal; do not chase late-game players blindly." },
-        { title: "Launch once, then observe", body: "Avoid spam attacks because failed raids waste attention and can invite retaliation." },
-        { title: "Reinvest immediately", body: "Use any gained cash on spawn flow, capacity, or lock habits before idling." },
-        { title: "Avoid scripts", body: "Auto raid, executor, and auto lock pages are unsafe and are not part of this guide." }
+        { title: "Spend stolen cash", body: "Convert any gained cash into upgrades before another player can turn it back into raid value." },
+        { title: "Upgrade the engine", body: "Prefer spawn flow, capacity, or cash growth over another immediate attack." },
+        { title: "Check your lock state", body: "Confirm the base is protected before you idle or leave the lobby." },
+        { title: "Avoid immediate idle", body: "Do not raid and then disappear while exposed cash is still high." },
+        { title: "Record the result", body: "Track whether the raid helped the session so the next target choice is based on evidence." }
       ]
     },
     tables: [
       {
         eyebrow: "Timing",
-        heading: "When to Raid and When to Wait",
+        heading: "Raid Decision Table",
         intro: "Use this table as a decision guide. It is a gameplay judgment layer, not an official formula.",
         columns: ["Situation", "Decision", "Reason"],
         rows: [
@@ -217,10 +217,10 @@ export const serpPages = {
     cardSections: [
       {
         eyebrow: "Target choice",
-        heading: "Target Selection and Attack Order",
+        heading: "No Auto Raid Scripts",
         cards: [
           {
-            title: "Prefer recoverable fights",
+            title: "Manual raids only",
             label: "pending",
             body: [
               "Look for targets where a failed attack will not break your session plan. A readable mid-tier base is usually safer than a rich active player who can answer immediately.",
@@ -249,8 +249,8 @@ export const serpPages = {
     video: {
       heading: "Raid Context Video",
       title: "Merge a Nuke raid context gameplay video",
-      embedUrl: "https://www.youtube-nocookie.com/embed/_fUwK07O4R8",
-      originalUrl: "https://www.youtube.com/watch?v=_fUwK07O4R8",
+      embedUrl: "https://www.youtube-nocookie.com/embed/k_jBrw4hMgY",
+      originalUrl: "https://www.youtube.com/watch?v=k_jBrw4hMgY",
       note: "This SERP video satisfies visual raid intent. It should help players recognize the gameplay context, but it does not verify payout formulas, cooldowns, or the best target order."
     },
     evidence: {
@@ -302,7 +302,7 @@ export const serpPages = {
     tables: [
       {
         eyebrow: "Decision table",
-        heading: "Choose by Bottleneck",
+        heading: "Upgrade by Bottleneck",
         intro: "Use the current problem on your board to decide the next upgrade category.",
         columns: ["Bottleneck", "Upgrade focus", "Why it helps"],
         rows: [
@@ -312,12 +312,24 @@ export const serpPages = {
           ["Frequent losses after raids", "Lock habit and defensive timing", "Protection matters once exposed cash is large."],
           ["Strong income but stalled reset plan", "Rebirth preparation", "A reset route can be better than forcing small upgrades."]
         ]
+      },
+      {
+        eyebrow: "Free vs premium",
+        heading: "Free Route vs Gamepass Route",
+        intro: "Public pass names are treated as pending signals. Use this comparison to avoid turning premium convenience into fake purchase advice.",
+        columns: ["Route", "What to do", "Risk boundary"],
+        rows: [
+          ["Free path", "Improve spawn flow, cash growth, board cleanup, and lock habits through normal play.", "Requires manual decisions but avoids purchase assumptions."],
+          ["Premium convenience", "Treat reported pass names as possible convenience, not required progression.", "No pass value is verified or recommended here."],
+          ["Risk", "Ignore any page that bundles upgrades with executor, auto merge, or auto raid instructions.", "Automation and exploit shortcuts are unsafe."],
+          ["When to ignore", "If the current bottleneck is obvious, solve it manually before considering any premium signal.", "A pass name is not proof that it fixes your board."]
+        ]
       }
     ],
     cardSections: [
       {
         eyebrow: "Safety",
-        heading: "Script and Auto Upgrade Safety",
+        heading: "If You Searched for Auto Upgrade",
         cards: [
           {
             title: "Manual route instead of scripts",
@@ -433,13 +445,27 @@ export const serpPages = {
             body: ["The page avoids fixed multiplier promises because the blueprint did not include direct in-game reset proof."]
           }
         ]
+      },
+      {
+        eyebrow: "Safety",
+        heading: "No Auto Rebirth Scripts",
+        cards: [
+          {
+            title: "Manual confirmation only",
+            label: "unsafe",
+            body: [
+              "Auto rebirth and executor pages are unsafe. A rebirth decision should come from the live prompt, your measured income, and a clear rebuild route.",
+              "Use the before-reset checklist above instead of any script, macro, or automated reset claim."
+            ]
+          }
+        ]
       }
     ],
     video: {
       heading: "Rebirth Context Video",
       title: "Merge a Nuke rebirth context video",
-      embedUrl: "https://www.youtube-nocookie.com/embed/KG_lFaKZW1o",
-      originalUrl: "https://www.youtube.com/watch?v=KG_lFaKZW1o",
+      embedUrl: "https://www.youtube-nocookie.com/embed/ofLxPHWUaXM",
+      originalUrl: "https://www.youtube.com/watch?v=ofLxPHWUaXM",
       note: "This video is a visual context block for reset and progression searches. It is not used as proof of rebirth cost, multiplier, or retained items."
     },
     evidence: {
@@ -456,7 +482,8 @@ export const serpPages = {
       { question: "When is the best time to rebirth?", answer: "When upgrades feel slow, your next run has a clear spawn-flow plan, and the prompt confirms the reset tradeoff you are willing to accept.", label: "pending" },
       { question: "What do I keep after rebirth?", answer: "This page does not claim exact retained items. Read the live prompt and treat third-party lists as pending unless tested.", label: "pending" },
       { question: "Should I raid before rebirth?", answer: "Only if your base is stable and you can spend or protect the result. A risky raid right before reset can waste time.", label: "pending" },
-      { question: "Do codes help after rebirth?", answer: "They can be useful if they work in your session, but this site currently has 0 codes verified by direct in-game redemption.", label: "reported" }
+      { question: "Do codes help after rebirth?", answer: "They can be useful if they work in your session, but this site currently has 0 codes verified by direct in-game redemption.", label: "reported" },
+      { question: "Are auto rebirth scripts safe?", answer: "No. Auto rebirth, executor, and macro instructions are unsafe and are not part of this route.", label: "unsafe" }
     ]
   },
   calculator: {
@@ -487,6 +514,17 @@ export const serpPages = {
           ["3", "Enter your next upgrade target.", "The result shows whether the target might be reachable."],
           ["4", "Check again after updates or rebirth.", "Rates can change when your board or game version changes."],
           ["5", "Treat raid losses as outside the formula.", "PvP events can make the estimate too optimistic."]
+        ]
+      },
+      {
+        eyebrow: "Use cases",
+        heading: "Three Safe Use Cases",
+        intro: "Use the calculator for planning scenarios that depend on your own measured numbers.",
+        columns: ["Use case", "Inputs to enter", "Safe takeaway"],
+        rows: [
+          ["Short session", "Current cash per minute and the next upgrade cost.", "Decide whether to keep playing or spend now."],
+          ["Overnight offline", "Measured rate, expected away time, and a realistic target.", "Estimate possible offline value without claiming a hidden cap."],
+          ["Pre-rebirth planning", "Current rate before reset and the first post-reset target.", "Compare whether rebuilding soon is more practical than waiting."]
         ]
       }
     ],
@@ -541,6 +579,7 @@ export const serpPages = {
     faqs: [
       { question: "Is this an official Merge a Nuke calculator?", answer: "No. It is an independent planning tool that uses the numbers you enter.", label: "estimated" },
       { question: "Does the calculator store my Roblox data?", answer: "No. The current tool works in the browser and does not ask for a login.", label: "verified" },
+      { question: "Does it know my real cash per second?", answer: "No. Enter a rate you measured in your own session. The page does not claim access to a hidden official cash-per-second formula.", label: "estimated" },
       { question: "Why did my real offline cash differ?", answer: "Your input rate may have changed, a raid may have affected progress, or the game may have updated.", label: "estimated" },
       { question: "Can this replace in-game testing?", answer: "No. Use it as a planning estimate, then compare the result with your next session.", label: "estimated" }
     ]
@@ -680,6 +719,17 @@ export const serpPages = {
           ["Merge", "Clean the board before opening a new idle window.", "A clean board makes the next estimate more reliable."],
           ["Check updates", "Look for Friday update signals before trusting old rates.", "Public updates can change assumptions."]
         ]
+      },
+      {
+        eyebrow: "Calculator bridge",
+        heading: "Use the Calculator Before Long Offline Sessions",
+        intro: "Long away windows need measured inputs, not static formulas copied from another player.",
+        columns: ["Scenario", "Calculator setup", "What to recheck"],
+        rows: [
+          ["Short session", "Use the current cash-per-minute rate and one nearby upgrade target.", "Whether active play beats waiting."],
+          ["Overnight offline", "Use a conservative away-time estimate and record the real return next session.", "Whether the old rate still matches your board."],
+          ["Pre-rebirth planning", "Compare current-run waiting with the first post-rebirth upgrade target.", "Whether resetting now has a practical recovery route."]
+        ]
       }
     ],
     cardSections: [
@@ -751,12 +801,13 @@ export const serpPages = {
         eyebrow: "Conflicts",
         heading: "Source Conflict Ledger",
         intro: "Use this table to understand why the page avoids the phrase verified active codes.",
-        columns: ["Code", "Current label", "Why"],
+        columns: ["Source", "Useful signal", "Page handling"],
         rows: [
-          ["BOOM", "official-page-reported", "The public Roblox page reports the code text, but this site has not completed redemption proof."],
-          ["UPDATE2", "reported", "Multiple third-party trackers report it, but direct in-game proof is not recorded here."],
-          ["ATOMIC", "disputed", "Some trackers list it while others omit or describe it differently."],
-          ["Expired list", "reported", "Several trackers report no expired codes, but code status can change quickly."]
+          ["Pocket Tactics", "Updated codes table and ATOMIC report.", "Use as reported only; do not upgrade to verified active."],
+          ["PCGamesN", "UPDATE2, BOOM, redeem steps, and community code tracking.", "Use for source comparison and redemption flow only."],
+          ["Beebom", "Codes, expired section, redeem steps, and why-not-working structure.", "Use for troubleshooting FAQ; missing codes become conflict evidence."],
+          ["Roblox Den", "Database-style active and expired status with recent check labels.", "Use as a tracker signal, not direct in-game proof."],
+          ["Destructoid", "Update-sensitive code coverage and redemption guidance.", "Use as reported/disputed when status wording differs."]
         ]
       }
     ],
@@ -827,16 +878,19 @@ export const serpPages = {
     },
     tables: [
       {
-        eyebrow: "Sources",
-        heading: "Reviewed Source Map",
-        intro: "Every source type has a different evidence ceiling.",
-        columns: ["Source", "Use", "Evidence ceiling"],
+        eyebrow: "Mechanics",
+        heading: "Mechanics Index",
+        intro: "This index routes players to useful mechanics while keeping missing data visible.",
+        columns: ["Mechanic", "Current status", "Next page"],
         rows: [
-          ["Roblox game page", "Public game description, creator, update signals, BOOM mention.", "reported"],
-          ["Rolimon's data page", "Third-party public listing and pass-name signals.", "pending"],
-          ["Fandom and fan wikis", "Topic coverage and missing-field discovery.", "reported"],
-          ["Code trackers", "Reported code status and conflicts.", "reported or disputed"],
-          ["YouTube videos", "Visual gameplay intent.", "youtube_embed only"]
+          ["Merge loop", "reported public-loop claim; exact efficiency is pending.", "/beginner-guide/"],
+          ["Cash per second", "estimated from player input; no hidden formula is verified.", "/calculator/"],
+          ["Offline cash", "reported mechanic; rate and cap remain pending.", "/offline-cash/"],
+          ["Raid", "reported mechanic; payout math and target order remain pending.", "/raid/"],
+          ["Base lock", "reported defensive habit; exact cooldown is pending.", "/raid/"],
+          ["Rebirth", "progression reset topic; retained items and multiplier remain pending.", "/rebirth/"],
+          ["Updates", "Friday update signal is reported; patch details need source review.", "/updates/"],
+          ["Codes", "BOOM is official-page-reported; UPDATE2 reported; ATOMIC disputed.", "/codes/"]
         ]
       },
       {
@@ -869,8 +923,8 @@ export const serpPages = {
     video: {
       heading: "Gameplay Overview Video",
       title: "Merge a Nuke gameplay overview video",
-      embedUrl: "https://www.youtube-nocookie.com/embed/qYVHWmSC05U",
-      originalUrl: "https://www.youtube.com/watch?v=qYVHWmSC05U",
+      embedUrl: "https://www.youtube-nocookie.com/embed/KG_lFaKZW1o",
+      originalUrl: "https://www.youtube.com/watch?v=KG_lFaKZW1o",
       note: "This video gives visual gameplay context for wiki visitors. It does not verify wiki facts."
     },
     evidence: {
@@ -892,8 +946,8 @@ export const serpPages = {
   },
   tierList: {
     currentSlug: "tier-list",
-    title: "Merge a Nuke Tier List | Roblox Progression Priorities",
-    description: "Read a Merge a Nuke tier list focused on progression priorities, ranking criteria, source notes, pending exact stats, and update-sensitive labels.",
+    title: "Merge a Nuke Tier List | Role-Based Priority Guide",
+    description: "Read a Merge a Nuke tier list focused on role-based priorities, ranking criteria, source notes, pending exact stats, and update-sensitive labels.",
     eyebrow: "Tier list",
     h1: "Merge a Nuke Tier List",
     intro: [
@@ -909,14 +963,15 @@ export const serpPages = {
     tables: [
       {
         eyebrow: "Priority tiers",
-        heading: "Progression Priority Tiers",
-        intro: "These are planning tiers, not official item tiers.",
-        columns: ["Tier", "Priority group", "Caveat"],
+        heading: "Role-Based Priority Tiers",
+        intro: "These are role-based planning tiers, not official item tiers.",
+        columns: ["Role", "Priority", "Caveat"],
         rows: [
-          ["S", "Cash engine upgrades, base lock habit, directly verified or official-page-reported free value.", "Not a bomb damage rank."],
-          ["A", "Clean merge chain, board capacity, measured offline routine.", "Depends on current board state."],
-          ["B", "Selective raids after recovery is stable.", "No payout percentage is verified here."],
-          ["C", "Unverified bomb-name claims and unsourced exact stats.", "Do not chase these without evidence."]
+          ["Cash engine", "S", "Usually the strongest route because it makes every next purchase easier."],
+          ["Base lock", "A", "Protects value when exposed cash becomes large, but exact cooldowns remain pending."],
+          ["Raid pressure", "B", "Useful after recovery is stable; no payout percentage is verified here."],
+          ["Rebirth preparation", "B", "Can matter when the current run stalls, but multiplier details are pending."],
+          ["Unverified bomb claims", "C", "Do not chase exact damage, strongest-nuke, or name lists without evidence."]
         ]
       },
       {
